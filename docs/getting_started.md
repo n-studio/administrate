@@ -56,6 +56,20 @@ Each `Admin::FooController` can be overwritten to specify custom behavior.
 Once you have Administrate installed,
 visit <http://localhost:3000/admin> to see your new dashboard in action.
 
+### Add assets
+
+Add to you Gemfile
+
+```ruby
+gem "datetime_picker_rails", "~> 0.0.7"
+gem "jquery-rails", ">= 4.0"
+gem "momentjs-rails", ">= 2.8", "<= 2.20.1"
+gem "sassc-rails", "~> 2.1"
+gem "selectize-rails", "~> 0.6"
+```
+
+Or use webpack/importmap to install them.
+
 ### Errors about assets?
 
 If your apps uses Sprockets 4, you'll need to add Administrate's assets to
