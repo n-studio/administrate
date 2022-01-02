@@ -15,6 +15,8 @@ module Administrate
       source_root File.expand_path("../templates", __FILE__)
 
       class_option :namespace, type: :string, default: "admin"
+      class_option :js, type: :string, default: "sprockets"
+      class_option :css, type: :string, default: "sprockets"
 
       def run_routes_generator
         if dashboard_resources.none?
@@ -28,6 +30,12 @@ module Administrate
           "application_controller.rb.erb",
           "app/controllers/#{namespace}/application_controller.rb",
         )
+      end
+
+      def create_js_assets
+      end
+
+      def create_css_assets
       end
 
       def run_dashboard_generators
@@ -47,6 +55,14 @@ module Administrate
 
       def namespace
         options[:namespace]
+      end
+
+      def js
+        options[:js]
+      end
+
+      def css
+        options[:css]
       end
 
       def singular_dashboard_resources

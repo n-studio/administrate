@@ -10,6 +10,13 @@ First, add the following to your Gemfile:
 ```ruby
 # Gemfile
 gem "administrate"
+
+# If you want to use sprockets and sassc-rails
+gem "datetime_picker_rails", "~> 0.0.7"
+gem "jquery-rails", ">= 4.0"
+gem "momentjs-rails", ">= 2.8", "<= 2.20.1"
+gem "sassc-rails", "~> 2.1"
+gem "selectize-rails", "~> 0.6"
 ```
 
 Re-bundle with `bundle install`, then run the installer:
@@ -55,20 +62,6 @@ Each `Admin::FooController` can be overwritten to specify custom behavior.
 
 Once you have Administrate installed,
 visit <http://localhost:3000/admin> to see your new dashboard in action.
-
-### Add assets
-
-Add to you Gemfile
-
-```ruby
-gem "datetime_picker_rails", "~> 0.0.7"
-gem "jquery-rails", ">= 4.0"
-gem "momentjs-rails", ">= 2.8", "<= 2.20.1"
-gem "sassc-rails", "~> 2.1"
-gem "selectize-rails", "~> 0.6"
-```
-
-Or use webpack/importmap to install them.
 
 ### Errors about assets?
 
@@ -118,6 +111,18 @@ Administrate supports using a namespace other than `Admin`, such as
 
 ```sh
 rails generate administrate:install --namespace=supervisor
+```
+
+## Using webpack
+
+```sh
+rails generate administrate:install --js=webpack --css=webpack
+```
+
+## Using importmap
+
+```sh
+rails generate administrate:install --js=importmap --css=cssbundling
 ```
 
 ## Keep Dashboards Updated as Model Attributes Change
