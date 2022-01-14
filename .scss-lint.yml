@@ -1,6 +1,10 @@
-scss_files: "app/assets/stylesheets/administrate/**/*.scss"
+scss_files: "lib/assets/stylesheets/**/*.scss"
 
-exclude: "app/assets/stylesheets/administrate/reset/**"
+exclude:
+  - "lib/assets/stylesheets/reset/**"
+  - "lib/assets/stylesheets/datetime_picker.scss"
+  - "lib/assets/stylesheets/datetime_picker/*"
+  - "lib/assets/stylesheets/datetime_picker/**/*"
 
 severity: warning
 
