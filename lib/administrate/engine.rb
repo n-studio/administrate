@@ -16,12 +16,12 @@ module Administrate
     @@javascripts = []
     @@stylesheets = []
 
-    # initializer "administrate.assets.precompile" do |app|
-    #   app.config.assets.precompile += [
-    #     "administrate/application.js",
-    #     "administrate/application.css",
-    #   ]
-    # end
+    initializer "administrate.assets.precompile" do |app|
+      app.config.assets.precompile += [
+        "administrate/builds/application.js",
+        "administrate/builds/application.css",
+      ]
+    end
 
     def self.add_javascript(script)
       @@javascripts << script
@@ -39,7 +39,7 @@ module Administrate
       @@javascripts
     end
 
-    add_javascript "administrate/application"
-    add_stylesheet "administrate/application"
+    add_javascript "administrate/builds/application"
+    add_stylesheet "administrate/builds/application"
   end
 end
