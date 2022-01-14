@@ -16585,7 +16585,6 @@
   var import_jquery2 = __toESM(require_jquery());
   var import_moment = __toESM(require_moment());
   var import_bootstrap_datetimepicker = __toESM(require_bootstrap_datetimepicker());
-  console.log(import_bootstrap_datetimepicker.default);
   (0, import_bootstrap_datetimepicker.default)(import_jquery2.default);
   (0, import_jquery2.default)(function() {
     (0, import_jquery2.default)('[data-type="time"]').datetimepicker({
