@@ -821,7 +821,7 @@ template {
 
 /*!
  * Datetimepicker for Bootstrap 3
- * version : 4.17.42
+ * version : 4.17.37
  * https://github.com/Eonasdan/bootstrap-datetimepicker/
  */
 .bootstrap-datetimepicker-widget {
@@ -829,7 +829,6 @@ template {
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
-  display: block;
   margin: 2px 0;
   padding: 4px;
   width: 19em;
@@ -860,7 +859,7 @@ template {
 .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-bottom: 7px solid #ccc;
+  border-bottom: 7px solid #cccccc;
   border-bottom-color: rgba(0, 0, 0, 0.2);
   top: -7px;
   left: 7px;
@@ -877,7 +876,7 @@ template {
 .bootstrap-datetimepicker-widget.dropdown-menu.top:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-top: 7px solid #ccc;
+  border-top: 7px solid #cccccc;
   border-top-color: rgba(0, 0, 0, 0.2);
   bottom: -7px;
   left: 6px;
@@ -1175,7 +1174,7 @@ template {
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
   background-color: #337ab7;
-  color: #fff;
+  color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -1206,7 +1205,7 @@ template {
 
 .bootstrap-datetimepicker-widget table td span.active {
   background-color: #337ab7;
-  color: #fff;
+  color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 

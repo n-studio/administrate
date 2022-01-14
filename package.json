@@ -2,7 +2,7 @@
   "name": "administrate",
   "private": "true",
   "dependencies": {
-    "eonasdan-bootstrap-datetimepicker-npm": "^4.17.42",
+    "bootstrap-datetimepicker-npm": "^4.17.37-npm",
     "esbuild": "^0.14.11",
     "jquery": "^3.6.0",
     "jquery-ujs": "^1.2.3",
