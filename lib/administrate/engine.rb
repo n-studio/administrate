@@ -18,8 +18,8 @@ module Administrate
 
     initializer "administrate.assets.precompile" do |app|
       app.config.assets.precompile += [
-        "administrate/builds/application.js",
-        "administrate/builds/application.css",
+        "administrate/application.js",
+        "administrate/application.css",
       ]
     end
 
@@ -39,7 +39,7 @@ module Administrate
       @@javascripts
     end
 
-    add_javascript "administrate/builds/application"
-    add_stylesheet "administrate/builds/application"
+    add_javascript "administrate/application"
+    add_stylesheet "administrate/application"
   end
 end
