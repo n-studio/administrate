@@ -28,394 +28,677 @@
     return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", !isNodeMode && module && module.__esModule ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
   };
 
-  // node_modules/jquery-ujs/src/rails.js
-  var require_rails = __commonJS({
-    "node_modules/jquery-ujs/src/rails.js"(exports, module) {
+  // node_modules/@rails/ujs/lib/assets/compiled/rails-ujs.js
+  var require_rails_ujs = __commonJS({
+    "node_modules/@rails/ujs/lib/assets/compiled/rails-ujs.js"(exports, module) {
       (function() {
-        "use strict";
-        var jqueryUjsInit = function($5, undefined2) {
-          if ($5.rails !== undefined2) {
-            $5.error("jquery-ujs has already been loaded!");
-          }
-          var rails;
-          var $document = $5(document);
-          $5.rails = rails = {
-            linkClickSelector: "a[data-confirm], a[data-method], a[data-remote]:not([disabled]), a[data-disable-with], a[data-disable]",
-            buttonClickSelector: "button[data-remote]:not([form]):not(form button), button[data-confirm]:not([form]):not(form button)",
-            inputChangeSelector: "select[data-remote], input[data-remote], textarea[data-remote]",
-            formSubmitSelector: "form:not([data-turbo=true])",
-            formInputClickSelector: "form:not([data-turbo=true]) input[type=submit], form:not([data-turbo=true]) input[type=image], form:not([data-turbo=true]) button[type=submit], form:not([data-turbo=true]) button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])",
-            disableSelector: "input[data-disable-with]:enabled, button[data-disable-with]:enabled, textarea[data-disable-with]:enabled, input[data-disable]:enabled, button[data-disable]:enabled, textarea[data-disable]:enabled",
-            enableSelector: "input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled, input[data-disable]:disabled, button[data-disable]:disabled, textarea[data-disable]:disabled",
-            requiredInputSelector: "input[name][required]:not([disabled]), textarea[name][required]:not([disabled])",
-            fileInputSelector: "input[name][type=file]:not([disabled])",
-            linkDisableSelector: "a[data-disable-with], a[data-disable]",
-            buttonDisableSelector: "button[data-remote][data-disable-with], button[data-remote][data-disable]",
-            csrfToken: function() {
-              return $5("meta[name=csrf-token]").attr("content");
-            },
-            csrfParam: function() {
-              return $5("meta[name=csrf-param]").attr("content");
-            },
-            CSRFProtection: function(xhr) {
-              var token = rails.csrfToken();
-              if (token)
-                xhr.setRequestHeader("X-CSRF-Token", token);
-            },
-            refreshCSRFTokens: function() {
-              $5('form input[name="' + rails.csrfParam() + '"]').val(rails.csrfToken());
-            },
-            fire: function(obj, name, data) {
-              var event = $5.Event(name);
-              obj.trigger(event, data);
-              return event.result !== false;
-            },
-            confirm: function(message) {
-              return confirm(message);
-            },
-            ajax: function(options) {
-              return $5.ajax(options);
-            },
-            href: function(element) {
-              return element[0].href;
-            },
-            isRemote: function(element) {
-              return element.data("remote") !== undefined2 && element.data("remote") !== false;
-            },
-            handleRemote: function(element) {
-              var method, url, data, withCredentials, dataType, options;
-              if (rails.fire(element, "ajax:before")) {
-                withCredentials = element.data("with-credentials") || null;
-                dataType = element.data("type") || $5.ajaxSettings && $5.ajaxSettings.dataType;
-                if (element.is("form")) {
-                  method = element.data("ujs:submit-button-formmethod") || element.attr("method");
-                  url = element.data("ujs:submit-button-formaction") || element.attr("action");
-                  data = $5(element[0]).serializeArray();
-                  var button = element.data("ujs:submit-button");
-                  if (button) {
-                    data.push(button);
-                    element.data("ujs:submit-button", null);
-                  }
-                  element.data("ujs:submit-button-formmethod", null);
-                  element.data("ujs:submit-button-formaction", null);
-                } else if (element.is(rails.inputChangeSelector)) {
-                  method = element.data("method");
-                  url = element.data("url");
-                  data = element.serialize();
-                  if (element.data("params"))
-                    data = data + "&" + element.data("params");
-                } else if (element.is(rails.buttonClickSelector)) {
-                  method = element.data("method") || "get";
-                  url = element.data("url");
-                  data = element.serialize();
-                  if (element.data("params"))
-                    data = data + "&" + element.data("params");
-                } else {
-                  method = element.data("method");
-                  url = rails.href(element);
-                  data = element.data("params") || null;
-                }
-                options = {
-                  type: method || "GET",
-                  data,
-                  dataType,
-                  beforeSend: function(xhr, settings) {
-                    if (settings.dataType === undefined2) {
-                      xhr.setRequestHeader("accept", "*/*;q=0.5, " + settings.accepts.script);
-                    }
-                    if (rails.fire(element, "ajax:beforeSend", [xhr, settings])) {
-                      element.trigger("ajax:send", xhr);
-                    } else {
-                      return false;
-                    }
-                  },
-                  success: function(data2, status, xhr) {
-                    element.trigger("ajax:success", [data2, status, xhr]);
-                  },
-                  complete: function(xhr, status) {
-                    element.trigger("ajax:complete", [xhr, status]);
-                  },
-                  error: function(xhr, status, error) {
-                    element.trigger("ajax:error", [xhr, status, error]);
-                  },
-                  crossDomain: rails.isCrossDomain(url)
-                };
-                if (withCredentials) {
-                  options.xhrFields = {
-                    withCredentials
-                  };
-                }
-                if (url) {
-                  options.url = url;
-                }
-                return rails.ajax(options);
+        var context = this;
+        (function() {
+          (function() {
+            this.Rails = {
+              linkClickSelector: "a[data-confirm], a[data-method], a[data-remote]:not([disabled]), a[data-disable-with], a[data-disable]",
+              buttonClickSelector: {
+                selector: "button[data-remote]:not([form]), button[data-confirm]:not([form])",
+                exclude: "form button"
+              },
+              inputChangeSelector: "select[data-remote], input[data-remote], textarea[data-remote]",
+              formSubmitSelector: "form:not([data-turbo=true])",
+              formInputClickSelector: "form:not([data-turbo=true]) input[type=submit], form:not([data-turbo=true]) input[type=image], form:not([data-turbo=true]) button[type=submit], form:not([data-turbo=true]) button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])",
+              formDisableSelector: "input[data-disable-with]:enabled, button[data-disable-with]:enabled, textarea[data-disable-with]:enabled, input[data-disable]:enabled, button[data-disable]:enabled, textarea[data-disable]:enabled",
+              formEnableSelector: "input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled, input[data-disable]:disabled, button[data-disable]:disabled, textarea[data-disable]:disabled",
+              fileInputSelector: "input[name][type=file]:not([disabled])",
+              linkDisableSelector: "a[data-disable-with], a[data-disable]",
+              buttonDisableSelector: "button[data-remote][data-disable-with], button[data-remote][data-disable]"
+            };
+          }).call(this);
+        }).call(context);
+        var Rails2 = context.Rails;
+        (function() {
+          (function() {
+            var nonce;
+            nonce = null;
+            Rails2.loadCSPNonce = function() {
+              var ref;
+              return nonce = (ref = document.querySelector("meta[name=csp-nonce]")) != null ? ref.content : void 0;
+            };
+            Rails2.cspNonce = function() {
+              return nonce != null ? nonce : Rails2.loadCSPNonce();
+            };
+          }).call(this);
+          (function() {
+            var expando, m;
+            m = Element.prototype.matches || Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector;
+            Rails2.matches = function(element, selector) {
+              if (selector.exclude != null) {
+                return m.call(element, selector.selector) && !m.call(element, selector.exclude);
               } else {
+                return m.call(element, selector);
+              }
+            };
+            expando = "_ujsData";
+            Rails2.getData = function(element, key) {
+              var ref;
+              return (ref = element[expando]) != null ? ref[key] : void 0;
+            };
+            Rails2.setData = function(element, key, value) {
+              if (element[expando] == null) {
+                element[expando] = {};
+              }
+              return element[expando][key] = value;
+            };
+            Rails2.$ = function(selector) {
+              return Array.prototype.slice.call(document.querySelectorAll(selector));
+            };
+          }).call(this);
+          (function() {
+            var $5, csrfParam, csrfToken;
+            $5 = Rails2.$;
+            csrfToken = Rails2.csrfToken = function() {
+              var meta;
+              meta = document.querySelector("meta[name=csrf-token]");
+              return meta && meta.content;
+            };
+            csrfParam = Rails2.csrfParam = function() {
+              var meta;
+              meta = document.querySelector("meta[name=csrf-param]");
+              return meta && meta.content;
+            };
+            Rails2.CSRFProtection = function(xhr) {
+              var token;
+              token = csrfToken();
+              if (token != null) {
+                return xhr.setRequestHeader("X-CSRF-Token", token);
+              }
+            };
+            Rails2.refreshCSRFTokens = function() {
+              var param, token;
+              token = csrfToken();
+              param = csrfParam();
+              if (token != null && param != null) {
+                return $5('form input[name="' + param + '"]').forEach(function(input) {
+                  return input.value = token;
+                });
+              }
+            };
+          }).call(this);
+          (function() {
+            var CustomEvent, fire, matches, preventDefault;
+            matches = Rails2.matches;
+            CustomEvent = window.CustomEvent;
+            if (typeof CustomEvent !== "function") {
+              CustomEvent = function(event, params) {
+                var evt;
+                evt = document.createEvent("CustomEvent");
+                evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+                return evt;
+              };
+              CustomEvent.prototype = window.Event.prototype;
+              preventDefault = CustomEvent.prototype.preventDefault;
+              CustomEvent.prototype.preventDefault = function() {
+                var result;
+                result = preventDefault.call(this);
+                if (this.cancelable && !this.defaultPrevented) {
+                  Object.defineProperty(this, "defaultPrevented", {
+                    get: function() {
+                      return true;
+                    }
+                  });
+                }
+                return result;
+              };
+            }
+            fire = Rails2.fire = function(obj, name, data) {
+              var event;
+              event = new CustomEvent(name, {
+                bubbles: true,
+                cancelable: true,
+                detail: data
+              });
+              obj.dispatchEvent(event);
+              return !event.defaultPrevented;
+            };
+            Rails2.stopEverything = function(e) {
+              fire(e.target, "ujs:everythingStopped");
+              e.preventDefault();
+              e.stopPropagation();
+              return e.stopImmediatePropagation();
+            };
+            Rails2.delegate = function(element, selector, eventType, handler) {
+              return element.addEventListener(eventType, function(e) {
+                var target;
+                target = e.target;
+                while (!(!(target instanceof Element) || matches(target, selector))) {
+                  target = target.parentNode;
+                }
+                if (target instanceof Element && handler.call(target, e) === false) {
+                  e.preventDefault();
+                  return e.stopPropagation();
+                }
+              });
+            };
+          }).call(this);
+          (function() {
+            var AcceptHeaders, CSRFProtection, createXHR, cspNonce, fire, prepareOptions, processResponse;
+            cspNonce = Rails2.cspNonce, CSRFProtection = Rails2.CSRFProtection, fire = Rails2.fire;
+            AcceptHeaders = {
+              "*": "*/*",
+              text: "text/plain",
+              html: "text/html",
+              xml: "application/xml, text/xml",
+              json: "application/json, text/javascript",
+              script: "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"
+            };
+            Rails2.ajax = function(options) {
+              var xhr;
+              options = prepareOptions(options);
+              xhr = createXHR(options, function() {
+                var ref, response;
+                response = processResponse((ref = xhr.response) != null ? ref : xhr.responseText, xhr.getResponseHeader("Content-Type"));
+                if (Math.floor(xhr.status / 100) === 2) {
+                  if (typeof options.success === "function") {
+                    options.success(response, xhr.statusText, xhr);
+                  }
+                } else {
+                  if (typeof options.error === "function") {
+                    options.error(response, xhr.statusText, xhr);
+                  }
+                }
+                return typeof options.complete === "function" ? options.complete(xhr, xhr.statusText) : void 0;
+              });
+              if (options.beforeSend != null && !options.beforeSend(xhr, options)) {
                 return false;
               }
-            },
-            isCrossDomain: function(url) {
-              var originAnchor = document.createElement("a");
+              if (xhr.readyState === XMLHttpRequest.OPENED) {
+                return xhr.send(options.data);
+              }
+            };
+            prepareOptions = function(options) {
+              options.url = options.url || location.href;
+              options.type = options.type.toUpperCase();
+              if (options.type === "GET" && options.data) {
+                if (options.url.indexOf("?") < 0) {
+                  options.url += "?" + options.data;
+                } else {
+                  options.url += "&" + options.data;
+                }
+              }
+              if (AcceptHeaders[options.dataType] == null) {
+                options.dataType = "*";
+              }
+              options.accept = AcceptHeaders[options.dataType];
+              if (options.dataType !== "*") {
+                options.accept += ", */*; q=0.01";
+              }
+              return options;
+            };
+            createXHR = function(options, done) {
+              var xhr;
+              xhr = new XMLHttpRequest();
+              xhr.open(options.type, options.url, true);
+              xhr.setRequestHeader("Accept", options.accept);
+              if (typeof options.data === "string") {
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+              }
+              if (!options.crossDomain) {
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+                CSRFProtection(xhr);
+              }
+              xhr.withCredentials = !!options.withCredentials;
+              xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                  return done(xhr);
+                }
+              };
+              return xhr;
+            };
+            processResponse = function(response, type) {
+              var parser, script;
+              if (typeof response === "string" && typeof type === "string") {
+                if (type.match(/\bjson\b/)) {
+                  try {
+                    response = JSON.parse(response);
+                  } catch (error) {
+                  }
+                } else if (type.match(/\b(?:java|ecma)script\b/)) {
+                  script = document.createElement("script");
+                  script.setAttribute("nonce", cspNonce());
+                  script.text = response;
+                  document.head.appendChild(script).parentNode.removeChild(script);
+                } else if (type.match(/\b(xml|html|svg)\b/)) {
+                  parser = new DOMParser();
+                  type = type.replace(/;.+/, "");
+                  try {
+                    response = parser.parseFromString(response, type);
+                  } catch (error) {
+                  }
+                }
+              }
+              return response;
+            };
+            Rails2.href = function(element) {
+              return element.href;
+            };
+            Rails2.isCrossDomain = function(url) {
+              var e, originAnchor, urlAnchor;
+              originAnchor = document.createElement("a");
               originAnchor.href = location.href;
-              var urlAnchor = document.createElement("a");
+              urlAnchor = document.createElement("a");
               try {
                 urlAnchor.href = url;
-                urlAnchor.href = urlAnchor.href;
                 return !((!urlAnchor.protocol || urlAnchor.protocol === ":") && !urlAnchor.host || originAnchor.protocol + "//" + originAnchor.host === urlAnchor.protocol + "//" + urlAnchor.host);
-              } catch (e) {
+              } catch (error) {
+                e = error;
                 return true;
               }
-            },
-            handleMethod: function(link) {
-              var href = rails.href(link), method = link.data("method"), target = link.attr("target"), csrfToken = rails.csrfToken(), csrfParam = rails.csrfParam(), form = $5('<form method="post" action="' + href + '"></form>'), metadataInput = '<input name="_method" value="' + method + '" type="hidden" />';
-              if (csrfParam !== undefined2 && csrfToken !== undefined2 && !rails.isCrossDomain(href)) {
-                metadataInput += '<input name="' + csrfParam + '" value="' + csrfToken + '" type="hidden" />';
+            };
+          }).call(this);
+          (function() {
+            var matches, toArray;
+            matches = Rails2.matches;
+            toArray = function(e) {
+              return Array.prototype.slice.call(e);
+            };
+            Rails2.serializeElement = function(element, additionalParam) {
+              var inputs, params;
+              inputs = [element];
+              if (matches(element, "form")) {
+                inputs = toArray(element.elements);
               }
-              if (target) {
-                form.attr("target", target);
-              }
-              form.hide().append(metadataInput).appendTo("body");
-              form.submit();
-            },
-            formElements: function(form, selector) {
-              return form.is("form") ? $5(form[0].elements).filter(selector) : form.find(selector);
-            },
-            disableFormElements: function(form) {
-              rails.formElements(form, rails.disableSelector).each(function() {
-                rails.disableFormElement($5(this));
+              params = [];
+              inputs.forEach(function(input) {
+                if (!input.name || input.disabled) {
+                  return;
+                }
+                if (matches(input, "fieldset[disabled] *")) {
+                  return;
+                }
+                if (matches(input, "select")) {
+                  return toArray(input.options).forEach(function(option) {
+                    if (option.selected) {
+                      return params.push({
+                        name: input.name,
+                        value: option.value
+                      });
+                    }
+                  });
+                } else if (input.checked || ["radio", "checkbox", "submit"].indexOf(input.type) === -1) {
+                  return params.push({
+                    name: input.name,
+                    value: input.value
+                  });
+                }
               });
-            },
-            disableFormElement: function(element) {
-              var method, replacement;
-              method = element.is("button") ? "html" : "val";
-              replacement = element.data("disable-with");
-              if (replacement !== undefined2) {
-                element.data("ujs:enable-with", element[method]());
-                element[method](replacement);
+              if (additionalParam) {
+                params.push(additionalParam);
               }
-              element.prop("disabled", true);
-              element.data("ujs:disabled", true);
-            },
-            enableFormElements: function(form) {
-              rails.formElements(form, rails.enableSelector).each(function() {
-                rails.enableFormElement($5(this));
-              });
-            },
-            enableFormElement: function(element) {
-              var method = element.is("button") ? "html" : "val";
-              if (element.data("ujs:enable-with") !== undefined2) {
-                element[method](element.data("ujs:enable-with"));
-                element.removeData("ujs:enable-with");
+              return params.map(function(param) {
+                if (param.name != null) {
+                  return encodeURIComponent(param.name) + "=" + encodeURIComponent(param.value);
+                } else {
+                  return param;
+                }
+              }).join("&");
+            };
+            Rails2.formElements = function(form, selector) {
+              if (matches(form, "form")) {
+                return toArray(form.elements).filter(function(el) {
+                  return matches(el, selector);
+                });
+              } else {
+                return toArray(form.querySelectorAll(selector));
               }
-              element.prop("disabled", false);
-              element.removeData("ujs:disabled");
-            },
-            allowAction: function(element) {
-              var message = element.data("confirm"), answer = false, callback;
+            };
+          }).call(this);
+          (function() {
+            var allowAction, fire, stopEverything;
+            fire = Rails2.fire, stopEverything = Rails2.stopEverything;
+            Rails2.handleConfirm = function(e) {
+              if (!allowAction(this)) {
+                return stopEverything(e);
+              }
+            };
+            Rails2.confirm = function(message, element) {
+              return confirm(message);
+            };
+            allowAction = function(element) {
+              var answer, callback, message;
+              message = element.getAttribute("data-confirm");
               if (!message) {
                 return true;
               }
-              if (rails.fire(element, "confirm")) {
+              answer = false;
+              if (fire(element, "confirm")) {
                 try {
-                  answer = rails.confirm(message);
-                } catch (e) {
-                  (console.error || console.log).call(console, e.stack || e);
+                  answer = Rails2.confirm(message, element);
+                } catch (error) {
                 }
-                callback = rails.fire(element, "confirm:complete", [answer]);
+                callback = fire(element, "confirm:complete", [answer]);
               }
               return answer && callback;
-            },
-            blankInputs: function(form, specifiedSelector, nonBlank) {
-              var foundInputs = $5(), input, valueToCheck, radiosForNameWithNoneSelected, radioName, selector = specifiedSelector || "input,textarea", requiredInputs = form.find(selector), checkedRadioButtonNames = {};
-              requiredInputs.each(function() {
-                input = $5(this);
-                if (input.is("input[type=radio]")) {
-                  radioName = input.attr("name");
-                  if (!checkedRadioButtonNames[radioName]) {
-                    if (form.find('input[type=radio]:checked[name="' + radioName + '"]').length === 0) {
-                      radiosForNameWithNoneSelected = form.find('input[type=radio][name="' + radioName + '"]');
-                      foundInputs = foundInputs.add(radiosForNameWithNoneSelected);
-                    }
-                    checkedRadioButtonNames[radioName] = radioName;
-                  }
-                } else {
-                  valueToCheck = input.is("input[type=checkbox],input[type=radio]") ? input.is(":checked") : !!input.val();
-                  if (valueToCheck === nonBlank) {
-                    foundInputs = foundInputs.add(input);
-                  }
-                }
-              });
-              return foundInputs.length ? foundInputs : false;
-            },
-            nonBlankInputs: function(form, specifiedSelector) {
-              return rails.blankInputs(form, specifiedSelector, true);
-            },
-            stopEverything: function(e) {
-              $5(e.target).trigger("ujs:everythingStopped");
-              e.stopImmediatePropagation();
-              return false;
-            },
-            disableElement: function(element) {
-              var replacement = element.data("disable-with");
-              if (replacement !== undefined2) {
-                element.data("ujs:enable-with", element.html());
-                element.html(replacement);
+            };
+          }).call(this);
+          (function() {
+            var disableFormElement, disableFormElements, disableLinkElement, enableFormElement, enableFormElements, enableLinkElement, formElements, getData, isXhrRedirect, matches, setData, stopEverything;
+            matches = Rails2.matches, getData = Rails2.getData, setData = Rails2.setData, stopEverything = Rails2.stopEverything, formElements = Rails2.formElements;
+            Rails2.handleDisabledElement = function(e) {
+              var element;
+              element = this;
+              if (element.disabled) {
+                return stopEverything(e);
               }
-              element.on("click.railsDisable", function(e) {
-                return rails.stopEverything(e);
-              });
-              element.data("ujs:disabled", true);
-            },
-            enableElement: function(element) {
-              if (element.data("ujs:enable-with") !== undefined2) {
-                element.html(element.data("ujs:enable-with"));
-                element.removeData("ujs:enable-with");
-              }
-              element.off("click.railsDisable");
-              element.removeData("ujs:disabled");
-            }
-          };
-          if (rails.fire($document, "rails:attachBindings")) {
-            $5.ajaxPrefilter(function(options, originalOptions, xhr) {
-              if (!options.crossDomain) {
-                rails.CSRFProtection(xhr);
-              }
-            });
-            $5(window).on("pageshow.rails", function() {
-              $5($5.rails.enableSelector).each(function() {
-                var element = $5(this);
-                if (element.data("ujs:disabled")) {
-                  $5.rails.enableFormElement(element);
+            };
+            Rails2.enableElement = function(e) {
+              var element;
+              if (e instanceof Event) {
+                if (isXhrRedirect(e)) {
+                  return;
                 }
-              });
-              $5($5.rails.linkDisableSelector).each(function() {
-                var element = $5(this);
-                if (element.data("ujs:disabled")) {
-                  $5.rails.enableElement(element);
-                }
-              });
-            });
-            $document.on("ajax:complete", rails.linkDisableSelector, function() {
-              rails.enableElement($5(this));
-            });
-            $document.on("ajax:complete", rails.buttonDisableSelector, function() {
-              rails.enableFormElement($5(this));
-            });
-            $document.on("click.rails", rails.linkClickSelector, function(e) {
-              var link = $5(this), method = link.data("method"), data = link.data("params"), metaClick = e.metaKey || e.ctrlKey;
-              if (!rails.allowAction(link))
-                return rails.stopEverything(e);
-              if (!metaClick && link.is(rails.linkDisableSelector))
-                rails.disableElement(link);
-              if (rails.isRemote(link)) {
-                if (metaClick && (!method || method === "GET") && !data) {
-                  return true;
-                }
-                var handleRemote = rails.handleRemote(link);
-                if (handleRemote === false) {
-                  rails.enableElement(link);
-                } else {
-                  handleRemote.fail(function() {
-                    rails.enableElement(link);
-                  });
-                }
-                return false;
-              } else if (method) {
-                rails.handleMethod(link);
-                return false;
-              }
-            });
-            $document.on("click.rails", rails.buttonClickSelector, function(e) {
-              var button = $5(this);
-              if (!rails.allowAction(button) || !rails.isRemote(button))
-                return rails.stopEverything(e);
-              if (button.is(rails.buttonDisableSelector))
-                rails.disableFormElement(button);
-              var handleRemote = rails.handleRemote(button);
-              if (handleRemote === false) {
-                rails.enableFormElement(button);
+                element = e.target;
               } else {
-                handleRemote.fail(function() {
-                  rails.enableFormElement(button);
+                element = e;
+              }
+              if (matches(element, Rails2.linkDisableSelector)) {
+                return enableLinkElement(element);
+              } else if (matches(element, Rails2.buttonDisableSelector) || matches(element, Rails2.formEnableSelector)) {
+                return enableFormElement(element);
+              } else if (matches(element, Rails2.formSubmitSelector)) {
+                return enableFormElements(element);
+              }
+            };
+            Rails2.disableElement = function(e) {
+              var element;
+              element = e instanceof Event ? e.target : e;
+              if (matches(element, Rails2.linkDisableSelector)) {
+                return disableLinkElement(element);
+              } else if (matches(element, Rails2.buttonDisableSelector) || matches(element, Rails2.formDisableSelector)) {
+                return disableFormElement(element);
+              } else if (matches(element, Rails2.formSubmitSelector)) {
+                return disableFormElements(element);
+              }
+            };
+            disableLinkElement = function(element) {
+              var replacement;
+              if (getData(element, "ujs:disabled")) {
+                return;
+              }
+              replacement = element.getAttribute("data-disable-with");
+              if (replacement != null) {
+                setData(element, "ujs:enable-with", element.innerHTML);
+                element.innerHTML = replacement;
+              }
+              element.addEventListener("click", stopEverything);
+              return setData(element, "ujs:disabled", true);
+            };
+            enableLinkElement = function(element) {
+              var originalText;
+              originalText = getData(element, "ujs:enable-with");
+              if (originalText != null) {
+                element.innerHTML = originalText;
+                setData(element, "ujs:enable-with", null);
+              }
+              element.removeEventListener("click", stopEverything);
+              return setData(element, "ujs:disabled", null);
+            };
+            disableFormElements = function(form) {
+              return formElements(form, Rails2.formDisableSelector).forEach(disableFormElement);
+            };
+            disableFormElement = function(element) {
+              var replacement;
+              if (getData(element, "ujs:disabled")) {
+                return;
+              }
+              replacement = element.getAttribute("data-disable-with");
+              if (replacement != null) {
+                if (matches(element, "button")) {
+                  setData(element, "ujs:enable-with", element.innerHTML);
+                  element.innerHTML = replacement;
+                } else {
+                  setData(element, "ujs:enable-with", element.value);
+                  element.value = replacement;
+                }
+              }
+              element.disabled = true;
+              return setData(element, "ujs:disabled", true);
+            };
+            enableFormElements = function(form) {
+              return formElements(form, Rails2.formEnableSelector).forEach(enableFormElement);
+            };
+            enableFormElement = function(element) {
+              var originalText;
+              originalText = getData(element, "ujs:enable-with");
+              if (originalText != null) {
+                if (matches(element, "button")) {
+                  element.innerHTML = originalText;
+                } else {
+                  element.value = originalText;
+                }
+                setData(element, "ujs:enable-with", null);
+              }
+              element.disabled = false;
+              return setData(element, "ujs:disabled", null);
+            };
+            isXhrRedirect = function(event) {
+              var ref, xhr;
+              xhr = (ref = event.detail) != null ? ref[0] : void 0;
+              return (xhr != null ? xhr.getResponseHeader("X-Xhr-Redirect") : void 0) != null;
+            };
+          }).call(this);
+          (function() {
+            var stopEverything;
+            stopEverything = Rails2.stopEverything;
+            Rails2.handleMethod = function(e) {
+              var csrfParam, csrfToken, form, formContent, href, link, method;
+              link = this;
+              method = link.getAttribute("data-method");
+              if (!method) {
+                return;
+              }
+              href = Rails2.href(link);
+              csrfToken = Rails2.csrfToken();
+              csrfParam = Rails2.csrfParam();
+              form = document.createElement("form");
+              formContent = "<input name='_method' value='" + method + "' type='hidden' />";
+              if (csrfParam != null && csrfToken != null && !Rails2.isCrossDomain(href)) {
+                formContent += "<input name='" + csrfParam + "' value='" + csrfToken + "' type='hidden' />";
+              }
+              formContent += '<input type="submit" />';
+              form.method = "post";
+              form.action = href;
+              form.target = link.target;
+              form.innerHTML = formContent;
+              form.style.display = "none";
+              document.body.appendChild(form);
+              form.querySelector('[type="submit"]').click();
+              return stopEverything(e);
+            };
+          }).call(this);
+          (function() {
+            var ajax, fire, getData, isCrossDomain, isRemote, matches, serializeElement, setData, stopEverything, slice = [].slice;
+            matches = Rails2.matches, getData = Rails2.getData, setData = Rails2.setData, fire = Rails2.fire, stopEverything = Rails2.stopEverything, ajax = Rails2.ajax, isCrossDomain = Rails2.isCrossDomain, serializeElement = Rails2.serializeElement;
+            isRemote = function(element) {
+              var value;
+              value = element.getAttribute("data-remote");
+              return value != null && value !== "false";
+            };
+            Rails2.handleRemote = function(e) {
+              var button, data, dataType, element, method, url, withCredentials;
+              element = this;
+              if (!isRemote(element)) {
+                return true;
+              }
+              if (!fire(element, "ajax:before")) {
+                fire(element, "ajax:stopped");
+                return false;
+              }
+              withCredentials = element.getAttribute("data-with-credentials");
+              dataType = element.getAttribute("data-type") || "script";
+              if (matches(element, Rails2.formSubmitSelector)) {
+                button = getData(element, "ujs:submit-button");
+                method = getData(element, "ujs:submit-button-formmethod") || element.method;
+                url = getData(element, "ujs:submit-button-formaction") || element.getAttribute("action") || location.href;
+                if (method.toUpperCase() === "GET") {
+                  url = url.replace(/\?.*$/, "");
+                }
+                if (element.enctype === "multipart/form-data") {
+                  data = new FormData(element);
+                  if (button != null) {
+                    data.append(button.name, button.value);
+                  }
+                } else {
+                  data = serializeElement(element, button);
+                }
+                setData(element, "ujs:submit-button", null);
+                setData(element, "ujs:submit-button-formmethod", null);
+                setData(element, "ujs:submit-button-formaction", null);
+              } else if (matches(element, Rails2.buttonClickSelector) || matches(element, Rails2.inputChangeSelector)) {
+                method = element.getAttribute("data-method");
+                url = element.getAttribute("data-url");
+                data = serializeElement(element, element.getAttribute("data-params"));
+              } else {
+                method = element.getAttribute("data-method");
+                url = Rails2.href(element);
+                data = element.getAttribute("data-params");
+              }
+              ajax({
+                type: method || "GET",
+                url,
+                data,
+                dataType,
+                beforeSend: function(xhr, options) {
+                  if (fire(element, "ajax:beforeSend", [xhr, options])) {
+                    return fire(element, "ajax:send", [xhr]);
+                  } else {
+                    fire(element, "ajax:stopped");
+                    return false;
+                  }
+                },
+                success: function() {
+                  var args;
+                  args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+                  return fire(element, "ajax:success", args);
+                },
+                error: function() {
+                  var args;
+                  args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+                  return fire(element, "ajax:error", args);
+                },
+                complete: function() {
+                  var args;
+                  args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+                  return fire(element, "ajax:complete", args);
+                },
+                crossDomain: isCrossDomain(url),
+                withCredentials: withCredentials != null && withCredentials !== "false"
+              });
+              return stopEverything(e);
+            };
+            Rails2.formSubmitButtonClick = function(e) {
+              var button, form;
+              button = this;
+              form = button.form;
+              if (!form) {
+                return;
+              }
+              if (button.name) {
+                setData(form, "ujs:submit-button", {
+                  name: button.name,
+                  value: button.value
                 });
               }
-              return false;
-            });
-            $document.on("change.rails", rails.inputChangeSelector, function(e) {
-              var link = $5(this);
-              if (!rails.allowAction(link) || !rails.isRemote(link))
-                return rails.stopEverything(e);
-              rails.handleRemote(link);
-              return false;
-            });
-            $document.on("submit.rails", rails.formSubmitSelector, function(e) {
-              var form = $5(this), remote = rails.isRemote(form), blankRequiredInputs, nonBlankFileInputs;
-              if (!rails.allowAction(form))
-                return rails.stopEverything(e);
-              if (form.attr("novalidate") === undefined2) {
-                if (form.data("ujs:formnovalidate-button") === undefined2) {
-                  blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector, false);
-                  if (blankRequiredInputs && rails.fire(form, "ajax:aborted:required", [blankRequiredInputs])) {
-                    return rails.stopEverything(e);
-                  }
-                } else {
-                  form.data("ujs:formnovalidate-button", undefined2);
-                }
+              setData(form, "ujs:formnovalidate-button", button.formNoValidate);
+              setData(form, "ujs:submit-button-formaction", button.getAttribute("formaction"));
+              return setData(form, "ujs:submit-button-formmethod", button.getAttribute("formmethod"));
+            };
+            Rails2.preventInsignificantClick = function(e) {
+              var data, insignificantMetaClick, link, metaClick, method, nonPrimaryMouseClick;
+              link = this;
+              method = (link.getAttribute("data-method") || "GET").toUpperCase();
+              data = link.getAttribute("data-params");
+              metaClick = e.metaKey || e.ctrlKey;
+              insignificantMetaClick = metaClick && method === "GET" && !data;
+              nonPrimaryMouseClick = e.button != null && e.button !== 0;
+              if (nonPrimaryMouseClick || insignificantMetaClick) {
+                return e.stopImmediatePropagation();
               }
-              if (remote) {
-                nonBlankFileInputs = rails.nonBlankInputs(form, rails.fileInputSelector);
-                if (nonBlankFileInputs) {
-                  setTimeout(function() {
-                    rails.disableFormElements(form);
-                  }, 13);
-                  var aborted = rails.fire(form, "ajax:aborted:file", [nonBlankFileInputs]);
-                  if (!aborted) {
-                    setTimeout(function() {
-                      rails.enableFormElements(form);
-                    }, 13);
-                  }
-                  return aborted;
+            };
+          }).call(this);
+          (function() {
+            var $5, CSRFProtection, delegate, disableElement, enableElement, fire, formSubmitButtonClick, getData, handleConfirm, handleDisabledElement, handleMethod, handleRemote, loadCSPNonce, preventInsignificantClick, refreshCSRFTokens;
+            fire = Rails2.fire, delegate = Rails2.delegate, getData = Rails2.getData, $5 = Rails2.$, refreshCSRFTokens = Rails2.refreshCSRFTokens, CSRFProtection = Rails2.CSRFProtection, loadCSPNonce = Rails2.loadCSPNonce, enableElement = Rails2.enableElement, disableElement = Rails2.disableElement, handleDisabledElement = Rails2.handleDisabledElement, handleConfirm = Rails2.handleConfirm, preventInsignificantClick = Rails2.preventInsignificantClick, handleRemote = Rails2.handleRemote, formSubmitButtonClick = Rails2.formSubmitButtonClick, handleMethod = Rails2.handleMethod;
+            if (typeof jQuery !== "undefined" && jQuery !== null && jQuery.ajax != null) {
+              if (jQuery.rails) {
+                throw new Error("If you load both jquery_ujs and rails-ujs, use rails-ujs only.");
+              }
+              jQuery.rails = Rails2;
+              jQuery.ajaxPrefilter(function(options, originalOptions, xhr) {
+                if (!options.crossDomain) {
+                  return CSRFProtection(xhr);
                 }
-                rails.handleRemote(form);
-                return false;
-              } else {
-                setTimeout(function() {
-                  rails.disableFormElements(form);
+              });
+            }
+            Rails2.start = function() {
+              if (window._rails_loaded) {
+                throw new Error("rails-ujs has already been loaded!");
+              }
+              window.addEventListener("pageshow", function() {
+                $5(Rails2.formEnableSelector).forEach(function(el) {
+                  if (getData(el, "ujs:disabled")) {
+                    return enableElement(el);
+                  }
+                });
+                return $5(Rails2.linkDisableSelector).forEach(function(el) {
+                  if (getData(el, "ujs:disabled")) {
+                    return enableElement(el);
+                  }
+                });
+              });
+              delegate(document, Rails2.linkDisableSelector, "ajax:complete", enableElement);
+              delegate(document, Rails2.linkDisableSelector, "ajax:stopped", enableElement);
+              delegate(document, Rails2.buttonDisableSelector, "ajax:complete", enableElement);
+              delegate(document, Rails2.buttonDisableSelector, "ajax:stopped", enableElement);
+              delegate(document, Rails2.linkClickSelector, "click", preventInsignificantClick);
+              delegate(document, Rails2.linkClickSelector, "click", handleDisabledElement);
+              delegate(document, Rails2.linkClickSelector, "click", handleConfirm);
+              delegate(document, Rails2.linkClickSelector, "click", disableElement);
+              delegate(document, Rails2.linkClickSelector, "click", handleRemote);
+              delegate(document, Rails2.linkClickSelector, "click", handleMethod);
+              delegate(document, Rails2.buttonClickSelector, "click", preventInsignificantClick);
+              delegate(document, Rails2.buttonClickSelector, "click", handleDisabledElement);
+              delegate(document, Rails2.buttonClickSelector, "click", handleConfirm);
+              delegate(document, Rails2.buttonClickSelector, "click", disableElement);
+              delegate(document, Rails2.buttonClickSelector, "click", handleRemote);
+              delegate(document, Rails2.inputChangeSelector, "change", handleDisabledElement);
+              delegate(document, Rails2.inputChangeSelector, "change", handleConfirm);
+              delegate(document, Rails2.inputChangeSelector, "change", handleRemote);
+              delegate(document, Rails2.formSubmitSelector, "submit", handleDisabledElement);
+              delegate(document, Rails2.formSubmitSelector, "submit", handleConfirm);
+              delegate(document, Rails2.formSubmitSelector, "submit", handleRemote);
+              delegate(document, Rails2.formSubmitSelector, "submit", function(e) {
+                return setTimeout(function() {
+                  return disableElement(e);
                 }, 13);
-              }
-            });
-            $document.on("click.rails", rails.formInputClickSelector, function(event) {
-              var button = $5(this);
-              if (!rails.allowAction(button))
-                return rails.stopEverything(event);
-              var name = button.attr("name"), data = name ? { name, value: button.val() } : null;
-              var form = button.closest("form");
-              if (form.length === 0) {
-                form = $5("#" + button.attr("form"));
-              }
-              form.data("ujs:submit-button", data);
-              form.data("ujs:formnovalidate-button", button.attr("formnovalidate"));
-              form.data("ujs:submit-button-formaction", button.attr("formaction"));
-              form.data("ujs:submit-button-formmethod", button.attr("formmethod"));
-            });
-            $document.on("ajax:send.rails", rails.formSubmitSelector, function(event) {
-              if (this === event.target)
-                rails.disableFormElements($5(this));
-            });
-            $document.on("ajax:complete.rails", rails.formSubmitSelector, function(event) {
-              if (this === event.target)
-                rails.enableFormElements($5(this));
-            });
-            $5(function() {
-              rails.refreshCSRFTokens();
-            });
-          }
-        };
-        if (window.jQuery) {
-          jqueryUjsInit(jQuery);
-        } else if (typeof exports === "object" && typeof module === "object") {
-          module.exports = jqueryUjsInit;
+              });
+              delegate(document, Rails2.formSubmitSelector, "ajax:send", disableElement);
+              delegate(document, Rails2.formSubmitSelector, "ajax:complete", enableElement);
+              delegate(document, Rails2.formInputClickSelector, "click", preventInsignificantClick);
+              delegate(document, Rails2.formInputClickSelector, "click", handleDisabledElement);
+              delegate(document, Rails2.formInputClickSelector, "click", handleConfirm);
+              delegate(document, Rails2.formInputClickSelector, "click", formSubmitButtonClick);
+              document.addEventListener("DOMContentLoaded", refreshCSRFTokens);
+              document.addEventListener("DOMContentLoaded", loadCSPNonce);
+              return window._rails_loaded = true;
+            };
+            if (window.Rails === Rails2 && fire(document, "rails:attachBindings")) {
+              Rails2.start();
+            }
+          }).call(this);
+        }).call(this);
+        if (typeof module === "object" && module.exports) {
+          module.exports = Rails2;
+        } else if (typeof define === "function" && define.amd) {
+          define(Rails2);
         }
-      })();
+      }).call(exports);
     }
   });
 
@@ -12622,7 +12905,7 @@
   var require_moment2 = __commonJS({
     "node_modules/bootstrap-datetimepicker-npm/node_modules/moment/moment.js"(exports, module) {
       (function(undefined2) {
-        var moment, VERSION = "2.8.4", globalScope = typeof global !== "undefined" ? global : this, oldGlobalMoment, round = Math.round, hasOwnProperty = Object.prototype.hasOwnProperty, i, YEAR = 0, MONTH = 1, DATE = 2, HOUR = 3, MINUTE = 4, SECOND = 5, MILLISECOND = 6, locales = {}, momentProperties = [], hasModule = typeof module !== "undefined" && module && module.exports, aspNetJsonRegex = /^\/?Date\((\-?\d+)/i, aspNetTimeSpanJsonRegex = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/, isoDurationRegex = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/, formattingTokens = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,4}|x|X|zz?|ZZ?|.)/g, localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, parseTokenOneOrTwoDigits = /\d\d?/, parseTokenOneToThreeDigits = /\d{1,3}/, parseTokenOneToFourDigits = /\d{1,4}/, parseTokenOneToSixDigits = /[+\-]?\d{1,6}/, parseTokenDigits = /\d+/, parseTokenWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, parseTokenTimezone = /Z|[\+\-]\d\d:?\d\d/gi, parseTokenT = /T/i, parseTokenOffsetMs = /[\+\-]?\d+/, parseTokenTimestampMs = /[\+\-]?\d+(\.\d{1,3})?/, parseTokenOneDigit = /\d/, parseTokenTwoDigits = /\d\d/, parseTokenThreeDigits = /\d{3}/, parseTokenFourDigits = /\d{4}/, parseTokenSixDigits = /[+-]?\d{6}/, parseTokenSignedNumber = /[+-]?\d+/, isoRegex = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/, isoFormat = "YYYY-MM-DDTHH:mm:ssZ", isoDates = [
+        var moment2, VERSION = "2.8.4", globalScope = typeof global !== "undefined" ? global : this, oldGlobalMoment, round = Math.round, hasOwnProperty = Object.prototype.hasOwnProperty, i, YEAR = 0, MONTH = 1, DATE = 2, HOUR = 3, MINUTE = 4, SECOND = 5, MILLISECOND = 6, locales = {}, momentProperties = [], hasModule = typeof module !== "undefined" && module && module.exports, aspNetJsonRegex = /^\/?Date\((\-?\d+)/i, aspNetTimeSpanJsonRegex = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/, isoDurationRegex = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/, formattingTokens = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,4}|x|X|zz?|ZZ?|.)/g, localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, parseTokenOneOrTwoDigits = /\d\d?/, parseTokenOneToThreeDigits = /\d{1,3}/, parseTokenOneToFourDigits = /\d{1,4}/, parseTokenOneToSixDigits = /[+\-]?\d{1,6}/, parseTokenDigits = /\d+/, parseTokenWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, parseTokenTimezone = /Z|[\+\-]\d\d:?\d\d/gi, parseTokenT = /T/i, parseTokenOffsetMs = /[\+\-]?\d+/, parseTokenTimestampMs = /[\+\-]?\d+(\.\d{1,3})?/, parseTokenOneDigit = /\d/, parseTokenTwoDigits = /\d\d/, parseTokenThreeDigits = /\d{3}/, parseTokenFourDigits = /\d{4}/, parseTokenSixDigits = /[+-]?\d{6}/, parseTokenSignedNumber = /[+-]?\d+/, isoRegex = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/, isoFormat = "YYYY-MM-DDTHH:mm:ssZ", isoDates = [
           ["YYYYYY-MM-DD", /[+-]\d{6}-\d{2}-\d{2}/],
           ["YYYY-MM-DD", /\d{4}-\d{2}-\d{2}/],
           ["GGGG-[W]WW-E", /\d{4}-W\d{2}-\d/],
@@ -12831,7 +13114,7 @@
           };
         }
         function printMsg(msg) {
-          if (moment.suppressDeprecationWarnings === false && typeof console !== "undefined" && console.warn) {
+          if (moment2.suppressDeprecationWarnings === false && typeof console !== "undefined" && console.warn) {
             console.warn("Deprecation warning: " + msg);
           }
         }
@@ -12885,7 +13168,7 @@
           this._days = +days + weeks * 7;
           this._months = +months + quarters * 3 + years * 12;
           this._data = {};
-          this._locale = moment.localeData();
+          this._locale = moment2.localeData();
           this._bubble();
         }
         function extend(a, b) {
@@ -12990,7 +13273,7 @@
               period = tmp;
             }
             val = typeof val === "string" ? +val : val;
-            dur = moment.duration(val, period);
+            dur = moment2.duration(val, period);
             addOrSubtractDurationFromMoment(this, dur, direction);
             return this;
           };
@@ -13008,7 +13291,7 @@
             rawMonthSetter(mom, rawGetter(mom, "Month") + months * isAdding);
           }
           if (updateOffset) {
-            moment.updateOffset(mom, days || months);
+            moment2.updateOffset(mom, days || months);
           }
         }
         function isArray(input) {
@@ -13056,15 +13339,15 @@
           } else {
             return;
           }
-          moment[field] = function(format, index) {
-            var i2, getter, method = moment._locale[field], results = [];
+          moment2[field] = function(format, index) {
+            var i2, getter, method = moment2._locale[field], results = [];
             if (typeof format === "number") {
               index = format;
               format = undefined2;
             }
             getter = function(i3) {
-              var m = moment().utc().set(setter, i3);
-              return method.call(moment._locale, m, format || "");
+              var m = moment2().utc().set(setter, i3);
+              return method.call(moment2._locale, m, format || "");
             };
             if (index != null) {
               return getter(index);
@@ -13091,7 +13374,7 @@
           return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
         }
         function weeksInYear(year, dow, doy) {
-          return weekOfYear(moment([year, 11, 31 + dow - doy]), dow, doy).week;
+          return weekOfYear(moment2([year, 11, 31 + dow - doy]), dow, doy).week;
         }
         function daysInYear(year) {
           return isLeapYear(year) ? 366 : 365;
@@ -13146,9 +13429,9 @@
           var oldLocale = null;
           if (!locales[name] && hasModule) {
             try {
-              oldLocale = moment.locale();
+              oldLocale = moment2.locale();
               __require("./locale/" + name);
-              moment.locale(oldLocale);
+              moment2.locale(oldLocale);
             } catch (e) {
             }
           }
@@ -13158,12 +13441,12 @@
           var res, diff;
           if (model._isUTC) {
             res = model.clone();
-            diff = (moment.isMoment(input) || isDate(input) ? +input : +moment(input)) - +res;
+            diff = (moment2.isMoment(input) || isDate(input) ? +input : +moment2(input)) - +res;
             res._d.setTime(+res._d + diff);
-            moment.updateOffset(res, false);
+            moment2.updateOffset(res, false);
             return res;
           } else {
-            return moment(input).local();
+            return moment2(input).local();
           }
         }
         extend(Locale.prototype, {
@@ -13195,7 +13478,7 @@
               this._shortMonthsParse = [];
             }
             for (i2 = 0; i2 < 12; i2++) {
-              mom = moment.utc([2e3, i2]);
+              mom = moment2.utc([2e3, i2]);
               if (strict && !this._longMonthsParse[i2]) {
                 this._longMonthsParse[i2] = new RegExp("^" + this.months(mom, "").replace(".", "") + "$", "i");
                 this._shortMonthsParse[i2] = new RegExp("^" + this.monthsShort(mom, "").replace(".", "") + "$", "i");
@@ -13232,7 +13515,7 @@
             }
             for (i2 = 0; i2 < 7; i2++) {
               if (!this._weekdaysParse[i2]) {
-                mom = moment([2e3, 1]).day(i2);
+                mom = moment2([2e3, 1]).day(i2);
                 regex = "^" + this.weekdays(mom, "") + "|^" + this.weekdaysShort(mom, "") + "|^" + this.weekdaysMin(mom, "");
                 this._weekdaysParse[i2] = new RegExp(regex.replace(".", ""), "i");
               }
@@ -13505,7 +13788,7 @@
               }
               break;
             case "YY":
-              datePartArray[YEAR] = moment.parseTwoDigitYear(input);
+              datePartArray[YEAR] = moment2.parseTwoDigitYear(input);
               break;
             case "YYYY":
             case "YYYYY":
@@ -13579,7 +13862,7 @@
             case "gg":
             case "GG":
               config._w = config._w || {};
-              config._w[token] = moment.parseTwoDigitYear(input);
+              config._w[token] = moment2.parseTwoDigitYear(input);
           }
         }
         function dayOfYearFromWeekInfo(config) {
@@ -13588,13 +13871,13 @@
           if (w.GG != null || w.W != null || w.E != null) {
             dow = 1;
             doy = 4;
-            weekYear = dfl(w.GG, config._a[YEAR], weekOfYear(moment(), 1, 4).year);
+            weekYear = dfl(w.GG, config._a[YEAR], weekOfYear(moment2(), 1, 4).year);
             week = dfl(w.W, 1);
             weekday = dfl(w.E, 1);
           } else {
             dow = config._locale._week.dow;
             doy = config._locale._week.doy;
-            weekYear = dfl(w.gg, config._a[YEAR], weekOfYear(moment(), dow, doy).year);
+            weekYear = dfl(w.gg, config._a[YEAR], weekOfYear(moment2(), dow, doy).year);
             week = dfl(w.w, 1);
             if (w.d != null) {
               weekday = w.d;
@@ -13677,7 +13960,7 @@
           }
         }
         function makeDateFromStringAndFormat(config) {
-          if (config._f === moment.ISO_8601) {
+          if (config._f === moment2.ISO_8601) {
             parseISO(config);
             return;
           }
@@ -13788,7 +14071,7 @@
           parseISO(config);
           if (config._isValid === false) {
             delete config._isValid;
-            moment.createFromInputFallback(config);
+            moment2.createFromInputFallback(config);
           }
         }
         function map(arr, fn) {
@@ -13818,7 +14101,7 @@
           } else if (typeof input === "number") {
             config._d = new Date(input);
           } else {
-            moment.createFromInputFallback(config);
+            moment2.createFromInputFallback(config);
           }
         }
         function makeDate(y, m, d, h, M, s, ms) {
@@ -13852,7 +14135,7 @@
           return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
         }
         function relativeTime(posNegDuration, withoutSuffix, locale) {
-          var duration = moment.duration(posNegDuration).abs(), seconds = round(duration.as("s")), minutes = round(duration.as("m")), hours = round(duration.as("h")), days = round(duration.as("d")), months = round(duration.as("M")), years = round(duration.as("y")), args = seconds < relativeTimeThresholds.s && ["s", seconds] || minutes === 1 && ["m"] || minutes < relativeTimeThresholds.m && ["mm", minutes] || hours === 1 && ["h"] || hours < relativeTimeThresholds.h && ["hh", hours] || days === 1 && ["d"] || days < relativeTimeThresholds.d && ["dd", days] || months === 1 && ["M"] || months < relativeTimeThresholds.M && ["MM", months] || years === 1 && ["y"] || ["yy", years];
+          var duration = moment2.duration(posNegDuration).abs(), seconds = round(duration.as("s")), minutes = round(duration.as("m")), hours = round(duration.as("h")), days = round(duration.as("d")), months = round(duration.as("M")), years = round(duration.as("y")), args = seconds < relativeTimeThresholds.s && ["s", seconds] || minutes === 1 && ["m"] || minutes < relativeTimeThresholds.m && ["mm", minutes] || hours === 1 && ["h"] || hours < relativeTimeThresholds.h && ["hh", hours] || days === 1 && ["d"] || days < relativeTimeThresholds.d && ["dd", days] || months === 1 && ["M"] || months < relativeTimeThresholds.M && ["MM", months] || years === 1 && ["y"] || ["yy", years];
           args[2] = withoutSuffix;
           args[3] = +posNegDuration > 0;
           args[4] = locale;
@@ -13866,7 +14149,7 @@
           if (daysToDayOfWeek < end - 7) {
             daysToDayOfWeek += 7;
           }
-          adjustedMoment = moment(mom).add(daysToDayOfWeek, "d");
+          adjustedMoment = moment2(mom).add(daysToDayOfWeek, "d");
           return {
             week: Math.ceil(adjustedMoment.dayOfYear() / 7),
             year: adjustedMoment.year()
@@ -13885,14 +14168,14 @@
         }
         function makeMoment(config) {
           var input = config._i, format = config._f, res;
-          config._locale = config._locale || moment.localeData(config._l);
+          config._locale = config._locale || moment2.localeData(config._l);
           if (input === null || format === undefined2 && input === "") {
-            return moment.invalid({ nullInput: true });
+            return moment2.invalid({ nullInput: true });
           }
           if (typeof input === "string") {
             config._i = input = config._locale.preparse(input);
           }
-          if (moment.isMoment(input)) {
+          if (moment2.isMoment(input)) {
             return new Moment(input, true);
           } else if (format) {
             if (isArray(format)) {
@@ -13910,7 +14193,7 @@
           }
           return res;
         }
-        moment = function(input, format, locale, strict) {
+        moment2 = function(input, format, locale, strict) {
           var c;
           if (typeof locale === "boolean") {
             strict = locale;
@@ -13926,8 +14209,8 @@
           c._pf = defaultParsingFlags();
           return makeMoment(c);
         };
-        moment.suppressDeprecationWarnings = false;
-        moment.createFromInputFallback = deprecate("moment construction falls back to js Date. This is discouraged and will be removed in upcoming major release. Please refer to https://github.com/moment/moment/issues/1407 for more info.", function(config) {
+        moment2.suppressDeprecationWarnings = false;
+        moment2.createFromInputFallback = deprecate("moment construction falls back to js Date. This is discouraged and will be removed in upcoming major release. Please refer to https://github.com/moment/moment/issues/1407 for more info.", function(config) {
           config._d = new Date(config._i + (config._useUTC ? " UTC" : ""));
         });
         function pickBy(fn, moments) {
@@ -13936,7 +14219,7 @@
             moments = moments[0];
           }
           if (!moments.length) {
-            return moment();
+            return moment2();
           }
           res = moments[0];
           for (i2 = 1; i2 < moments.length; ++i2) {
@@ -13946,15 +14229,15 @@
           }
           return res;
         }
-        moment.min = function() {
+        moment2.min = function() {
           var args = [].slice.call(arguments, 0);
           return pickBy("isBefore", args);
         };
-        moment.max = function() {
+        moment2.max = function() {
           var args = [].slice.call(arguments, 0);
           return pickBy("isAfter", args);
         };
-        moment.utc = function(input, format, locale, strict) {
+        moment2.utc = function(input, format, locale, strict) {
           var c;
           if (typeof locale === "boolean") {
             strict = locale;
@@ -13971,12 +14254,12 @@
           c._pf = defaultParsingFlags();
           return makeMoment(c).utc();
         };
-        moment.unix = function(input) {
-          return moment(input * 1e3);
+        moment2.unix = function(input) {
+          return moment2(input * 1e3);
         };
-        moment.duration = function(input, key) {
+        moment2.duration = function(input, key) {
           var duration = input, match = null, sign, ret, parseIso, diffRes;
-          if (moment.isDuration(input)) {
+          if (moment2.isDuration(input)) {
             duration = {
               ms: input._milliseconds,
               d: input._days,
@@ -14015,25 +14298,25 @@
               w: parseIso(match[8])
             };
           } else if (typeof duration === "object" && ("from" in duration || "to" in duration)) {
-            diffRes = momentsDifference(moment(duration.from), moment(duration.to));
+            diffRes = momentsDifference(moment2(duration.from), moment2(duration.to));
             duration = {};
             duration.ms = diffRes.milliseconds;
             duration.M = diffRes.months;
           }
           ret = new Duration(duration);
-          if (moment.isDuration(input) && hasOwnProp(input, "_locale")) {
+          if (moment2.isDuration(input) && hasOwnProp(input, "_locale")) {
             ret._locale = input._locale;
           }
           return ret;
         };
-        moment.version = VERSION;
-        moment.defaultFormat = isoFormat;
-        moment.ISO_8601 = function() {
+        moment2.version = VERSION;
+        moment2.defaultFormat = isoFormat;
+        moment2.ISO_8601 = function() {
         };
-        moment.momentProperties = momentProperties;
-        moment.updateOffset = function() {
+        moment2.momentProperties = momentProperties;
+        moment2.updateOffset = function() {
         };
-        moment.relativeTimeThreshold = function(threshold, limit) {
+        moment2.relativeTimeThreshold = function(threshold, limit) {
           if (relativeTimeThresholds[threshold] === undefined2) {
             return false;
           }
@@ -14043,47 +14326,47 @@
           relativeTimeThresholds[threshold] = limit;
           return true;
         };
-        moment.lang = deprecate("moment.lang is deprecated. Use moment.locale instead.", function(key, value) {
-          return moment.locale(key, value);
+        moment2.lang = deprecate("moment.lang is deprecated. Use moment.locale instead.", function(key, value) {
+          return moment2.locale(key, value);
         });
-        moment.locale = function(key, values) {
+        moment2.locale = function(key, values) {
           var data;
           if (key) {
             if (typeof values !== "undefined") {
-              data = moment.defineLocale(key, values);
+              data = moment2.defineLocale(key, values);
             } else {
-              data = moment.localeData(key);
+              data = moment2.localeData(key);
             }
             if (data) {
-              moment.duration._locale = moment._locale = data;
+              moment2.duration._locale = moment2._locale = data;
             }
           }
-          return moment._locale._abbr;
+          return moment2._locale._abbr;
         };
-        moment.defineLocale = function(name, values) {
+        moment2.defineLocale = function(name, values) {
           if (values !== null) {
             values.abbr = name;
             if (!locales[name]) {
               locales[name] = new Locale();
             }
             locales[name].set(values);
-            moment.locale(name);
+            moment2.locale(name);
             return locales[name];
           } else {
             delete locales[name];
             return null;
           }
         };
-        moment.langData = deprecate("moment.langData is deprecated. Use moment.localeData instead.", function(key) {
-          return moment.localeData(key);
+        moment2.langData = deprecate("moment.langData is deprecated. Use moment.localeData instead.", function(key) {
+          return moment2.localeData(key);
         });
-        moment.localeData = function(key) {
+        moment2.localeData = function(key) {
           var locale;
           if (key && key._locale && key._locale._abbr) {
             key = key._locale._abbr;
           }
           if (!key) {
-            return moment._locale;
+            return moment2._locale;
           }
           if (!isArray(key)) {
             locale = loadLocale(key);
@@ -14094,20 +14377,20 @@
           }
           return chooseLocale(key);
         };
-        moment.isMoment = function(obj) {
+        moment2.isMoment = function(obj) {
           return obj instanceof Moment || obj != null && hasOwnProp(obj, "_isAMomentObject");
         };
-        moment.isDuration = function(obj) {
+        moment2.isDuration = function(obj) {
           return obj instanceof Duration;
         };
         for (i = lists.length - 1; i >= 0; --i) {
           makeList(lists[i]);
         }
-        moment.normalizeUnits = function(units) {
+        moment2.normalizeUnits = function(units) {
           return normalizeUnits(units);
         };
-        moment.invalid = function(flags) {
-          var m = moment.utc(NaN);
+        moment2.invalid = function(flags) {
+          var m = moment2.utc(NaN);
           if (flags != null) {
             extend(m._pf, flags);
           } else {
@@ -14115,15 +14398,15 @@
           }
           return m;
         };
-        moment.parseZone = function() {
-          return moment.apply(null, arguments).parseZone();
+        moment2.parseZone = function() {
+          return moment2.apply(null, arguments).parseZone();
         };
-        moment.parseTwoDigitYear = function(input) {
+        moment2.parseTwoDigitYear = function(input) {
           return toInt(input) + (toInt(input) > 68 ? 1900 : 2e3);
         };
-        extend(moment.fn = Moment.prototype, {
+        extend(moment2.fn = Moment.prototype, {
           clone: function() {
-            return moment(this);
+            return moment2(this);
           },
           valueOf: function() {
             return +this._d + (this._offset || 0) * 6e4;
@@ -14138,7 +14421,7 @@
             return this._offset ? new Date(+this) : this._d;
           },
           toISOString: function() {
-            var m = moment(this).utc();
+            var m = moment2(this).utc();
             if (0 < m.year() && m.year() <= 9999) {
               if (typeof Date.prototype.toISOString === "function") {
                 return this.toDate().toISOString();
@@ -14166,7 +14449,7 @@
           },
           isDSTShifted: function() {
             if (this._a) {
-              return this.isValid() && compareArrays(this._a, (this._isUTC ? moment.utc(this._a) : moment(this._a)).toArray()) > 0;
+              return this.isValid() && compareArrays(this._a, (this._isUTC ? moment2.utc(this._a) : moment2(this._a)).toArray()) > 0;
             }
             return false;
           },
@@ -14190,7 +14473,7 @@
             return this;
           },
           format: function(inputString) {
-            var output = formatMoment(this, inputString || moment.defaultFormat);
+            var output = formatMoment(this, inputString || moment2.defaultFormat);
             return this.localeData().postformat(output);
           },
           add: createAdder(1, "add"),
@@ -14201,8 +14484,8 @@
             if (units === "year" || units === "month") {
               diff = (this.daysInMonth() + that.daysInMonth()) * 432e5;
               output = (this.year() - that.year()) * 12 + (this.month() - that.month());
-              daysAdjust = this - moment(this).startOf("month") - (that - moment(that).startOf("month"));
-              daysAdjust -= (this.zone() - moment(this).startOf("month").zone() - (that.zone() - moment(that).startOf("month").zone())) * 6e4;
+              daysAdjust = this - moment2(this).startOf("month") - (that - moment2(that).startOf("month"));
+              daysAdjust -= (this.zone() - moment2(this).startOf("month").zone() - (that.zone() - moment2(that).startOf("month").zone())) * 6e4;
               output += daysAdjust / diff;
               if (units === "year") {
                 output = output / 12;
@@ -14214,14 +14497,14 @@
             return asFloat ? output : absRound(output);
           },
           from: function(time, withoutSuffix) {
-            return moment.duration({ to: this, from: time }).locale(this.locale()).humanize(!withoutSuffix);
+            return moment2.duration({ to: this, from: time }).locale(this.locale()).humanize(!withoutSuffix);
           },
           fromNow: function(withoutSuffix) {
-            return this.from(moment(), withoutSuffix);
+            return this.from(moment2(), withoutSuffix);
           },
           calendar: function(time) {
-            var now = time || moment(), sod = makeAs(now, this).startOf("day"), diff = this.diff(sod, "days", true), format = diff < -6 ? "sameElse" : diff < -1 ? "lastWeek" : diff < 0 ? "lastDay" : diff < 1 ? "sameDay" : diff < 2 ? "nextDay" : diff < 7 ? "nextWeek" : "sameElse";
-            return this.format(this.localeData().calendar(format, this, moment(now)));
+            var now = time || moment2(), sod = makeAs(now, this).startOf("day"), diff = this.diff(sod, "days", true), format = diff < -6 ? "sameElse" : diff < -1 ? "lastWeek" : diff < 0 ? "lastDay" : diff < 1 ? "sameDay" : diff < 2 ? "nextDay" : diff < 7 ? "nextWeek" : "sameElse";
+            return this.format(this.localeData().calendar(format, this, moment2(now)));
           },
           isLeapYear: function() {
             return isLeapYear(this.year());
@@ -14279,10 +14562,10 @@
             var inputMs;
             units = normalizeUnits(typeof units !== "undefined" ? units : "millisecond");
             if (units === "millisecond") {
-              input = moment.isMoment(input) ? input : moment(input);
+              input = moment2.isMoment(input) ? input : moment2(input);
               return +this > +input;
             } else {
-              inputMs = moment.isMoment(input) ? +input : +moment(input);
+              inputMs = moment2.isMoment(input) ? +input : +moment2(input);
               return inputMs < +this.clone().startOf(units);
             }
           },
@@ -14290,10 +14573,10 @@
             var inputMs;
             units = normalizeUnits(typeof units !== "undefined" ? units : "millisecond");
             if (units === "millisecond") {
-              input = moment.isMoment(input) ? input : moment(input);
+              input = moment2.isMoment(input) ? input : moment2(input);
               return +this < +input;
             } else {
-              inputMs = moment.isMoment(input) ? +input : +moment(input);
+              inputMs = moment2.isMoment(input) ? +input : +moment2(input);
               return +this.clone().endOf(units) < inputMs;
             }
           },
@@ -14301,19 +14584,19 @@
             var inputMs;
             units = normalizeUnits(units || "millisecond");
             if (units === "millisecond") {
-              input = moment.isMoment(input) ? input : moment(input);
+              input = moment2.isMoment(input) ? input : moment2(input);
               return +this === +input;
             } else {
-              inputMs = +moment(input);
+              inputMs = +moment2(input);
               return +this.clone().startOf(units) <= inputMs && inputMs <= +this.clone().endOf(units);
             }
           },
           min: deprecate("moment().min is deprecated, use moment.min instead. https://github.com/moment/moment/issues/1548", function(other) {
-            other = moment.apply(null, arguments);
+            other = moment2.apply(null, arguments);
             return other < this ? this : other;
           }),
           max: deprecate("moment().max is deprecated, use moment.max instead. https://github.com/moment/moment/issues/1548", function(other) {
-            other = moment.apply(null, arguments);
+            other = moment2.apply(null, arguments);
             return other > this ? this : other;
           }),
           zone: function(input, keepLocalTime) {
@@ -14335,10 +14618,10 @@
               }
               if (offset !== input) {
                 if (!keepLocalTime || this._changeInProgress) {
-                  addOrSubtractDurationFromMoment(this, moment.duration(offset - input, "m"), 1, false);
+                  addOrSubtractDurationFromMoment(this, moment2.duration(offset - input, "m"), 1, false);
                 } else if (!this._changeInProgress) {
                   this._changeInProgress = true;
-                  moment.updateOffset(this, true);
+                  moment2.updateOffset(this, true);
                   this._changeInProgress = null;
                 }
               }
@@ -14365,7 +14648,7 @@
             if (!input) {
               input = 0;
             } else {
-              input = moment(input).zone();
+              input = moment2(input).zone();
             }
             return (this.zone() - input) % 60 === 0;
           },
@@ -14373,7 +14656,7 @@
             return daysInMonth(this.year(), this.month());
           },
           dayOfYear: function(input) {
-            var dayOfYear = round((moment(this).startOf("day") - moment(this).startOf("year")) / 864e5) + 1;
+            var dayOfYear = round((moment2(this).startOf("day") - moment2(this).startOf("year")) / 864e5) + 1;
             return input == null ? dayOfYear : this.add(input - dayOfYear, "d");
           },
           quarter: function(input) {
@@ -14425,7 +14708,7 @@
             if (key === undefined2) {
               return this._locale._abbr;
             } else {
-              newLocaleData = moment.localeData(key);
+              newLocaleData = moment2.localeData(key);
               if (newLocaleData != null) {
                 this._locale = newLocaleData;
               }
@@ -14472,34 +14755,34 @@
           return function(value) {
             if (value != null) {
               rawSetter(this, unit, value);
-              moment.updateOffset(this, keepTime);
+              moment2.updateOffset(this, keepTime);
               return this;
             } else {
               return rawGetter(this, unit);
             }
           };
         }
-        moment.fn.millisecond = moment.fn.milliseconds = makeAccessor("Milliseconds", false);
-        moment.fn.second = moment.fn.seconds = makeAccessor("Seconds", false);
-        moment.fn.minute = moment.fn.minutes = makeAccessor("Minutes", false);
-        moment.fn.hour = moment.fn.hours = makeAccessor("Hours", true);
-        moment.fn.date = makeAccessor("Date", true);
-        moment.fn.dates = deprecate("dates accessor is deprecated. Use date instead.", makeAccessor("Date", true));
-        moment.fn.year = makeAccessor("FullYear", true);
-        moment.fn.years = deprecate("years accessor is deprecated. Use year instead.", makeAccessor("FullYear", true));
-        moment.fn.days = moment.fn.day;
-        moment.fn.months = moment.fn.month;
-        moment.fn.weeks = moment.fn.week;
-        moment.fn.isoWeeks = moment.fn.isoWeek;
-        moment.fn.quarters = moment.fn.quarter;
-        moment.fn.toJSON = moment.fn.toISOString;
+        moment2.fn.millisecond = moment2.fn.milliseconds = makeAccessor("Milliseconds", false);
+        moment2.fn.second = moment2.fn.seconds = makeAccessor("Seconds", false);
+        moment2.fn.minute = moment2.fn.minutes = makeAccessor("Minutes", false);
+        moment2.fn.hour = moment2.fn.hours = makeAccessor("Hours", true);
+        moment2.fn.date = makeAccessor("Date", true);
+        moment2.fn.dates = deprecate("dates accessor is deprecated. Use date instead.", makeAccessor("Date", true));
+        moment2.fn.year = makeAccessor("FullYear", true);
+        moment2.fn.years = deprecate("years accessor is deprecated. Use year instead.", makeAccessor("FullYear", true));
+        moment2.fn.days = moment2.fn.day;
+        moment2.fn.months = moment2.fn.month;
+        moment2.fn.weeks = moment2.fn.week;
+        moment2.fn.isoWeeks = moment2.fn.isoWeek;
+        moment2.fn.quarters = moment2.fn.quarter;
+        moment2.fn.toJSON = moment2.fn.toISOString;
         function daysToYears(days) {
           return days * 400 / 146097;
         }
         function yearsToDays(years) {
           return years * 146097 / 400;
         }
-        extend(moment.duration.fn = Duration.prototype, {
+        extend(moment2.duration.fn = Duration.prototype, {
           _bubble: function() {
             var milliseconds = this._milliseconds, days = this._days, months = this._months, data = this._data, seconds, minutes, hours, years = 0;
             data.milliseconds = milliseconds % 1e3;
@@ -14546,7 +14829,7 @@
             return this.localeData().postformat(output);
           },
           add: function(input, val) {
-            var dur = moment.duration(input, val);
+            var dur = moment2.duration(input, val);
             this._milliseconds += dur._milliseconds;
             this._days += dur._days;
             this._months += dur._months;
@@ -14554,7 +14837,7 @@
             return this;
           },
           subtract: function(input, val) {
-            var dur = moment.duration(input, val);
+            var dur = moment2.duration(input, val);
             this._milliseconds -= dur._milliseconds;
             this._days -= dur._days;
             this._months -= dur._months;
@@ -14592,8 +14875,8 @@
               }
             }
           },
-          lang: moment.fn.lang,
-          locale: moment.fn.locale,
+          lang: moment2.fn.lang,
+          locale: moment2.fn.locale,
           toIsoString: deprecate("toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)", function() {
             return this.toISOString();
           }),
@@ -14608,9 +14891,9 @@
             return this._locale;
           }
         });
-        moment.duration.fn.toString = moment.duration.fn.toISOString;
+        moment2.duration.fn.toString = moment2.duration.fn.toISOString;
         function makeDurationGetter(name) {
-          moment.duration.fn[name] = function() {
+          moment2.duration.fn[name] = function() {
             return this._data[name];
           };
         }
@@ -14619,31 +14902,31 @@
             makeDurationGetter(i.toLowerCase());
           }
         }
-        moment.duration.fn.asMilliseconds = function() {
+        moment2.duration.fn.asMilliseconds = function() {
           return this.as("ms");
         };
-        moment.duration.fn.asSeconds = function() {
+        moment2.duration.fn.asSeconds = function() {
           return this.as("s");
         };
-        moment.duration.fn.asMinutes = function() {
+        moment2.duration.fn.asMinutes = function() {
           return this.as("m");
         };
-        moment.duration.fn.asHours = function() {
+        moment2.duration.fn.asHours = function() {
           return this.as("h");
         };
-        moment.duration.fn.asDays = function() {
+        moment2.duration.fn.asDays = function() {
           return this.as("d");
         };
-        moment.duration.fn.asWeeks = function() {
+        moment2.duration.fn.asWeeks = function() {
           return this.as("weeks");
         };
-        moment.duration.fn.asMonths = function() {
+        moment2.duration.fn.asMonths = function() {
           return this.as("M");
         };
-        moment.duration.fn.asYears = function() {
+        moment2.duration.fn.asYears = function() {
           return this.as("y");
         };
-        moment.locale("en", {
+        moment2.locale("en", {
           ordinalParse: /\d{1,2}(th|st|nd|rd)/,
           ordinal: function(number) {
             var b = number % 10, output = toInt(number % 100 / 10) === 1 ? "th" : b === 1 ? "st" : b === 2 ? "nd" : b === 3 ? "rd" : "th";
@@ -14656,19 +14939,19 @@
           }
           oldGlobalMoment = globalScope.moment;
           if (shouldDeprecate) {
-            globalScope.moment = deprecate("Accessing Moment through the global scope is deprecated, and will be removed in an upcoming release.", moment);
+            globalScope.moment = deprecate("Accessing Moment through the global scope is deprecated, and will be removed in an upcoming release.", moment2);
           } else {
-            globalScope.moment = moment;
+            globalScope.moment = moment2;
           }
         }
         if (hasModule) {
-          module.exports = moment;
+          module.exports = moment2;
         } else if (typeof define === "function" && define.amd) {
           define("moment", function(require2, exports2, module2) {
             if (module2.config && module2.config() && module2.config().noGlobal === true) {
               globalScope.moment = oldGlobalMoment;
             }
-            return moment;
+            return moment2;
           });
           makeGlobal(true);
         } else {
@@ -14683,7 +14966,7 @@
     "node_modules/bootstrap-datetimepicker-npm/src/js/bootstrap-datetimepicker.js"(exports, module) {
       module.exports = function($5) {
         "use strict";
-        var moment = require_moment2();
+        var moment2 = require_moment2();
         var dateTimePicker = function(element, options) {
           var picker = {}, date, viewDate, unset = true, input, component = false, widget = false, use24Hours, minViewModeNumber = 0, actualFormat, parseFormats, currentViewMode, datePickerModes = [
             {
@@ -14737,28 +15020,28 @@
             46: "delete"
           }, keyState = {}, getMoment = function(d) {
             var tzEnabled = false, returnMoment, currentZoneOffset, incomingZoneOffset, timeZoneIndicator, dateWithTimeZoneInfo;
-            if (moment.tz !== void 0 && options.timeZone !== void 0 && options.timeZone !== null && options.timeZone !== "") {
+            if (moment2.tz !== void 0 && options.timeZone !== void 0 && options.timeZone !== null && options.timeZone !== "") {
               tzEnabled = true;
             }
             if (d === void 0 || d === null) {
               if (tzEnabled) {
-                returnMoment = moment().tz(options.timeZone).startOf("d");
+                returnMoment = moment2().tz(options.timeZone).startOf("d");
               } else {
-                returnMoment = moment().startOf("d");
+                returnMoment = moment2().startOf("d");
               }
             } else {
               if (tzEnabled) {
-                currentZoneOffset = moment().tz(options.timeZone).utcOffset();
-                incomingZoneOffset = moment(d, parseFormats, options.useStrict).utcOffset();
+                currentZoneOffset = moment2().tz(options.timeZone).utcOffset();
+                incomingZoneOffset = moment2(d, parseFormats, options.useStrict).utcOffset();
                 if (incomingZoneOffset !== currentZoneOffset) {
-                  timeZoneIndicator = moment().tz(options.timeZone).format("Z");
-                  dateWithTimeZoneInfo = moment(d, parseFormats, options.useStrict).format("YYYY-MM-DD[T]HH:mm:ss") + timeZoneIndicator;
-                  returnMoment = moment(dateWithTimeZoneInfo, parseFormats, options.useStrict).tz(options.timeZone);
+                  timeZoneIndicator = moment2().tz(options.timeZone).format("Z");
+                  dateWithTimeZoneInfo = moment2(d, parseFormats, options.useStrict).format("YYYY-MM-DD[T]HH:mm:ss") + timeZoneIndicator;
+                  returnMoment = moment2(dateWithTimeZoneInfo, parseFormats, options.useStrict).tz(options.timeZone);
                 } else {
-                  returnMoment = moment(d, parseFormats, options.useStrict).tz(options.timeZone);
+                  returnMoment = moment2(d, parseFormats, options.useStrict).tz(options.timeZone);
                 }
               } else {
-                returnMoment = moment(d, parseFormats, options.useStrict);
+                returnMoment = moment2(d, parseFormats, options.useStrict);
               }
             }
             return returnMoment;
@@ -15087,15 +15370,15 @@
             }
             yearsView.find("td").html(html);
           }, updateDecades = function() {
-            var decadesView = widget.find(".datepicker-decades"), decadesViewHeader = decadesView.find("th"), startDecade = moment({ y: viewDate.year() - viewDate.year() % 100 - 1 }), endDecade = startDecade.clone().add(100, "y"), startedAt = startDecade.clone(), html = "";
+            var decadesView = widget.find(".datepicker-decades"), decadesViewHeader = decadesView.find("th"), startDecade = moment2({ y: viewDate.year() - viewDate.year() % 100 - 1 }), endDecade = startDecade.clone().add(100, "y"), startedAt = startDecade.clone(), html = "";
             decadesViewHeader.eq(0).find("span").attr("title", options.tooltips.prevCentury);
             decadesViewHeader.eq(2).find("span").attr("title", options.tooltips.nextCentury);
             decadesView.find(".disabled").removeClass("disabled");
-            if (startDecade.isSame(moment({ y: 1900 })) || options.minDate && options.minDate.isAfter(startDecade, "y")) {
+            if (startDecade.isSame(moment2({ y: 1900 })) || options.minDate && options.minDate.isAfter(startDecade, "y")) {
               decadesViewHeader.eq(0).addClass("disabled");
             }
             decadesViewHeader.eq(1).text(startDecade.year() + "-" + endDecade.year());
-            if (startDecade.isSame(moment({ y: 2e3 })) || options.maxDate && options.maxDate.isBefore(endDecade, "y")) {
+            if (startDecade.isSame(moment2({ y: 2e3 })) || options.maxDate && options.maxDate.isBefore(endDecade, "y")) {
               decadesViewHeader.eq(2).addClass("disabled");
             }
             while (!startDecade.isAfter(endDecade, "y")) {
@@ -15530,8 +15813,8 @@
             return widget ? hide() : show();
           }, parseInputDate = function(inputDate) {
             if (options.parseInputDate === void 0) {
-              if (moment.isMoment(inputDate) || inputDate instanceof Date) {
-                inputDate = moment(inputDate);
+              if (moment2.isMoment(inputDate) || inputDate instanceof Date) {
+                inputDate = moment2(inputDate);
               } else {
                 inputDate = getMoment(inputDate);
               }
@@ -15715,7 +15998,7 @@
               }
               return date.clone();
             }
-            if (newDate !== null && typeof newDate !== "string" && !moment.isMoment(newDate) && !(newDate instanceof Date)) {
+            if (newDate !== null && typeof newDate !== "string" && !moment2.isMoment(newDate) && !(newDate instanceof Date)) {
               throw new TypeError("date() parameter must be one of [null, string, moment or Date]");
             }
             setValue(newDate === null ? null : parseInputDate(newDate));
@@ -15926,7 +16209,7 @@
             if (arguments.length === 0) {
               return options.locale;
             }
-            if (!moment.localeData(locale)) {
+            if (!moment2.localeData(locale)) {
               throw new TypeError("locale() locale " + locale + " is not loaded from moment locales!");
             }
             options.locale = locale;
@@ -16331,7 +16614,7 @@
               viewDate = date.clone();
               return picker;
             }
-            if (typeof newDate !== "string" && !moment.isMoment(newDate) && !(newDate instanceof Date)) {
+            if (typeof newDate !== "string" && !moment2.isMoment(newDate) && !(newDate instanceof Date)) {
               throw new TypeError("viewDate() parameter must be one of [string, moment or Date]");
             }
             viewDate = parseInputDate(newDate);
@@ -16396,7 +16679,7 @@
           maxDate: false,
           useCurrent: true,
           collapse: true,
-          locale: moment.locale(),
+          locale: moment2.locale(),
           defaultDate: false,
           disabledDates: false,
           enabledDates: false,
@@ -16570,7 +16853,7 @@
   });
 
   // lib/assets/javascript/application.js
-  var import_jquery_ujs = __toESM(require_rails());
+  var import_ujs = __toESM(require_rails_ujs());
 
   // lib/assets/javascript/components/associative.js
   var import_jquery = __toESM(require_jquery());
@@ -16585,7 +16868,9 @@
   var import_jquery2 = __toESM(require_jquery());
   var import_moment = __toESM(require_moment());
   var import_bootstrap_datetimepicker = __toESM(require_bootstrap_datetimepicker());
+  window.moment = import_moment.default;
   (0, import_bootstrap_datetimepicker.default)(import_jquery2.default);
+  window.$ = import_jquery2.default;
   (0, import_jquery2.default)(function() {
     (0, import_jquery2.default)('[data-type="time"]').datetimepicker({
       debug: false,
@@ -16620,6 +16905,9 @@
     (0, import_jquery3.default)("table").on("click", ".js-table-row", visitDataUrl);
     (0, import_jquery3.default)("table").on("keydown", ".js-table-row", visitDataUrl);
   });
+
+  // lib/assets/javascript/application.js
+  import_ujs.default.start();
 })();
 /*!
  * jQuery JavaScript Library v3.6.0
