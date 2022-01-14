@@ -5918,13 +5918,13 @@
     "node_modules/jquery-ujs/src/rails.js"(exports, module) {
       (function() {
         "use strict";
-        var jqueryUjsInit = function($2, undefined2) {
-          if ($2.rails !== undefined2) {
-            $2.error("jquery-ujs has already been loaded!");
+        var jqueryUjsInit = function($3, undefined2) {
+          if ($3.rails !== undefined2) {
+            $3.error("jquery-ujs has already been loaded!");
           }
           var rails;
-          var $document = $2(document);
-          $2.rails = rails = {
+          var $document = $3(document);
+          $3.rails = rails = {
             linkClickSelector: "a[data-confirm], a[data-method], a[data-remote]:not([disabled]), a[data-disable-with], a[data-disable]",
             buttonClickSelector: "button[data-remote]:not([form]):not(form button), button[data-confirm]:not([form]):not(form button)",
             inputChangeSelector: "select[data-remote], input[data-remote], textarea[data-remote]",
@@ -5937,10 +5937,10 @@
             linkDisableSelector: "a[data-disable-with], a[data-disable]",
             buttonDisableSelector: "button[data-remote][data-disable-with], button[data-remote][data-disable]",
             csrfToken: function() {
-              return $2("meta[name=csrf-token]").attr("content");
+              return $3("meta[name=csrf-token]").attr("content");
             },
             csrfParam: function() {
-              return $2("meta[name=csrf-param]").attr("content");
+              return $3("meta[name=csrf-param]").attr("content");
             },
             CSRFProtection: function(xhr) {
               var token = rails.csrfToken();
@@ -5948,10 +5948,10 @@
                 xhr.setRequestHeader("X-CSRF-Token", token);
             },
             refreshCSRFTokens: function() {
-              $2('form input[name="' + rails.csrfParam() + '"]').val(rails.csrfToken());
+              $3('form input[name="' + rails.csrfParam() + '"]').val(rails.csrfToken());
             },
             fire: function(obj, name, data) {
-              var event = $2.Event(name);
+              var event = $3.Event(name);
               obj.trigger(event, data);
               return event.result !== false;
             },
@@ -5959,7 +5959,7 @@
               return confirm(message);
             },
             ajax: function(options) {
-              return $2.ajax(options);
+              return $3.ajax(options);
             },
             href: function(element) {
               return element[0].href;
@@ -5971,11 +5971,11 @@
               var method, url, data, withCredentials, dataType, options;
               if (rails.fire(element, "ajax:before")) {
                 withCredentials = element.data("with-credentials") || null;
-                dataType = element.data("type") || $2.ajaxSettings && $2.ajaxSettings.dataType;
+                dataType = element.data("type") || $3.ajaxSettings && $3.ajaxSettings.dataType;
                 if (element.is("form")) {
                   method = element.data("ujs:submit-button-formmethod") || element.attr("method");
                   url = element.data("ujs:submit-button-formaction") || element.attr("action");
-                  data = $2(element[0]).serializeArray();
+                  data = $3(element[0]).serializeArray();
                   var button = element.data("ujs:submit-button");
                   if (button) {
                     data.push(button);
@@ -6051,7 +6051,7 @@
               }
             },
             handleMethod: function(link) {
-              var href = rails.href(link), method = link.data("method"), target = link.attr("target"), csrfToken = rails.csrfToken(), csrfParam = rails.csrfParam(), form = $2('<form method="post" action="' + href + '"></form>'), metadataInput = '<input name="_method" value="' + method + '" type="hidden" />';
+              var href = rails.href(link), method = link.data("method"), target = link.attr("target"), csrfToken = rails.csrfToken(), csrfParam = rails.csrfParam(), form = $3('<form method="post" action="' + href + '"></form>'), metadataInput = '<input name="_method" value="' + method + '" type="hidden" />';
               if (csrfParam !== undefined2 && csrfToken !== undefined2 && !rails.isCrossDomain(href)) {
                 metadataInput += '<input name="' + csrfParam + '" value="' + csrfToken + '" type="hidden" />';
               }
@@ -6062,11 +6062,11 @@
               form.submit();
             },
             formElements: function(form, selector) {
-              return form.is("form") ? $2(form[0].elements).filter(selector) : form.find(selector);
+              return form.is("form") ? $3(form[0].elements).filter(selector) : form.find(selector);
             },
             disableFormElements: function(form) {
               rails.formElements(form, rails.disableSelector).each(function() {
-                rails.disableFormElement($2(this));
+                rails.disableFormElement($3(this));
               });
             },
             disableFormElement: function(element) {
@@ -6082,7 +6082,7 @@
             },
             enableFormElements: function(form) {
               rails.formElements(form, rails.enableSelector).each(function() {
-                rails.enableFormElement($2(this));
+                rails.enableFormElement($3(this));
               });
             },
             enableFormElement: function(element) {
@@ -6110,9 +6110,9 @@
               return answer && callback;
             },
             blankInputs: function(form, specifiedSelector, nonBlank) {
-              var foundInputs = $2(), input, valueToCheck, radiosForNameWithNoneSelected, radioName, selector = specifiedSelector || "input,textarea", requiredInputs = form.find(selector), checkedRadioButtonNames = {};
+              var foundInputs = $3(), input, valueToCheck, radiosForNameWithNoneSelected, radioName, selector = specifiedSelector || "input,textarea", requiredInputs = form.find(selector), checkedRadioButtonNames = {};
               requiredInputs.each(function() {
-                input = $2(this);
+                input = $3(this);
                 if (input.is("input[type=radio]")) {
                   radioName = input.attr("name");
                   if (!checkedRadioButtonNames[radioName]) {
@@ -6135,7 +6135,7 @@
               return rails.blankInputs(form, specifiedSelector, true);
             },
             stopEverything: function(e) {
-              $2(e.target).trigger("ujs:everythingStopped");
+              $3(e.target).trigger("ujs:everythingStopped");
               e.stopImmediatePropagation();
               return false;
             },
@@ -6160,33 +6160,33 @@
             }
           };
           if (rails.fire($document, "rails:attachBindings")) {
-            $2.ajaxPrefilter(function(options, originalOptions, xhr) {
+            $3.ajaxPrefilter(function(options, originalOptions, xhr) {
               if (!options.crossDomain) {
                 rails.CSRFProtection(xhr);
               }
             });
-            $2(window).on("pageshow.rails", function() {
-              $2($2.rails.enableSelector).each(function() {
-                var element = $2(this);
+            $3(window).on("pageshow.rails", function() {
+              $3($3.rails.enableSelector).each(function() {
+                var element = $3(this);
                 if (element.data("ujs:disabled")) {
-                  $2.rails.enableFormElement(element);
+                  $3.rails.enableFormElement(element);
                 }
               });
-              $2($2.rails.linkDisableSelector).each(function() {
-                var element = $2(this);
+              $3($3.rails.linkDisableSelector).each(function() {
+                var element = $3(this);
                 if (element.data("ujs:disabled")) {
-                  $2.rails.enableElement(element);
+                  $3.rails.enableElement(element);
                 }
               });
             });
             $document.on("ajax:complete", rails.linkDisableSelector, function() {
-              rails.enableElement($2(this));
+              rails.enableElement($3(this));
             });
             $document.on("ajax:complete", rails.buttonDisableSelector, function() {
-              rails.enableFormElement($2(this));
+              rails.enableFormElement($3(this));
             });
             $document.on("click.rails", rails.linkClickSelector, function(e) {
-              var link = $2(this), method = link.data("method"), data = link.data("params"), metaClick = e.metaKey || e.ctrlKey;
+              var link = $3(this), method = link.data("method"), data = link.data("params"), metaClick = e.metaKey || e.ctrlKey;
               if (!rails.allowAction(link))
                 return rails.stopEverything(e);
               if (!metaClick && link.is(rails.linkDisableSelector))
@@ -6210,7 +6210,7 @@
               }
             });
             $document.on("click.rails", rails.buttonClickSelector, function(e) {
-              var button = $2(this);
+              var button = $3(this);
               if (!rails.allowAction(button) || !rails.isRemote(button))
                 return rails.stopEverything(e);
               if (button.is(rails.buttonDisableSelector))
@@ -6226,14 +6226,14 @@
               return false;
             });
             $document.on("change.rails", rails.inputChangeSelector, function(e) {
-              var link = $2(this);
+              var link = $3(this);
               if (!rails.allowAction(link) || !rails.isRemote(link))
                 return rails.stopEverything(e);
               rails.handleRemote(link);
               return false;
             });
             $document.on("submit.rails", rails.formSubmitSelector, function(e) {
-              var form = $2(this), remote = rails.isRemote(form), blankRequiredInputs, nonBlankFileInputs;
+              var form = $3(this), remote = rails.isRemote(form), blankRequiredInputs, nonBlankFileInputs;
               if (!rails.allowAction(form))
                 return rails.stopEverything(e);
               if (form.attr("novalidate") === undefined2) {
@@ -6269,13 +6269,13 @@
               }
             });
             $document.on("click.rails", rails.formInputClickSelector, function(event) {
-              var button = $2(this);
+              var button = $3(this);
               if (!rails.allowAction(button))
                 return rails.stopEverything(event);
               var name = button.attr("name"), data = name ? { name, value: button.val() } : null;
               var form = button.closest("form");
               if (form.length === 0) {
-                form = $2("#" + button.attr("form"));
+                form = $3("#" + button.attr("form"));
               }
               form.data("ujs:submit-button", data);
               form.data("ujs:formnovalidate-button", button.attr("formnovalidate"));
@@ -6284,13 +6284,13 @@
             });
             $document.on("ajax:send.rails", rails.formSubmitSelector, function(event) {
               if (this === event.target)
-                rails.disableFormElements($2(this));
+                rails.disableFormElements($3(this));
             });
             $document.on("ajax:complete.rails", rails.formSubmitSelector, function(event) {
               if (this === event.target)
-                rails.enableFormElements($2(this));
+                rails.enableFormElements($3(this));
             });
-            $2(function() {
+            $3(function() {
               rails.refreshCSRFTokens();
             });
           }
@@ -6738,7 +6738,7 @@
         } else {
           root.Selectize = factory(root.jQuery, root.Sifter, root.MicroPlugin);
         }
-      })(exports, function($2, Sifter, MicroPlugin) {
+      })(exports, function($3, Sifter, MicroPlugin) {
         "use strict";
         var highlight = function($element, pattern) {
           if (typeof pattern === "string" && !pattern.length)
@@ -6770,7 +6770,7 @@
             highlight2(this);
           });
         };
-        $2.fn.removeHighlight = function() {
+        $3.fn.removeHighlight = function() {
           return this.find("span.highlight").each(function() {
             this.parentNode.firstChild.nodeName;
             var parent = this.parentNode;
@@ -6945,7 +6945,7 @@
             return 0;
           }
           if (!Selectize.$testInput) {
-            Selectize.$testInput = $2("<span />").css({
+            Selectize.$testInput = $3("<span />").css({
               position: "absolute",
               top: -99999,
               left: -99999,
@@ -7037,7 +7037,7 @@
           var computedStyle = window.getComputedStyle && window.getComputedStyle(input, null);
           dir = computedStyle ? computedStyle.getPropertyValue("direction") : input.currentStyle && input.currentStyle.direction;
           dir = dir || $input.parents("[dir]:first").attr("dir") || "";
-          $2.extend(self, {
+          $3.extend(self, {
             order: 0,
             settings,
             $input,
@@ -7104,13 +7104,13 @@
         } else {
           logError("Dependency MicroPlugin is missing", { explanation: 'Make sure you either: (1) are using the "standalone" version of Selectize, or (2) require MicroPlugin before you load Selectize.' });
         }
-        $2.extend(Selectize.prototype, {
+        $3.extend(Selectize.prototype, {
           setup: function() {
             var self = this;
             var settings = self.settings;
             var eventNS = self.eventNS;
-            var $window = $2(window);
-            var $document = $2(document);
+            var $window = $3(window);
+            var $document = $3(document);
             var $input = self.$input;
             var $wrapper;
             var $control;
@@ -7126,15 +7126,15 @@
             var inputId;
             inputMode = self.settings.mode;
             classes = $input.attr("class") || "";
-            $wrapper = $2("<div>").addClass(settings.wrapperClass).addClass(classes).addClass(inputMode);
-            $control = $2("<div>").addClass(settings.inputClass).addClass("items").appendTo($wrapper);
-            $control_input = $2('<input type="text" autocomplete="off" />').appendTo($control).attr("tabindex", $input.is(":disabled") ? "-1" : self.tabIndex);
-            $dropdown_parent = $2(settings.dropdownParent || $wrapper);
-            $dropdown = $2("<div>").addClass(settings.dropdownClass).addClass(inputMode).hide().appendTo($dropdown_parent);
-            $dropdown_content = $2("<div>").addClass(settings.dropdownContentClass).appendTo($dropdown);
+            $wrapper = $3("<div>").addClass(settings.wrapperClass).addClass(classes).addClass(inputMode);
+            $control = $3("<div>").addClass(settings.inputClass).addClass("items").appendTo($wrapper);
+            $control_input = $3('<input type="text" autocomplete="off" />').appendTo($control).attr("tabindex", $input.is(":disabled") ? "-1" : self.tabIndex);
+            $dropdown_parent = $3(settings.dropdownParent || $wrapper);
+            $dropdown = $3("<div>").addClass(settings.dropdownClass).addClass(inputMode).hide().appendTo($dropdown_parent);
+            $dropdown_content = $3("<div>").addClass(settings.dropdownContentClass).appendTo($dropdown);
             if (inputId = $input.attr("id")) {
               $control_input.attr("id", inputId + "-selectized");
-              $2("label[for='" + inputId + "']").attr("for", inputId + "-selectized");
+              $3("label[for='" + inputId + "']").attr("for", inputId + "-selectized");
             }
             if (self.settings.copyClassesToDropdown) {
               $dropdown.addClass(classes);
@@ -7253,7 +7253,7 @@
               tabindex: $input.attr("tabindex")
             };
             $input.attr("tabindex", -1).hide().after(self.$wrapper);
-            if ($2.isArray(settings.items)) {
+            if ($3.isArray(settings.items)) {
               self.setValue(settings.items);
               delete settings.items;
             }
@@ -7301,7 +7301,7 @@
                 return '<div class="create">Add <strong>' + escape(data.input) + "</strong>&hellip;</div>";
               }
             };
-            self.settings.render = $2.extend({}, templates, self.settings.render);
+            self.settings.render = $3.extend({}, templates, self.settings.render);
           },
           setupCallbacks: function() {
             var key, fn, callbacks = {
@@ -7341,7 +7341,7 @@
           onMouseDown: function(e) {
             var self = this;
             var defaultPrevented = e.isDefaultPrevented();
-            var $target = $2(e.target);
+            var $target = $3(e.target);
             if (self.isFocused) {
               if (e.target !== self.$control_input[0]) {
                 if (self.settings.mode === "single") {
@@ -7374,7 +7374,7 @@
                 if (!pastedText.match(self.settings.splitOn)) {
                   return;
                 }
-                var splitInput = $2.trim(pastedText).split(self.settings.splitOn);
+                var splitInput = $3.trim(pastedText).split(self.settings.splitOn);
                 for (var i = 0, n = splitInput.length; i < n; i++) {
                   self.createItem(splitInput[i]);
                 }
@@ -7562,7 +7562,7 @@
               e.preventDefault();
               e.stopPropagation();
             }
-            $target = $2(e.currentTarget);
+            $target = $3(e.currentTarget);
             if ($target.hasClass("create")) {
               self.createItem(null, function() {
                 if (self.settings.closeAfterSelect) {
@@ -7637,9 +7637,9 @@
             var $last;
             if (self.settings.mode === "single")
               return;
-            $item = $2($item);
+            $item = $3($item);
             if (!$item.length) {
-              $2(self.$activeItems).removeClass("active");
+              $3(self.$activeItems).removeClass("active");
               self.$activeItems = [];
               if (self.isFocused) {
                 self.showInput();
@@ -7659,7 +7659,7 @@
               for (i = begin; i <= end; i++) {
                 item = self.$control[0].childNodes[i];
                 if (self.$activeItems.indexOf(item) === -1) {
-                  $2(item).addClass("active");
+                  $3(item).addClass("active");
                   self.$activeItems.push(item);
                 }
               }
@@ -7673,7 +7673,7 @@
                 self.$activeItems.push($item.addClass("active")[0]);
               }
             } else {
-              $2(self.$activeItems).removeClass("active");
+              $3(self.$activeItems).removeClass("active");
               self.$activeItems = [$item.addClass("active")[0]];
             }
             self.hideInput();
@@ -7688,7 +7688,7 @@
             if (self.$activeOption)
               self.$activeOption.removeClass("active");
             self.$activeOption = null;
-            $option = $2($option);
+            $option = $3($option);
             if (!$option.length)
               return;
             self.$activeOption = $option.addClass("active");
@@ -7771,10 +7771,10 @@
             }
             if (query !== self.lastQuery) {
               self.lastQuery = query;
-              result = self.sifter.search(query, $2.extend(options, { score: calculateScore }));
+              result = self.sifter.search(query, $3.extend(options, { score: calculateScore }));
               self.currentResults = result;
             } else {
-              result = $2.extend(true, {}, self.currentResults);
+              result = $3.extend(true, {}, self.currentResults);
             }
             if (settings.hideSelected) {
               for (i = result.items.length - 1; i >= 0; i--) {
@@ -7792,7 +7792,7 @@
               triggerDropdown = true;
             }
             var self = this;
-            var query = $2.trim(self.$control_input.val());
+            var query = $3.trim(self.$control_input.val());
             var results = self.search(query);
             var $dropdown_content = self.$dropdown_content;
             var active_before = self.$activeOption && hash_key(self.$activeOption.attr("data-value"));
@@ -7806,7 +7806,7 @@
               option = self.options[results.items[i].id];
               option_html = self.render("option", option);
               optgroup = option[self.settings.optgroupField] || "";
-              optgroups = $2.isArray(optgroup) ? optgroup : [optgroup];
+              optgroups = $3.isArray(optgroup) ? optgroup : [optgroup];
               for (j = 0, k = optgroups && optgroups.length; j < k; j++) {
                 optgroup = optgroups[j];
                 if (!self.optgroups.hasOwnProperty(optgroup)) {
@@ -7833,7 +7833,7 @@
                 html_children = document.createDocumentFragment();
                 html_children.appendChild(self.render("optgroup_header", self.optgroups[optgroup]));
                 html_children.appendChild(groups[optgroup]);
-                html.appendChild(self.render("optgroup", $2.extend({}, self.optgroups[optgroup], {
+                html.appendChild(self.render("optgroup", $3.extend({}, self.optgroups[optgroup], {
                   html: domToString(html_children),
                   dom: html_children
                 })));
@@ -7858,7 +7858,7 @@
             has_create_option = self.canCreate(query);
             if (has_create_option) {
               $dropdown_content.prepend(self.render("option_create", { input: query }));
-              $create = $2($dropdown_content[0].childNodes[0]);
+              $create = $3($dropdown_content[0].childNodes[0]);
             }
             self.hasOptions = results.items.length > 0 || has_create_option;
             if (self.hasOptions) {
@@ -7892,7 +7892,7 @@
           },
           addOption: function(data) {
             var i, n, value, self = this;
-            if ($2.isArray(data)) {
+            if ($3.isArray(data)) {
               for (i = 0, n = data.length; i < n; i++) {
                 self.addOption(data[i]);
               }
@@ -7972,7 +7972,7 @@
             }
             if (self.items.indexOf(value_new) !== -1) {
               $item = self.getItem(value);
-              $item_new = $2(self.render("item", data));
+              $item_new = $3(self.render("item", data));
               if ($item.hasClass("active"))
                 $item_new.addClass("active");
               $item.replaceWith($item_new);
@@ -8003,7 +8003,7 @@
             self.userOptions = {};
             self.renderCache = {};
             var options = self.options;
-            $2.each(self.options, function(key, value) {
+            $3.each(self.options, function(key, value) {
               if (self.items.indexOf(key) == -1) {
                 delete options[key];
               }
@@ -8018,18 +8018,18 @@
           getAdjacentOption: function($option, direction) {
             var $options = this.$dropdown.find("[data-selectable]");
             var index = $options.index($option) + direction;
-            return index >= 0 && index < $options.length ? $options.eq(index) : $2();
+            return index >= 0 && index < $options.length ? $options.eq(index) : $3();
           },
           getElementWithValue: function(value, $els) {
             value = hash_key(value);
             if (typeof value !== "undefined" && value !== null) {
               for (var i = 0, n = $els.length; i < n; i++) {
                 if ($els[i].getAttribute("data-value") === value) {
-                  return $2($els[i]);
+                  return $3($els[i]);
                 }
               }
             }
-            return $2();
+            return $3();
           },
           getItem: function(value) {
             return this.getElementWithValue(value, this.$control.children());
@@ -8040,7 +8040,7 @@
             for (var i = 0; i < childNodes.length; i++) {
               this.buffer.appendChild(childNodes[i]);
             }
-            var items = $2.isArray(values) ? values : [values];
+            var items = $3.isArray(values) ? values : [values];
             for (var i = 0, n = items.length; i < n; i++) {
               this.isPending = i < n - 1;
               this.addItem(items[i], silent);
@@ -8068,7 +8068,7 @@
                 self.clear(silent);
               if (inputMode === "multi" && self.isFull())
                 return;
-              $item = $2(self.render("item", self.options[value]));
+              $item = $3(self.render("item", self.options[value]));
               wasFull = self.isFull();
               self.items.splice(self.caretPos, 0, value);
               self.insertAtCaret($item);
@@ -8101,7 +8101,7 @@
           removeItem: function(value, silent) {
             var self = this;
             var $item, i, idx;
-            $item = value instanceof $2 ? value : self.getItem(value);
+            $item = value instanceof $3 ? value : self.getItem(value);
             value = hash_key($item.attr("data-value"));
             i = self.items.indexOf(value);
             if (i !== -1) {
@@ -8128,7 +8128,7 @@
           createItem: function(input, triggerDropdown) {
             var self = this;
             var caret = self.caretPos;
-            input = input || $2.trim(self.$control_input.val() || "");
+            input = input || $3.trim(self.$control_input.val() || "");
             var callback = arguments[arguments.length - 1];
             if (typeof callback !== "function")
               callback = function() {
@@ -8192,7 +8192,7 @@
             var isFull = self.isFull();
             var isLocked = self.isLocked;
             self.$wrapper.toggleClass("rtl", self.rtl);
-            self.$control.toggleClass("focus", self.isFocused).toggleClass("disabled", self.isDisabled).toggleClass("required", self.isRequired).toggleClass("invalid", self.isInvalid).toggleClass("locked", isLocked).toggleClass("full", isFull).toggleClass("not-full", !isFull).toggleClass("input-active", self.isFocused && !self.isInputHidden).toggleClass("dropdown-active", self.isOpen).toggleClass("has-options", !$2.isEmptyObject(self.options)).toggleClass("has-items", self.items.length > 0);
+            self.$control.toggleClass("focus", self.isFocused).toggleClass("disabled", self.isDisabled).toggleClass("required", self.isRequired).toggleClass("invalid", self.isInvalid).toggleClass("locked", isLocked).toggleClass("full", isFull).toggleClass("not-full", !isFull).toggleClass("input-active", self.isFocused && !self.isInputHidden).toggleClass("dropdown-active", self.isOpen).toggleClass("has-options", !$3.isEmptyObject(self.options)).toggleClass("has-items", self.items.length > 0);
             self.$control_input.data("grow", !isFull && !isLocked);
           },
           isFull: function() {
@@ -8312,7 +8312,7 @@
                 caret++;
               }
               for (i = 0, n = self.$activeItems.length; i < n; i++) {
-                values.push($2(self.$activeItems[i]).attr("data-value"));
+                values.push($3(self.$activeItems[i]).attr("data-value"));
               }
               if (e) {
                 e.preventDefault();
@@ -8396,7 +8396,7 @@
               var j, n, fn, $children, $child;
               $children = self.$control.children(":not(input)");
               for (j = 0, n = $children.length; j < n; j++) {
-                $child = $2($children[j]).detach();
+                $child = $3($children[j]).detach();
                 if (j < i) {
                   self.$control_input.before($child);
                 } else {
@@ -8444,9 +8444,9 @@
               Selectize.$testInput.remove();
               Selectize.$testInput = void 0;
             }
-            $2(window).off(eventNS);
-            $2(document).off(eventNS);
-            $2(document.body).off(eventNS);
+            $3(window).off(eventNS);
+            $3(document).off(eventNS);
+            $3(document.body).off(eventNS);
             delete self.$input[0].selectize;
           },
           render: function(templateName, data) {
@@ -8467,7 +8467,7 @@
                 return self.renderCache[templateName][value];
               }
             }
-            html = $2(self.settings.render[templateName].apply(this, [data, escape_html]));
+            html = $3(self.settings.render[templateName].apply(this, [data, escape_html]));
             if (templateName === "option" || templateName === "option_create") {
               if (!data[self.settings.disabledField]) {
                 html.attr("data-selectable", "");
@@ -8548,9 +8548,9 @@
           copyClassesToDropdown: true,
           render: {}
         };
-        $2.fn.selectize = function(settings_user) {
-          var defaults = $2.fn.selectize.defaults;
-          var settings = $2.extend({}, defaults, settings_user);
+        $3.fn.selectize = function(settings_user) {
+          var defaults = $3.fn.selectize.defaults;
+          var settings = $3.extend({}, defaults, settings_user);
           var attr_data = settings.dataAttr;
           var field_label = settings.labelField;
           var field_value = settings.valueField;
@@ -8562,7 +8562,7 @@
             var i, n, values, option;
             var data_raw = $input.attr(attr_data);
             if (!data_raw) {
-              var value = $2.trim($input.val() || "");
+              var value = $3.trim($input.val() || "");
               if (!settings.allowEmptyOption && !value.length)
                 return;
               values = value.split(settings.delimiter);
@@ -8592,7 +8592,7 @@
               return null;
             };
             var addOption = function($option, group) {
-              $option = $2($option);
+              $option = $3($option);
               var value = hash_key($option.val());
               if (!value && !settings.allowEmptyOption)
                 return;
@@ -8601,7 +8601,7 @@
                   var arr = optionsMap[value][field_optgroup];
                   if (!arr) {
                     optionsMap[value][field_optgroup] = group;
-                  } else if (!$2.isArray(arr)) {
+                  } else if (!$3.isArray(arr)) {
                     optionsMap[value][field_optgroup] = [arr, group];
                   } else {
                     arr.push(group);
@@ -8622,7 +8622,7 @@
             };
             var addGroup = function($optgroup) {
               var i2, n2, id, optgroup, $options;
-              $optgroup = $2($optgroup);
+              $optgroup = $3($optgroup);
               id = $optgroup.attr("label");
               if (id) {
                 optgroup = readData($optgroup) || {};
@@ -8631,7 +8631,7 @@
                 optgroup[field_disabled] = $optgroup.prop("disabled");
                 settings_element.optgroups.push(optgroup);
               }
-              $options = $2("option", $optgroup);
+              $options = $3("option", $optgroup);
               for (i2 = 0, n2 = $options.length; i2 < n2; i2++) {
                 addOption($options[i2], id);
               }
@@ -8651,7 +8651,7 @@
             if (this.selectize)
               return;
             var instance;
-            var $input = $2(this);
+            var $input = $3(this);
             var tag_name = this.tagName.toLowerCase();
             var placeholder = $input.attr("placeholder") || $input.attr("data-placeholder");
             if (!placeholder && !settings.allowEmptyOption) {
@@ -8668,15 +8668,15 @@
             } else {
               init_textbox($input, settings_element);
             }
-            instance = new Selectize($input, $2.extend(true, {}, defaults, settings_element, settings_user));
+            instance = new Selectize($input, $3.extend(true, {}, defaults, settings_element, settings_user));
           });
         };
-        $2.fn.selectize.defaults = Selectize.defaults;
-        $2.fn.selectize.support = {
+        $3.fn.selectize.defaults = Selectize.defaults;
+        $3.fn.selectize.support = {
           validity: SUPPORTS_VALIDITY_API
         };
         Selectize.define("drag_drop", function(options) {
-          if (!$2.fn.sortable)
+          if (!$3.fn.sortable)
             throw new Error('The "drag_drop" plugin requires jQuery UI "sortable".');
           if (this.settings.mode !== "multi")
             return;
@@ -8716,7 +8716,7 @@
                   var active = self.$activeItems ? self.$activeItems.slice() : null;
                   var values = [];
                   $control.children("[data-value]").each(function() {
-                    values.push($2(this).attr("data-value"));
+                    values.push($3(this).attr("data-value"));
                   });
                   self.setValue(values);
                   self.setActiveItem(active);
@@ -8727,7 +8727,7 @@
         });
         Selectize.define("dropdown_header", function(options) {
           var self = this;
-          options = $2.extend({
+          options = $3.extend({
             title: "Untitled",
             headerClass: "selectize-dropdown-header",
             titleRowClass: "selectize-dropdown-header-title",
@@ -8741,21 +8741,21 @@
             var original = self.setup;
             return function() {
               original.apply(self, arguments);
-              self.$dropdown_header = $2(options.html(options));
+              self.$dropdown_header = $3(options.html(options));
               self.$dropdown.prepend(self.$dropdown_header);
             };
           }();
         });
         Selectize.define("optgroup_columns", function(options) {
           var self = this;
-          options = $2.extend({
+          options = $3.extend({
             equalizeWidth: true,
             equalizeHeight: true
           }, options);
           this.getAdjacentOption = function($option, direction) {
             var $options = $option.closest("[data-group]").find("[data-selectable]");
             var index = $options.index($option) + direction;
-            return index >= 0 && index < $options.length ? $options.eq(index) : $2();
+            return index >= 0 && index < $options.length ? $options.eq(index) : $3();
           };
           this.onKeyDown = function() {
             var original = self.onKeyDown;
@@ -8796,7 +8796,7 @@
           };
           var equalizeSizes = function() {
             var i, n, height_max, width, width_last, width_parent, $optgroups;
-            $optgroups = $2("[data-group]", self.$dropdown_content);
+            $optgroups = $3("[data-group]", self.$dropdown_content);
             n = $optgroups.length;
             if (!n || !self.$dropdown_content.width())
               return;
@@ -8823,7 +8823,7 @@
           }
         });
         Selectize.define("remove_button", function(options) {
-          options = $2.extend({
+          options = $3.extend({
             label: "&times;",
             title: "Remove",
             className: "remove",
@@ -8834,14 +8834,14 @@
             var self = thisRef;
             var html = '<a href="javascript:void(0)" class="' + options2.className + '" tabindex="-1" title="' + escape_html(options2.title) + '">' + options2.label + "</a>";
             var append = function(html_container, html_element) {
-              return $2("<span>").append(html_container).append(html_element);
+              return $3("<span>").append(html_container).append(html_element);
             };
             thisRef.setup = function() {
               var original = self.setup;
               return function() {
                 if (options2.append) {
-                  var id = $2(self.$input.context).attr("id");
-                  var selectizer = $2("#" + id);
+                  var id = $3(self.$input.context).attr("id");
+                  var selectizer = $3("#" + id);
                   var render_item = self.settings.render.item;
                   self.settings.render.item = function(data) {
                     return append(render_item.apply(thisRef, arguments), html);
@@ -8878,7 +8878,7 @@
                   e.preventDefault();
                   if (self.isLocked)
                     return;
-                  var $item = $2(e.currentTarget).parent();
+                  var $item = $3(e.currentTarget).parent();
                   self.setActiveItem($item);
                   if (self.deleteSelection()) {
                     self.setCaret(self.items.length);
@@ -18089,7 +18089,7 @@
           }
           factory(jQuery, moment);
         }
-      })(function($2, moment2) {
+      })(function($3, moment2) {
         "use strict";
         if (!moment2) {
           throw new Error("bootstrap-datetimepicker requires Moment.js to be loaded first");
@@ -18188,48 +18188,48 @@
           }, hasDate = function() {
             return isEnabled("y") || isEnabled("M") || isEnabled("d");
           }, getDatePickerTemplate = function() {
-            var headTemplate = $2("<thead>").append($2("<tr>").append($2("<th>").addClass("prev").attr("data-action", "previous").append($2("<span>").addClass(options.icons.previous))).append($2("<th>").addClass("picker-switch").attr("data-action", "pickerSwitch").attr("colspan", options.calendarWeeks ? "6" : "5")).append($2("<th>").addClass("next").attr("data-action", "next").append($2("<span>").addClass(options.icons.next)))), contTemplate = $2("<tbody>").append($2("<tr>").append($2("<td>").attr("colspan", options.calendarWeeks ? "8" : "7")));
+            var headTemplate = $3("<thead>").append($3("<tr>").append($3("<th>").addClass("prev").attr("data-action", "previous").append($3("<span>").addClass(options.icons.previous))).append($3("<th>").addClass("picker-switch").attr("data-action", "pickerSwitch").attr("colspan", options.calendarWeeks ? "6" : "5")).append($3("<th>").addClass("next").attr("data-action", "next").append($3("<span>").addClass(options.icons.next)))), contTemplate = $3("<tbody>").append($3("<tr>").append($3("<td>").attr("colspan", options.calendarWeeks ? "8" : "7")));
             return [
-              $2("<div>").addClass("datepicker-days").append($2("<table>").addClass("table-condensed").append(headTemplate).append($2("<tbody>"))),
-              $2("<div>").addClass("datepicker-months").append($2("<table>").addClass("table-condensed").append(headTemplate.clone()).append(contTemplate.clone())),
-              $2("<div>").addClass("datepicker-years").append($2("<table>").addClass("table-condensed").append(headTemplate.clone()).append(contTemplate.clone())),
-              $2("<div>").addClass("datepicker-decades").append($2("<table>").addClass("table-condensed").append(headTemplate.clone()).append(contTemplate.clone()))
+              $3("<div>").addClass("datepicker-days").append($3("<table>").addClass("table-condensed").append(headTemplate).append($3("<tbody>"))),
+              $3("<div>").addClass("datepicker-months").append($3("<table>").addClass("table-condensed").append(headTemplate.clone()).append(contTemplate.clone())),
+              $3("<div>").addClass("datepicker-years").append($3("<table>").addClass("table-condensed").append(headTemplate.clone()).append(contTemplate.clone())),
+              $3("<div>").addClass("datepicker-decades").append($3("<table>").addClass("table-condensed").append(headTemplate.clone()).append(contTemplate.clone()))
             ];
           }, getTimePickerMainTemplate = function() {
-            var topRow = $2("<tr>"), middleRow = $2("<tr>"), bottomRow = $2("<tr>");
+            var topRow = $3("<tr>"), middleRow = $3("<tr>"), bottomRow = $3("<tr>");
             if (isEnabled("h")) {
-              topRow.append($2("<td>").append($2("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.incrementHour }).addClass("btn").attr("data-action", "incrementHours").append($2("<span>").addClass(options.icons.up))));
-              middleRow.append($2("<td>").append($2("<span>").addClass("timepicker-hour").attr({ "data-time-component": "hours", "title": options.tooltips.pickHour }).attr("data-action", "showHours")));
-              bottomRow.append($2("<td>").append($2("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.decrementHour }).addClass("btn").attr("data-action", "decrementHours").append($2("<span>").addClass(options.icons.down))));
+              topRow.append($3("<td>").append($3("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.incrementHour }).addClass("btn").attr("data-action", "incrementHours").append($3("<span>").addClass(options.icons.up))));
+              middleRow.append($3("<td>").append($3("<span>").addClass("timepicker-hour").attr({ "data-time-component": "hours", "title": options.tooltips.pickHour }).attr("data-action", "showHours")));
+              bottomRow.append($3("<td>").append($3("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.decrementHour }).addClass("btn").attr("data-action", "decrementHours").append($3("<span>").addClass(options.icons.down))));
             }
             if (isEnabled("m")) {
               if (isEnabled("h")) {
-                topRow.append($2("<td>").addClass("separator"));
-                middleRow.append($2("<td>").addClass("separator").html(":"));
-                bottomRow.append($2("<td>").addClass("separator"));
+                topRow.append($3("<td>").addClass("separator"));
+                middleRow.append($3("<td>").addClass("separator").html(":"));
+                bottomRow.append($3("<td>").addClass("separator"));
               }
-              topRow.append($2("<td>").append($2("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.incrementMinute }).addClass("btn").attr("data-action", "incrementMinutes").append($2("<span>").addClass(options.icons.up))));
-              middleRow.append($2("<td>").append($2("<span>").addClass("timepicker-minute").attr({ "data-time-component": "minutes", "title": options.tooltips.pickMinute }).attr("data-action", "showMinutes")));
-              bottomRow.append($2("<td>").append($2("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.decrementMinute }).addClass("btn").attr("data-action", "decrementMinutes").append($2("<span>").addClass(options.icons.down))));
+              topRow.append($3("<td>").append($3("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.incrementMinute }).addClass("btn").attr("data-action", "incrementMinutes").append($3("<span>").addClass(options.icons.up))));
+              middleRow.append($3("<td>").append($3("<span>").addClass("timepicker-minute").attr({ "data-time-component": "minutes", "title": options.tooltips.pickMinute }).attr("data-action", "showMinutes")));
+              bottomRow.append($3("<td>").append($3("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.decrementMinute }).addClass("btn").attr("data-action", "decrementMinutes").append($3("<span>").addClass(options.icons.down))));
             }
             if (isEnabled("s")) {
               if (isEnabled("m")) {
-                topRow.append($2("<td>").addClass("separator"));
-                middleRow.append($2("<td>").addClass("separator").html(":"));
-                bottomRow.append($2("<td>").addClass("separator"));
+                topRow.append($3("<td>").addClass("separator"));
+                middleRow.append($3("<td>").addClass("separator").html(":"));
+                bottomRow.append($3("<td>").addClass("separator"));
               }
-              topRow.append($2("<td>").append($2("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.incrementSecond }).addClass("btn").attr("data-action", "incrementSeconds").append($2("<span>").addClass(options.icons.up))));
-              middleRow.append($2("<td>").append($2("<span>").addClass("timepicker-second").attr({ "data-time-component": "seconds", "title": options.tooltips.pickSecond }).attr("data-action", "showSeconds")));
-              bottomRow.append($2("<td>").append($2("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.decrementSecond }).addClass("btn").attr("data-action", "decrementSeconds").append($2("<span>").addClass(options.icons.down))));
+              topRow.append($3("<td>").append($3("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.incrementSecond }).addClass("btn").attr("data-action", "incrementSeconds").append($3("<span>").addClass(options.icons.up))));
+              middleRow.append($3("<td>").append($3("<span>").addClass("timepicker-second").attr({ "data-time-component": "seconds", "title": options.tooltips.pickSecond }).attr("data-action", "showSeconds")));
+              bottomRow.append($3("<td>").append($3("<a>").attr({ href: "#", tabindex: "-1", "title": options.tooltips.decrementSecond }).addClass("btn").attr("data-action", "decrementSeconds").append($3("<span>").addClass(options.icons.down))));
             }
             if (!use24Hours) {
-              topRow.append($2("<td>").addClass("separator"));
-              middleRow.append($2("<td>").append($2("<button>").addClass("btn btn-primary").attr({ "data-action": "togglePeriod", tabindex: "-1", "title": options.tooltips.togglePeriod })));
-              bottomRow.append($2("<td>").addClass("separator"));
+              topRow.append($3("<td>").addClass("separator"));
+              middleRow.append($3("<td>").append($3("<button>").addClass("btn btn-primary").attr({ "data-action": "togglePeriod", tabindex: "-1", "title": options.tooltips.togglePeriod })));
+              bottomRow.append($3("<td>").addClass("separator"));
             }
-            return $2("<div>").addClass("timepicker-picker").append($2("<table>").addClass("table-condensed").append([topRow, middleRow, bottomRow]));
+            return $3("<div>").addClass("timepicker-picker").append($3("<table>").addClass("table-condensed").append([topRow, middleRow, bottomRow]));
           }, getTimePickerTemplate = function() {
-            var hoursView = $2("<div>").addClass("timepicker-hours").append($2("<table>").addClass("table-condensed")), minutesView = $2("<div>").addClass("timepicker-minutes").append($2("<table>").addClass("table-condensed")), secondsView = $2("<div>").addClass("timepicker-seconds").append($2("<table>").addClass("table-condensed")), ret = [getTimePickerMainTemplate()];
+            var hoursView = $3("<div>").addClass("timepicker-hours").append($3("<table>").addClass("table-condensed")), minutesView = $3("<div>").addClass("timepicker-minutes").append($3("<table>").addClass("table-condensed")), secondsView = $3("<div>").addClass("timepicker-seconds").append($3("<table>").addClass("table-condensed")), ret = [getTimePickerMainTemplate()];
             if (isEnabled("h")) {
               ret.push(hoursView);
             }
@@ -18243,20 +18243,20 @@
           }, getToolbar = function() {
             var row = [];
             if (options.showTodayButton) {
-              row.push($2("<td>").append($2("<a>").attr({ "data-action": "today", "title": options.tooltips.today }).append($2("<span>").addClass(options.icons.today))));
+              row.push($3("<td>").append($3("<a>").attr({ "data-action": "today", "title": options.tooltips.today }).append($3("<span>").addClass(options.icons.today))));
             }
             if (!options.sideBySide && hasDate() && hasTime()) {
-              row.push($2("<td>").append($2("<a>").attr({ "data-action": "togglePicker", "title": options.tooltips.selectTime }).append($2("<span>").addClass(options.icons.time))));
+              row.push($3("<td>").append($3("<a>").attr({ "data-action": "togglePicker", "title": options.tooltips.selectTime }).append($3("<span>").addClass(options.icons.time))));
             }
             if (options.showClear) {
-              row.push($2("<td>").append($2("<a>").attr({ "data-action": "clear", "title": options.tooltips.clear }).append($2("<span>").addClass(options.icons.clear))));
+              row.push($3("<td>").append($3("<a>").attr({ "data-action": "clear", "title": options.tooltips.clear }).append($3("<span>").addClass(options.icons.clear))));
             }
             if (options.showClose) {
-              row.push($2("<td>").append($2("<a>").attr({ "data-action": "close", "title": options.tooltips.close }).append($2("<span>").addClass(options.icons.close))));
+              row.push($3("<td>").append($3("<a>").attr({ "data-action": "close", "title": options.tooltips.close }).append($3("<span>").addClass(options.icons.close))));
             }
-            return $2("<table>").addClass("table-condensed").append($2("<tbody>").append($2("<tr>").append(row)));
+            return $3("<table>").addClass("table-condensed").append($3("<tbody>").append($3("<tr>").append(row)));
           }, getTemplate = function() {
-            var template = $2("<div>").addClass("bootstrap-datetimepicker-widget dropdown-menu"), dateView = $2("<div>").addClass("datepicker").append(getDatePickerTemplate()), timeView = $2("<div>").addClass("timepicker").append(getTimePickerTemplate()), content = $2("<ul>").addClass("list-unstyled"), toolbar = $2("<li>").addClass("picker-switch" + (options.collapse ? " accordion-toggle" : "")).append(getToolbar());
+            var template = $3("<div>").addClass("bootstrap-datetimepicker-widget dropdown-menu"), dateView = $3("<div>").addClass("datepicker").append(getDatePickerTemplate()), timeView = $3("<div>").addClass("timepicker").append(getTimePickerTemplate()), content = $3("<ul>").addClass("list-unstyled"), toolbar = $3("<li>").addClass("picker-switch" + (options.collapse ? " accordion-toggle" : "")).append(getToolbar());
             if (options.inline) {
               template.removeClass("dropdown-menu");
             }
@@ -18271,7 +18271,7 @@
               if (options.toolbarPlacement === "top") {
                 template.append(toolbar);
               }
-              template.append($2("<div>").addClass("row").append(dateView.addClass("col-md-6")).append(timeView.addClass("col-md-6")));
+              template.append($3("<div>").addClass("row").append(dateView.addClass("col-md-6")).append(timeView.addClass("col-md-6")));
               if (options.toolbarPlacement === "bottom") {
                 template.append(toolbar);
               }
@@ -18281,13 +18281,13 @@
               content.append(toolbar);
             }
             if (hasDate()) {
-              content.append($2("<li>").addClass(options.collapse && hasTime() ? "collapse in" : "").append(dateView));
+              content.append($3("<li>").addClass(options.collapse && hasTime() ? "collapse in" : "").append(dateView));
             }
             if (options.toolbarPlacement === "default") {
               content.append(toolbar);
             }
             if (hasTime()) {
-              content.append($2("<li>").addClass(options.collapse && hasDate() ? "collapse" : "").append(timeView));
+              content.append($3("<li>").addClass(options.collapse && hasDate() ? "collapse" : "").append(timeView));
             }
             if (options.toolbarPlacement === "bottom") {
               content.append(toolbar);
@@ -18301,9 +18301,9 @@
               eData = element.find("input").data();
             }
             if (eData.dateOptions && eData.dateOptions instanceof Object) {
-              dataOptions = $2.extend(true, dataOptions, eData.dateOptions);
+              dataOptions = $3.extend(true, dataOptions, eData.dateOptions);
             }
-            $2.each(options, function(key) {
+            $3.each(options, function(key) {
               var attributeName = "date" + key.charAt(0).toUpperCase() + key.slice(1);
               if (eData[attributeName] !== void 0) {
                 dataOptions[key] = eData[attributeName];
@@ -18324,14 +18324,14 @@
               element.children().first().after(widget);
             }
             if (vertical === "auto") {
-              if (offset.top + widget.height() * 1.5 >= $2(window).height() + $2(window).scrollTop() && widget.height() + element.outerHeight() < offset.top) {
+              if (offset.top + widget.height() * 1.5 >= $3(window).height() + $3(window).scrollTop() && widget.height() + element.outerHeight() < offset.top) {
                 vertical = "top";
               } else {
                 vertical = "bottom";
               }
             }
             if (horizontal === "auto") {
-              if (parent.width() < offset.left + widget.outerWidth() / 2 && offset.left + widget.outerWidth() > $2(window).width()) {
+              if (parent.width() < offset.left + widget.outerWidth() / 2 && offset.left + widget.outerWidth() > $3(window).width()) {
                 horizontal = "right";
               } else {
                 horizontal = "left";
@@ -18349,7 +18349,7 @@
             }
             if (parent.css("position") !== "relative") {
               parent = parent.parents().filter(function() {
-                return $2(this).css("position") === "relative";
+                return $3(this).css("position") === "relative";
               }).first();
             }
             if (parent.length === 0) {
@@ -18384,12 +18384,12 @@
             }
             widget.find(".datepicker > div").hide().filter(".datepicker-" + datePickerModes[currentViewMode].clsName).show();
           }, fillDow = function() {
-            var row = $2("<tr>"), currentDate = viewDate.clone().startOf("w").startOf("d");
+            var row = $3("<tr>"), currentDate = viewDate.clone().startOf("w").startOf("d");
             if (options.calendarWeeks === true) {
-              row.append($2("<th>").addClass("cw").text("#"));
+              row.append($3("<th>").addClass("cw").text("#"));
             }
             while (currentDate.isBefore(viewDate.clone().endOf("w"))) {
-              row.append($2("<th>").addClass("dow").text(currentDate.format("dd")));
+              row.append($3("<th>").addClass("dow").text(currentDate.format("dd")));
               currentDate.add(1, "d");
             }
             widget.find(".datepicker-days thead").append(row);
@@ -18428,7 +18428,7 @@
             }
             if (options.disabledTimeIntervals && (granularity === "h" || granularity === "m" || granularity === "s")) {
               var found = false;
-              $2.each(options.disabledTimeIntervals, function() {
+              $3.each(options.disabledTimeIntervals, function() {
                 if (targetMoment.isBetween(this[0], this[1])) {
                   found = true;
                   return false;
@@ -18442,7 +18442,7 @@
           }, fillMonths = function() {
             var spans = [], monthsShort = viewDate.clone().startOf("y").startOf("d");
             while (monthsShort.isSame(viewDate, "y")) {
-              spans.push($2("<span>").attr("data-action", "selectMonth").addClass("month").text(monthsShort.format("MMM")));
+              spans.push($3("<span>").attr("data-action", "selectMonth").addClass("month").text(monthsShort.format("MMM")));
               monthsShort.add(1, "M");
             }
             widget.find(".datepicker-months td").empty().append(spans);
@@ -18465,7 +18465,7 @@
             }
             months.each(function(index) {
               if (!isValid(viewDate.clone().month(index), "M")) {
-                $2(this).addClass("disabled");
+                $3(this).addClass("disabled");
               }
             });
           }, updateYears = function() {
@@ -18527,7 +18527,7 @@
             currentDate = viewDate.clone().startOf("M").startOf("w").startOf("d");
             for (i = 0; i < 42; i++) {
               if (currentDate.weekday() === 0) {
-                row = $2("<tr>");
+                row = $3("<tr>");
                 if (options.calendarWeeks) {
                   row.append('<td class="cw">' + currentDate.week() + "</td>");
                 }
@@ -18565,13 +18565,13 @@
             updateYears();
             updateDecades();
           }, fillHours = function() {
-            var table = widget.find(".timepicker-hours table"), currentHour = viewDate.clone().startOf("d"), html = [], row = $2("<tr>");
+            var table = widget.find(".timepicker-hours table"), currentHour = viewDate.clone().startOf("d"), html = [], row = $3("<tr>");
             if (viewDate.hour() > 11 && !use24Hours) {
               currentHour.hour(12);
             }
             while (currentHour.isSame(viewDate, "d") && (use24Hours || viewDate.hour() < 12 && currentHour.hour() < 12 || viewDate.hour() > 11)) {
               if (currentHour.hour() % 4 === 0) {
-                row = $2("<tr>");
+                row = $3("<tr>");
                 html.push(row);
               }
               row.append('<td data-action="selectHour" class="hour' + (!isValid(currentHour, "h") ? " disabled" : "") + '">' + currentHour.format(use24Hours ? "HH" : "hh") + "</td>");
@@ -18579,10 +18579,10 @@
             }
             table.empty().append(html);
           }, fillMinutes = function() {
-            var table = widget.find(".timepicker-minutes table"), currentMinute = viewDate.clone().startOf("h"), html = [], row = $2("<tr>"), step = options.stepping === 1 ? 5 : options.stepping;
+            var table = widget.find(".timepicker-minutes table"), currentMinute = viewDate.clone().startOf("h"), html = [], row = $3("<tr>"), step = options.stepping === 1 ? 5 : options.stepping;
             while (viewDate.isSame(currentMinute, "h")) {
               if (currentMinute.minute() % (step * 4) === 0) {
-                row = $2("<tr>");
+                row = $3("<tr>");
                 html.push(row);
               }
               row.append('<td data-action="selectMinute" class="minute' + (!isValid(currentMinute, "m") ? " disabled" : "") + '">' + currentMinute.format("mm") + "</td>");
@@ -18590,10 +18590,10 @@
             }
             table.empty().append(html);
           }, fillSeconds = function() {
-            var table = widget.find(".timepicker-seconds table"), currentSecond = viewDate.clone().startOf("m"), html = [], row = $2("<tr>");
+            var table = widget.find(".timepicker-seconds table"), currentSecond = viewDate.clone().startOf("m"), html = [], row = $3("<tr>");
             while (viewDate.isSame(currentSecond, "m")) {
               if (currentSecond.second() % 20 === 0) {
-                row = $2("<tr>");
+                row = $3("<tr>");
                 html.push(row);
               }
               row.append('<td data-action="selectSecond" class="second' + (!isValid(currentSecond, "s") ? " disabled" : "") + '">' + currentSecond.format("ss") + "</td>");
@@ -18681,7 +18681,7 @@
               return picker;
             }
             widget.find(".collapse").each(function() {
-              var collapseData = $2(this).data("collapse");
+              var collapseData = $3(this).data("collapse");
               if (collapseData && collapseData.transitioning) {
                 transitioning = true;
                 return false;
@@ -18695,7 +18695,7 @@
               component.toggleClass("active");
             }
             widget.hide();
-            $2(window).off("resize", place);
+            $3(window).off("resize", place);
             widget.off("click", "[data-action]");
             widget.off("mousedown", false);
             widget.remove();
@@ -18735,7 +18735,7 @@
               showMode(1);
             },
             selectMonth: function(e) {
-              var month = $2(e.target).closest("tbody").find("span").index($2(e.target));
+              var month = $3(e.target).closest("tbody").find("span").index($3(e.target));
               viewDate.month(month);
               if (currentViewMode === minViewModeNumber) {
                 setValue(date.clone().year(viewDate.year()).month(viewDate.month()));
@@ -18749,7 +18749,7 @@
               viewUpdate("M");
             },
             selectYear: function(e) {
-              var year = parseInt($2(e.target).text(), 10) || 0;
+              var year = parseInt($3(e.target).text(), 10) || 0;
               viewDate.year(year);
               if (currentViewMode === minViewModeNumber) {
                 setValue(date.clone().year(viewDate.year()));
@@ -18763,7 +18763,7 @@
               viewUpdate("YYYY");
             },
             selectDecade: function(e) {
-              var year = parseInt($2(e.target).data("selection"), 10) || 0;
+              var year = parseInt($3(e.target).data("selection"), 10) || 0;
               viewDate.year(year);
               if (currentViewMode === minViewModeNumber) {
                 setValue(date.clone().year(viewDate.year()));
@@ -18778,13 +18778,13 @@
             },
             selectDay: function(e) {
               var day = viewDate.clone();
-              if ($2(e.target).is(".old")) {
+              if ($3(e.target).is(".old")) {
                 day.subtract(1, "M");
               }
-              if ($2(e.target).is(".new")) {
+              if ($3(e.target).is(".new")) {
                 day.add(1, "M");
               }
-              setValue(day.date(parseInt($2(e.target).text(), 10)));
+              setValue(day.date(parseInt($3(e.target).text(), 10)));
               if (!hasTime() && !options.keepOpen && !options.inline) {
                 hide();
               }
@@ -18829,7 +18829,7 @@
               setValue(date.clone().add(date.hours() >= 12 ? -12 : 12, "h"));
             },
             togglePicker: function(e) {
-              var $this = $2(e.target), $parent = $this.closest("ul"), expanded = $parent.find(".in"), closed = $parent.find(".collapse:not(.in)"), collapseData;
+              var $this = $3(e.target), $parent = $this.closest("ul"), expanded = $parent.find(".in"), closed = $parent.find(".collapse:not(.in)"), collapseData;
               if (expanded && expanded.length) {
                 collapseData = expanded.data("collapse");
                 if (collapseData && collapseData.transitioning) {
@@ -18866,7 +18866,7 @@
               widget.find(".timepicker .timepicker-seconds").show();
             },
             selectHour: function(e) {
-              var hour = parseInt($2(e.target).text(), 10);
+              var hour = parseInt($3(e.target).text(), 10);
               if (!use24Hours) {
                 if (date.hours() >= 12) {
                   if (hour !== 12) {
@@ -18882,11 +18882,11 @@
               actions.showPicker.call(picker);
             },
             selectMinute: function(e) {
-              setValue(date.clone().minutes(parseInt($2(e.target).text(), 10)));
+              setValue(date.clone().minutes(parseInt($3(e.target).text(), 10)));
               actions.showPicker.call(picker);
             },
             selectSecond: function(e) {
-              setValue(date.clone().seconds(parseInt($2(e.target).text(), 10)));
+              setValue(date.clone().seconds(parseInt($3(e.target).text(), 10)));
               actions.showPicker.call(picker);
             },
             clear,
@@ -18898,10 +18898,10 @@
             },
             close: hide
           }, doAction = function(e) {
-            if ($2(e.currentTarget).is(".disabled")) {
+            if ($3(e.currentTarget).is(".disabled")) {
               return false;
             }
-            actions[$2(e.currentTarget).data("action")].apply(picker, arguments);
+            actions[$3(e.currentTarget).data("action")].apply(picker, arguments);
             return false;
           }, show = function() {
             var currentMoment, useCurrentGranularity = {
@@ -18941,7 +18941,7 @@
             widget.find(".timepicker-seconds").hide();
             update();
             showMode();
-            $2(window).on("resize", place);
+            $3(window).on("resize", place);
             widget.on("click", "[data-action]", doAction);
             widget.on("mousedown", false);
             if (component && component.hasClass("btn")) {
@@ -18997,7 +18997,7 @@
             e.stopPropagation();
             e.preventDefault();
           }, change = function(e) {
-            var val = $2(e.target).val().trim(), parsedDate = val ? parseInputDate(val) : null;
+            var val = $3(e.target).val().trim(), parsedDate = val ? parseInputDate(val) : null;
             setValue(parsedDate);
             e.stopImmediatePropagation();
             return false;
@@ -19035,7 +19035,7 @@
             }
           }, indexGivenDates = function(givenDatesArray) {
             var givenDatesIndexed = {};
-            $2.each(givenDatesArray, function() {
+            $3.each(givenDatesArray, function() {
               var dDate = parseInputDate(this);
               if (dDate.isValid()) {
                 givenDatesIndexed[dDate.format("YYYY-MM-DD")] = true;
@@ -19044,7 +19044,7 @@
             return Object.keys(givenDatesIndexed).length ? givenDatesIndexed : false;
           }, indexGivenHours = function(givenHoursArray) {
             var givenHoursIndexed = {};
-            $2.each(givenHoursArray, function() {
+            $3.each(givenHoursArray, function() {
               givenHoursIndexed[this] = true;
             });
             return Object.keys(givenHoursIndexed).length ? givenHoursIndexed : false;
@@ -19111,13 +19111,13 @@
           };
           picker.options = function(newOptions) {
             if (arguments.length === 0) {
-              return $2.extend(true, {}, options);
+              return $3.extend(true, {}, options);
             }
             if (!(newOptions instanceof Object)) {
               throw new TypeError("options() options parameter should be an object");
             }
-            $2.extend(true, options, newOptions);
-            $2.each(options, function(key, value) {
+            $3.extend(true, options, newOptions);
+            $3.each(options, function(key, value) {
               if (picker[key] !== void 0) {
                 picker[key](value);
               } else {
@@ -19187,7 +19187,7 @@
           };
           picker.disabledDates = function(dates) {
             if (arguments.length === 0) {
-              return options.disabledDates ? $2.extend({}, options.disabledDates) : options.disabledDates;
+              return options.disabledDates ? $3.extend({}, options.disabledDates) : options.disabledDates;
             }
             if (!dates) {
               options.disabledDates = false;
@@ -19204,7 +19204,7 @@
           };
           picker.enabledDates = function(dates) {
             if (arguments.length === 0) {
-              return options.enabledDates ? $2.extend({}, options.enabledDates) : options.enabledDates;
+              return options.enabledDates ? $3.extend({}, options.enabledDates) : options.enabledDates;
             }
             if (!dates) {
               options.enabledDates = false;
@@ -19408,12 +19408,12 @@
           };
           picker.icons = function(icons) {
             if (arguments.length === 0) {
-              return $2.extend({}, options.icons);
+              return $3.extend({}, options.icons);
             }
             if (!(icons instanceof Object)) {
               throw new TypeError("icons() expects parameter to be an Object");
             }
-            $2.extend(options.icons, icons);
+            $3.extend(options.icons, icons);
             if (widget) {
               hide();
               show();
@@ -19422,12 +19422,12 @@
           };
           picker.tooltips = function(tooltips) {
             if (arguments.length === 0) {
-              return $2.extend({}, options.tooltips);
+              return $3.extend({}, options.tooltips);
             }
             if (!(tooltips instanceof Object)) {
               throw new TypeError("tooltips() expects parameter to be an Object");
             }
-            $2.extend(options.tooltips, tooltips);
+            $3.extend(options.tooltips, tooltips);
             if (widget) {
               hide();
               show();
@@ -19492,7 +19492,7 @@
           };
           picker.widgetPositioning = function(widgetPositioning) {
             if (arguments.length === 0) {
-              return $2.extend({}, options.widgetPositioning);
+              return $3.extend({}, options.widgetPositioning);
             }
             if ({}.toString.call(widgetPositioning) !== "[object Object]") {
               throw new TypeError("widgetPositioning() expects an object variable");
@@ -19564,9 +19564,9 @@
               return options.widgetParent;
             }
             if (typeof widgetParent === "string") {
-              widgetParent = $2(widgetParent);
+              widgetParent = $3(widgetParent);
             }
-            if (widgetParent !== null && (typeof widgetParent !== "string" && !(widgetParent instanceof $2))) {
+            if (widgetParent !== null && (typeof widgetParent !== "string" && !(widgetParent instanceof $3))) {
               throw new TypeError("widgetParent() expects a string or a jQuery object parameter");
             }
             options.widgetParent = widgetParent;
@@ -19679,7 +19679,7 @@
           };
           picker.disabledTimeIntervals = function(disabledTimeIntervals) {
             if (arguments.length === 0) {
-              return options.disabledTimeIntervals ? $2.extend({}, options.disabledTimeIntervals) : options.disabledTimeIntervals;
+              return options.disabledTimeIntervals ? $3.extend({}, options.disabledTimeIntervals) : options.disabledTimeIntervals;
             }
             if (!disabledTimeIntervals) {
               options.disabledTimeIntervals = false;
@@ -19695,7 +19695,7 @@
           };
           picker.disabledHours = function(hours) {
             if (arguments.length === 0) {
-              return options.disabledHours ? $2.extend({}, options.disabledHours) : options.disabledHours;
+              return options.disabledHours ? $3.extend({}, options.disabledHours) : options.disabledHours;
             }
             if (!hours) {
               options.disabledHours = false;
@@ -19723,7 +19723,7 @@
           };
           picker.enabledHours = function(hours) {
             if (arguments.length === 0) {
-              return options.enabledHours ? $2.extend({}, options.enabledHours) : options.enabledHours;
+              return options.enabledHours ? $3.extend({}, options.enabledHours) : options.enabledHours;
             }
             if (!hours) {
               options.enabledHours = false;
@@ -19786,7 +19786,7 @@
           }
           date = getMoment();
           viewDate = date.clone();
-          $2.extend(true, options, dataToOptions());
+          $3.extend(true, options, dataToOptions());
           picker.options(options);
           initFormatting();
           attachDatePickerElementEvents();
@@ -19803,34 +19803,34 @@
           }
           return picker;
         };
-        $2.fn.datetimepicker = function(options) {
+        $3.fn.datetimepicker = function(options) {
           options = options || {};
           var args = Array.prototype.slice.call(arguments, 1), isInstance = true, thisMethods = ["destroy", "hide", "show", "toggle"], returnValue;
           if (typeof options === "object") {
             return this.each(function() {
-              var $this = $2(this), _options;
+              var $this = $3(this), _options;
               if (!$this.data("DateTimePicker")) {
-                _options = $2.extend(true, {}, $2.fn.datetimepicker.defaults, options);
+                _options = $3.extend(true, {}, $3.fn.datetimepicker.defaults, options);
                 $this.data("DateTimePicker", dateTimePicker($this, _options));
               }
             });
           } else if (typeof options === "string") {
             this.each(function() {
-              var $this = $2(this), instance = $this.data("DateTimePicker");
+              var $this = $3(this), instance = $this.data("DateTimePicker");
               if (!instance) {
                 throw new Error('bootstrap-datetimepicker("' + options + '") method was called on an element that is not using DateTimePicker');
               }
               returnValue = instance[options].apply(instance, args);
               isInstance = returnValue === instance;
             });
-            if (isInstance || $2.inArray(options, thisMethods) > -1) {
+            if (isInstance || $3.inArray(options, thisMethods) > -1) {
               return this;
             }
             return returnValue;
           }
           throw new TypeError("Invalid arguments for DateTimePicker: " + options);
         };
-        $2.fn.datetimepicker.defaults = {
+        $3.fn.datetimepicker.defaults = {
           timeZone: "",
           format: false,
           dayViewHeaderFormat: "MMMM YYYY",
@@ -20012,7 +20012,7 @@
           enabledHours: false,
           viewDate: false
         };
-        return $2.fn.datetimepicker;
+        return $3.fn.datetimepicker;
       });
     }
   });
@@ -20065,6 +20065,9 @@
     $("table").on("click", ".js-table-row", visitDataUrl);
     $("table").on("keydown", ".js-table-row", visitDataUrl);
   });
+
+  // lib/assets/javascript/application.js
+  window.$ = import_jquery.default;
 })();
 /*!
  * jQuery JavaScript Library v2.2.4
