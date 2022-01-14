@@ -28,6 +28,397 @@
     return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", !isNodeMode && module && module.__esModule ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
   };
 
+  // node_modules/jquery-ujs/src/rails.js
+  var require_rails = __commonJS({
+    "node_modules/jquery-ujs/src/rails.js"(exports, module) {
+      (function() {
+        "use strict";
+        var jqueryUjsInit = function($5, undefined2) {
+          if ($5.rails !== undefined2) {
+            $5.error("jquery-ujs has already been loaded!");
+          }
+          var rails;
+          var $document = $5(document);
+          $5.rails = rails = {
+            linkClickSelector: "a[data-confirm], a[data-method], a[data-remote]:not([disabled]), a[data-disable-with], a[data-disable]",
+            buttonClickSelector: "button[data-remote]:not([form]):not(form button), button[data-confirm]:not([form]):not(form button)",
+            inputChangeSelector: "select[data-remote], input[data-remote], textarea[data-remote]",
+            formSubmitSelector: "form:not([data-turbo=true])",
+            formInputClickSelector: "form:not([data-turbo=true]) input[type=submit], form:not([data-turbo=true]) input[type=image], form:not([data-turbo=true]) button[type=submit], form:not([data-turbo=true]) button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])",
+            disableSelector: "input[data-disable-with]:enabled, button[data-disable-with]:enabled, textarea[data-disable-with]:enabled, input[data-disable]:enabled, button[data-disable]:enabled, textarea[data-disable]:enabled",
+            enableSelector: "input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled, input[data-disable]:disabled, button[data-disable]:disabled, textarea[data-disable]:disabled",
+            requiredInputSelector: "input[name][required]:not([disabled]), textarea[name][required]:not([disabled])",
+            fileInputSelector: "input[name][type=file]:not([disabled])",
+            linkDisableSelector: "a[data-disable-with], a[data-disable]",
+            buttonDisableSelector: "button[data-remote][data-disable-with], button[data-remote][data-disable]",
+            csrfToken: function() {
+              return $5("meta[name=csrf-token]").attr("content");
+            },
+            csrfParam: function() {
+              return $5("meta[name=csrf-param]").attr("content");
+            },
+            CSRFProtection: function(xhr) {
+              var token = rails.csrfToken();
+              if (token)
+                xhr.setRequestHeader("X-CSRF-Token", token);
+            },
+            refreshCSRFTokens: function() {
+              $5('form input[name="' + rails.csrfParam() + '"]').val(rails.csrfToken());
+            },
+            fire: function(obj, name, data) {
+              var event = $5.Event(name);
+              obj.trigger(event, data);
+              return event.result !== false;
+            },
+            confirm: function(message) {
+              return confirm(message);
+            },
+            ajax: function(options) {
+              return $5.ajax(options);
+            },
+            href: function(element) {
+              return element[0].href;
+            },
+            isRemote: function(element) {
+              return element.data("remote") !== undefined2 && element.data("remote") !== false;
+            },
+            handleRemote: function(element) {
+              var method, url, data, withCredentials, dataType, options;
+              if (rails.fire(element, "ajax:before")) {
+                withCredentials = element.data("with-credentials") || null;
+                dataType = element.data("type") || $5.ajaxSettings && $5.ajaxSettings.dataType;
+                if (element.is("form")) {
+                  method = element.data("ujs:submit-button-formmethod") || element.attr("method");
+                  url = element.data("ujs:submit-button-formaction") || element.attr("action");
+                  data = $5(element[0]).serializeArray();
+                  var button = element.data("ujs:submit-button");
+                  if (button) {
+                    data.push(button);
+                    element.data("ujs:submit-button", null);
+                  }
+                  element.data("ujs:submit-button-formmethod", null);
+                  element.data("ujs:submit-button-formaction", null);
+                } else if (element.is(rails.inputChangeSelector)) {
+                  method = element.data("method");
+                  url = element.data("url");
+                  data = element.serialize();
+                  if (element.data("params"))
+                    data = data + "&" + element.data("params");
+                } else if (element.is(rails.buttonClickSelector)) {
+                  method = element.data("method") || "get";
+                  url = element.data("url");
+                  data = element.serialize();
+                  if (element.data("params"))
+                    data = data + "&" + element.data("params");
+                } else {
+                  method = element.data("method");
+                  url = rails.href(element);
+                  data = element.data("params") || null;
+                }
+                options = {
+                  type: method || "GET",
+                  data,
+                  dataType,
+                  beforeSend: function(xhr, settings) {
+                    if (settings.dataType === undefined2) {
+                      xhr.setRequestHeader("accept", "*/*;q=0.5, " + settings.accepts.script);
+                    }
+                    if (rails.fire(element, "ajax:beforeSend", [xhr, settings])) {
+                      element.trigger("ajax:send", xhr);
+                    } else {
+                      return false;
+                    }
+                  },
+                  success: function(data2, status, xhr) {
+                    element.trigger("ajax:success", [data2, status, xhr]);
+                  },
+                  complete: function(xhr, status) {
+                    element.trigger("ajax:complete", [xhr, status]);
+                  },
+                  error: function(xhr, status, error) {
+                    element.trigger("ajax:error", [xhr, status, error]);
+                  },
+                  crossDomain: rails.isCrossDomain(url)
+                };
+                if (withCredentials) {
+                  options.xhrFields = {
+                    withCredentials
+                  };
+                }
+                if (url) {
+                  options.url = url;
+                }
+                return rails.ajax(options);
+              } else {
+                return false;
+              }
+            },
+            isCrossDomain: function(url) {
+              var originAnchor = document.createElement("a");
+              originAnchor.href = location.href;
+              var urlAnchor = document.createElement("a");
+              try {
+                urlAnchor.href = url;
+                urlAnchor.href = urlAnchor.href;
+                return !((!urlAnchor.protocol || urlAnchor.protocol === ":") && !urlAnchor.host || originAnchor.protocol + "//" + originAnchor.host === urlAnchor.protocol + "//" + urlAnchor.host);
+              } catch (e) {
+                return true;
+              }
+            },
+            handleMethod: function(link) {
+              var href = rails.href(link), method = link.data("method"), target = link.attr("target"), csrfToken = rails.csrfToken(), csrfParam = rails.csrfParam(), form = $5('<form method="post" action="' + href + '"></form>'), metadataInput = '<input name="_method" value="' + method + '" type="hidden" />';
+              if (csrfParam !== undefined2 && csrfToken !== undefined2 && !rails.isCrossDomain(href)) {
+                metadataInput += '<input name="' + csrfParam + '" value="' + csrfToken + '" type="hidden" />';
+              }
+              if (target) {
+                form.attr("target", target);
+              }
+              form.hide().append(metadataInput).appendTo("body");
+              form.submit();
+            },
+            formElements: function(form, selector) {
+              return form.is("form") ? $5(form[0].elements).filter(selector) : form.find(selector);
+            },
+            disableFormElements: function(form) {
+              rails.formElements(form, rails.disableSelector).each(function() {
+                rails.disableFormElement($5(this));
+              });
+            },
+            disableFormElement: function(element) {
+              var method, replacement;
+              method = element.is("button") ? "html" : "val";
+              replacement = element.data("disable-with");
+              if (replacement !== undefined2) {
+                element.data("ujs:enable-with", element[method]());
+                element[method](replacement);
+              }
+              element.prop("disabled", true);
+              element.data("ujs:disabled", true);
+            },
+            enableFormElements: function(form) {
+              rails.formElements(form, rails.enableSelector).each(function() {
+                rails.enableFormElement($5(this));
+              });
+            },
+            enableFormElement: function(element) {
+              var method = element.is("button") ? "html" : "val";
+              if (element.data("ujs:enable-with") !== undefined2) {
+                element[method](element.data("ujs:enable-with"));
+                element.removeData("ujs:enable-with");
+              }
+              element.prop("disabled", false);
+              element.removeData("ujs:disabled");
+            },
+            allowAction: function(element) {
+              var message = element.data("confirm"), answer = false, callback;
+              if (!message) {
+                return true;
+              }
+              if (rails.fire(element, "confirm")) {
+                try {
+                  answer = rails.confirm(message);
+                } catch (e) {
+                  (console.error || console.log).call(console, e.stack || e);
+                }
+                callback = rails.fire(element, "confirm:complete", [answer]);
+              }
+              return answer && callback;
+            },
+            blankInputs: function(form, specifiedSelector, nonBlank) {
+              var foundInputs = $5(), input, valueToCheck, radiosForNameWithNoneSelected, radioName, selector = specifiedSelector || "input,textarea", requiredInputs = form.find(selector), checkedRadioButtonNames = {};
+              requiredInputs.each(function() {
+                input = $5(this);
+                if (input.is("input[type=radio]")) {
+                  radioName = input.attr("name");
+                  if (!checkedRadioButtonNames[radioName]) {
+                    if (form.find('input[type=radio]:checked[name="' + radioName + '"]').length === 0) {
+                      radiosForNameWithNoneSelected = form.find('input[type=radio][name="' + radioName + '"]');
+                      foundInputs = foundInputs.add(radiosForNameWithNoneSelected);
+                    }
+                    checkedRadioButtonNames[radioName] = radioName;
+                  }
+                } else {
+                  valueToCheck = input.is("input[type=checkbox],input[type=radio]") ? input.is(":checked") : !!input.val();
+                  if (valueToCheck === nonBlank) {
+                    foundInputs = foundInputs.add(input);
+                  }
+                }
+              });
+              return foundInputs.length ? foundInputs : false;
+            },
+            nonBlankInputs: function(form, specifiedSelector) {
+              return rails.blankInputs(form, specifiedSelector, true);
+            },
+            stopEverything: function(e) {
+              $5(e.target).trigger("ujs:everythingStopped");
+              e.stopImmediatePropagation();
+              return false;
+            },
+            disableElement: function(element) {
+              var replacement = element.data("disable-with");
+              if (replacement !== undefined2) {
+                element.data("ujs:enable-with", element.html());
+                element.html(replacement);
+              }
+              element.on("click.railsDisable", function(e) {
+                return rails.stopEverything(e);
+              });
+              element.data("ujs:disabled", true);
+            },
+            enableElement: function(element) {
+              if (element.data("ujs:enable-with") !== undefined2) {
+                element.html(element.data("ujs:enable-with"));
+                element.removeData("ujs:enable-with");
+              }
+              element.off("click.railsDisable");
+              element.removeData("ujs:disabled");
+            }
+          };
+          if (rails.fire($document, "rails:attachBindings")) {
+            $5.ajaxPrefilter(function(options, originalOptions, xhr) {
+              if (!options.crossDomain) {
+                rails.CSRFProtection(xhr);
+              }
+            });
+            $5(window).on("pageshow.rails", function() {
+              $5($5.rails.enableSelector).each(function() {
+                var element = $5(this);
+                if (element.data("ujs:disabled")) {
+                  $5.rails.enableFormElement(element);
+                }
+              });
+              $5($5.rails.linkDisableSelector).each(function() {
+                var element = $5(this);
+                if (element.data("ujs:disabled")) {
+                  $5.rails.enableElement(element);
+                }
+              });
+            });
+            $document.on("ajax:complete", rails.linkDisableSelector, function() {
+              rails.enableElement($5(this));
+            });
+            $document.on("ajax:complete", rails.buttonDisableSelector, function() {
+              rails.enableFormElement($5(this));
+            });
+            $document.on("click.rails", rails.linkClickSelector, function(e) {
+              var link = $5(this), method = link.data("method"), data = link.data("params"), metaClick = e.metaKey || e.ctrlKey;
+              if (!rails.allowAction(link))
+                return rails.stopEverything(e);
+              if (!metaClick && link.is(rails.linkDisableSelector))
+                rails.disableElement(link);
+              if (rails.isRemote(link)) {
+                if (metaClick && (!method || method === "GET") && !data) {
+                  return true;
+                }
+                var handleRemote = rails.handleRemote(link);
+                if (handleRemote === false) {
+                  rails.enableElement(link);
+                } else {
+                  handleRemote.fail(function() {
+                    rails.enableElement(link);
+                  });
+                }
+                return false;
+              } else if (method) {
+                rails.handleMethod(link);
+                return false;
+              }
+            });
+            $document.on("click.rails", rails.buttonClickSelector, function(e) {
+              var button = $5(this);
+              if (!rails.allowAction(button) || !rails.isRemote(button))
+                return rails.stopEverything(e);
+              if (button.is(rails.buttonDisableSelector))
+                rails.disableFormElement(button);
+              var handleRemote = rails.handleRemote(button);
+              if (handleRemote === false) {
+                rails.enableFormElement(button);
+              } else {
+                handleRemote.fail(function() {
+                  rails.enableFormElement(button);
+                });
+              }
+              return false;
+            });
+            $document.on("change.rails", rails.inputChangeSelector, function(e) {
+              var link = $5(this);
+              if (!rails.allowAction(link) || !rails.isRemote(link))
+                return rails.stopEverything(e);
+              rails.handleRemote(link);
+              return false;
+            });
+            $document.on("submit.rails", rails.formSubmitSelector, function(e) {
+              var form = $5(this), remote = rails.isRemote(form), blankRequiredInputs, nonBlankFileInputs;
+              if (!rails.allowAction(form))
+                return rails.stopEverything(e);
+              if (form.attr("novalidate") === undefined2) {
+                if (form.data("ujs:formnovalidate-button") === undefined2) {
+                  blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector, false);
+                  if (blankRequiredInputs && rails.fire(form, "ajax:aborted:required", [blankRequiredInputs])) {
+                    return rails.stopEverything(e);
+                  }
+                } else {
+                  form.data("ujs:formnovalidate-button", undefined2);
+                }
+              }
+              if (remote) {
+                nonBlankFileInputs = rails.nonBlankInputs(form, rails.fileInputSelector);
+                if (nonBlankFileInputs) {
+                  setTimeout(function() {
+                    rails.disableFormElements(form);
+                  }, 13);
+                  var aborted = rails.fire(form, "ajax:aborted:file", [nonBlankFileInputs]);
+                  if (!aborted) {
+                    setTimeout(function() {
+                      rails.enableFormElements(form);
+                    }, 13);
+                  }
+                  return aborted;
+                }
+                rails.handleRemote(form);
+                return false;
+              } else {
+                setTimeout(function() {
+                  rails.disableFormElements(form);
+                }, 13);
+              }
+            });
+            $document.on("click.rails", rails.formInputClickSelector, function(event) {
+              var button = $5(this);
+              if (!rails.allowAction(button))
+                return rails.stopEverything(event);
+              var name = button.attr("name"), data = name ? { name, value: button.val() } : null;
+              var form = button.closest("form");
+              if (form.length === 0) {
+                form = $5("#" + button.attr("form"));
+              }
+              form.data("ujs:submit-button", data);
+              form.data("ujs:formnovalidate-button", button.attr("formnovalidate"));
+              form.data("ujs:submit-button-formaction", button.attr("formaction"));
+              form.data("ujs:submit-button-formmethod", button.attr("formmethod"));
+            });
+            $document.on("ajax:send.rails", rails.formSubmitSelector, function(event) {
+              if (this === event.target)
+                rails.disableFormElements($5(this));
+            });
+            $document.on("ajax:complete.rails", rails.formSubmitSelector, function(event) {
+              if (this === event.target)
+                rails.enableFormElements($5(this));
+            });
+            $5(function() {
+              rails.refreshCSRFTokens();
+            });
+          }
+        };
+        if (window.jQuery) {
+          jqueryUjsInit(jQuery);
+        } else if (typeof exports === "object" && typeof module === "object") {
+          module.exports = jqueryUjsInit;
+        }
+      })();
+    }
+  });
+
   // node_modules/jquery/dist/jquery.js
   var require_jquery = __commonJS({
     "node_modules/jquery/dist/jquery.js"(exports, module) {
@@ -5913,397 +6304,6 @@
     }
   });
 
-  // node_modules/jquery-ujs/src/rails.js
-  var require_rails = __commonJS({
-    "node_modules/jquery-ujs/src/rails.js"(exports, module) {
-      (function() {
-        "use strict";
-        var jqueryUjsInit = function($3, undefined2) {
-          if ($3.rails !== undefined2) {
-            $3.error("jquery-ujs has already been loaded!");
-          }
-          var rails;
-          var $document = $3(document);
-          $3.rails = rails = {
-            linkClickSelector: "a[data-confirm], a[data-method], a[data-remote]:not([disabled]), a[data-disable-with], a[data-disable]",
-            buttonClickSelector: "button[data-remote]:not([form]):not(form button), button[data-confirm]:not([form]):not(form button)",
-            inputChangeSelector: "select[data-remote], input[data-remote], textarea[data-remote]",
-            formSubmitSelector: "form:not([data-turbo=true])",
-            formInputClickSelector: "form:not([data-turbo=true]) input[type=submit], form:not([data-turbo=true]) input[type=image], form:not([data-turbo=true]) button[type=submit], form:not([data-turbo=true]) button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])",
-            disableSelector: "input[data-disable-with]:enabled, button[data-disable-with]:enabled, textarea[data-disable-with]:enabled, input[data-disable]:enabled, button[data-disable]:enabled, textarea[data-disable]:enabled",
-            enableSelector: "input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled, input[data-disable]:disabled, button[data-disable]:disabled, textarea[data-disable]:disabled",
-            requiredInputSelector: "input[name][required]:not([disabled]), textarea[name][required]:not([disabled])",
-            fileInputSelector: "input[name][type=file]:not([disabled])",
-            linkDisableSelector: "a[data-disable-with], a[data-disable]",
-            buttonDisableSelector: "button[data-remote][data-disable-with], button[data-remote][data-disable]",
-            csrfToken: function() {
-              return $3("meta[name=csrf-token]").attr("content");
-            },
-            csrfParam: function() {
-              return $3("meta[name=csrf-param]").attr("content");
-            },
-            CSRFProtection: function(xhr) {
-              var token = rails.csrfToken();
-              if (token)
-                xhr.setRequestHeader("X-CSRF-Token", token);
-            },
-            refreshCSRFTokens: function() {
-              $3('form input[name="' + rails.csrfParam() + '"]').val(rails.csrfToken());
-            },
-            fire: function(obj, name, data) {
-              var event = $3.Event(name);
-              obj.trigger(event, data);
-              return event.result !== false;
-            },
-            confirm: function(message) {
-              return confirm(message);
-            },
-            ajax: function(options) {
-              return $3.ajax(options);
-            },
-            href: function(element) {
-              return element[0].href;
-            },
-            isRemote: function(element) {
-              return element.data("remote") !== undefined2 && element.data("remote") !== false;
-            },
-            handleRemote: function(element) {
-              var method, url, data, withCredentials, dataType, options;
-              if (rails.fire(element, "ajax:before")) {
-                withCredentials = element.data("with-credentials") || null;
-                dataType = element.data("type") || $3.ajaxSettings && $3.ajaxSettings.dataType;
-                if (element.is("form")) {
-                  method = element.data("ujs:submit-button-formmethod") || element.attr("method");
-                  url = element.data("ujs:submit-button-formaction") || element.attr("action");
-                  data = $3(element[0]).serializeArray();
-                  var button = element.data("ujs:submit-button");
-                  if (button) {
-                    data.push(button);
-                    element.data("ujs:submit-button", null);
-                  }
-                  element.data("ujs:submit-button-formmethod", null);
-                  element.data("ujs:submit-button-formaction", null);
-                } else if (element.is(rails.inputChangeSelector)) {
-                  method = element.data("method");
-                  url = element.data("url");
-                  data = element.serialize();
-                  if (element.data("params"))
-                    data = data + "&" + element.data("params");
-                } else if (element.is(rails.buttonClickSelector)) {
-                  method = element.data("method") || "get";
-                  url = element.data("url");
-                  data = element.serialize();
-                  if (element.data("params"))
-                    data = data + "&" + element.data("params");
-                } else {
-                  method = element.data("method");
-                  url = rails.href(element);
-                  data = element.data("params") || null;
-                }
-                options = {
-                  type: method || "GET",
-                  data,
-                  dataType,
-                  beforeSend: function(xhr, settings) {
-                    if (settings.dataType === undefined2) {
-                      xhr.setRequestHeader("accept", "*/*;q=0.5, " + settings.accepts.script);
-                    }
-                    if (rails.fire(element, "ajax:beforeSend", [xhr, settings])) {
-                      element.trigger("ajax:send", xhr);
-                    } else {
-                      return false;
-                    }
-                  },
-                  success: function(data2, status, xhr) {
-                    element.trigger("ajax:success", [data2, status, xhr]);
-                  },
-                  complete: function(xhr, status) {
-                    element.trigger("ajax:complete", [xhr, status]);
-                  },
-                  error: function(xhr, status, error) {
-                    element.trigger("ajax:error", [xhr, status, error]);
-                  },
-                  crossDomain: rails.isCrossDomain(url)
-                };
-                if (withCredentials) {
-                  options.xhrFields = {
-                    withCredentials
-                  };
-                }
-                if (url) {
-                  options.url = url;
-                }
-                return rails.ajax(options);
-              } else {
-                return false;
-              }
-            },
-            isCrossDomain: function(url) {
-              var originAnchor = document.createElement("a");
-              originAnchor.href = location.href;
-              var urlAnchor = document.createElement("a");
-              try {
-                urlAnchor.href = url;
-                urlAnchor.href = urlAnchor.href;
-                return !((!urlAnchor.protocol || urlAnchor.protocol === ":") && !urlAnchor.host || originAnchor.protocol + "//" + originAnchor.host === urlAnchor.protocol + "//" + urlAnchor.host);
-              } catch (e) {
-                return true;
-              }
-            },
-            handleMethod: function(link) {
-              var href = rails.href(link), method = link.data("method"), target = link.attr("target"), csrfToken = rails.csrfToken(), csrfParam = rails.csrfParam(), form = $3('<form method="post" action="' + href + '"></form>'), metadataInput = '<input name="_method" value="' + method + '" type="hidden" />';
-              if (csrfParam !== undefined2 && csrfToken !== undefined2 && !rails.isCrossDomain(href)) {
-                metadataInput += '<input name="' + csrfParam + '" value="' + csrfToken + '" type="hidden" />';
-              }
-              if (target) {
-                form.attr("target", target);
-              }
-              form.hide().append(metadataInput).appendTo("body");
-              form.submit();
-            },
-            formElements: function(form, selector) {
-              return form.is("form") ? $3(form[0].elements).filter(selector) : form.find(selector);
-            },
-            disableFormElements: function(form) {
-              rails.formElements(form, rails.disableSelector).each(function() {
-                rails.disableFormElement($3(this));
-              });
-            },
-            disableFormElement: function(element) {
-              var method, replacement;
-              method = element.is("button") ? "html" : "val";
-              replacement = element.data("disable-with");
-              if (replacement !== undefined2) {
-                element.data("ujs:enable-with", element[method]());
-                element[method](replacement);
-              }
-              element.prop("disabled", true);
-              element.data("ujs:disabled", true);
-            },
-            enableFormElements: function(form) {
-              rails.formElements(form, rails.enableSelector).each(function() {
-                rails.enableFormElement($3(this));
-              });
-            },
-            enableFormElement: function(element) {
-              var method = element.is("button") ? "html" : "val";
-              if (element.data("ujs:enable-with") !== undefined2) {
-                element[method](element.data("ujs:enable-with"));
-                element.removeData("ujs:enable-with");
-              }
-              element.prop("disabled", false);
-              element.removeData("ujs:disabled");
-            },
-            allowAction: function(element) {
-              var message = element.data("confirm"), answer = false, callback;
-              if (!message) {
-                return true;
-              }
-              if (rails.fire(element, "confirm")) {
-                try {
-                  answer = rails.confirm(message);
-                } catch (e) {
-                  (console.error || console.log).call(console, e.stack || e);
-                }
-                callback = rails.fire(element, "confirm:complete", [answer]);
-              }
-              return answer && callback;
-            },
-            blankInputs: function(form, specifiedSelector, nonBlank) {
-              var foundInputs = $3(), input, valueToCheck, radiosForNameWithNoneSelected, radioName, selector = specifiedSelector || "input,textarea", requiredInputs = form.find(selector), checkedRadioButtonNames = {};
-              requiredInputs.each(function() {
-                input = $3(this);
-                if (input.is("input[type=radio]")) {
-                  radioName = input.attr("name");
-                  if (!checkedRadioButtonNames[radioName]) {
-                    if (form.find('input[type=radio]:checked[name="' + radioName + '"]').length === 0) {
-                      radiosForNameWithNoneSelected = form.find('input[type=radio][name="' + radioName + '"]');
-                      foundInputs = foundInputs.add(radiosForNameWithNoneSelected);
-                    }
-                    checkedRadioButtonNames[radioName] = radioName;
-                  }
-                } else {
-                  valueToCheck = input.is("input[type=checkbox],input[type=radio]") ? input.is(":checked") : !!input.val();
-                  if (valueToCheck === nonBlank) {
-                    foundInputs = foundInputs.add(input);
-                  }
-                }
-              });
-              return foundInputs.length ? foundInputs : false;
-            },
-            nonBlankInputs: function(form, specifiedSelector) {
-              return rails.blankInputs(form, specifiedSelector, true);
-            },
-            stopEverything: function(e) {
-              $3(e.target).trigger("ujs:everythingStopped");
-              e.stopImmediatePropagation();
-              return false;
-            },
-            disableElement: function(element) {
-              var replacement = element.data("disable-with");
-              if (replacement !== undefined2) {
-                element.data("ujs:enable-with", element.html());
-                element.html(replacement);
-              }
-              element.on("click.railsDisable", function(e) {
-                return rails.stopEverything(e);
-              });
-              element.data("ujs:disabled", true);
-            },
-            enableElement: function(element) {
-              if (element.data("ujs:enable-with") !== undefined2) {
-                element.html(element.data("ujs:enable-with"));
-                element.removeData("ujs:enable-with");
-              }
-              element.off("click.railsDisable");
-              element.removeData("ujs:disabled");
-            }
-          };
-          if (rails.fire($document, "rails:attachBindings")) {
-            $3.ajaxPrefilter(function(options, originalOptions, xhr) {
-              if (!options.crossDomain) {
-                rails.CSRFProtection(xhr);
-              }
-            });
-            $3(window).on("pageshow.rails", function() {
-              $3($3.rails.enableSelector).each(function() {
-                var element = $3(this);
-                if (element.data("ujs:disabled")) {
-                  $3.rails.enableFormElement(element);
-                }
-              });
-              $3($3.rails.linkDisableSelector).each(function() {
-                var element = $3(this);
-                if (element.data("ujs:disabled")) {
-                  $3.rails.enableElement(element);
-                }
-              });
-            });
-            $document.on("ajax:complete", rails.linkDisableSelector, function() {
-              rails.enableElement($3(this));
-            });
-            $document.on("ajax:complete", rails.buttonDisableSelector, function() {
-              rails.enableFormElement($3(this));
-            });
-            $document.on("click.rails", rails.linkClickSelector, function(e) {
-              var link = $3(this), method = link.data("method"), data = link.data("params"), metaClick = e.metaKey || e.ctrlKey;
-              if (!rails.allowAction(link))
-                return rails.stopEverything(e);
-              if (!metaClick && link.is(rails.linkDisableSelector))
-                rails.disableElement(link);
-              if (rails.isRemote(link)) {
-                if (metaClick && (!method || method === "GET") && !data) {
-                  return true;
-                }
-                var handleRemote = rails.handleRemote(link);
-                if (handleRemote === false) {
-                  rails.enableElement(link);
-                } else {
-                  handleRemote.fail(function() {
-                    rails.enableElement(link);
-                  });
-                }
-                return false;
-              } else if (method) {
-                rails.handleMethod(link);
-                return false;
-              }
-            });
-            $document.on("click.rails", rails.buttonClickSelector, function(e) {
-              var button = $3(this);
-              if (!rails.allowAction(button) || !rails.isRemote(button))
-                return rails.stopEverything(e);
-              if (button.is(rails.buttonDisableSelector))
-                rails.disableFormElement(button);
-              var handleRemote = rails.handleRemote(button);
-              if (handleRemote === false) {
-                rails.enableFormElement(button);
-              } else {
-                handleRemote.fail(function() {
-                  rails.enableFormElement(button);
-                });
-              }
-              return false;
-            });
-            $document.on("change.rails", rails.inputChangeSelector, function(e) {
-              var link = $3(this);
-              if (!rails.allowAction(link) || !rails.isRemote(link))
-                return rails.stopEverything(e);
-              rails.handleRemote(link);
-              return false;
-            });
-            $document.on("submit.rails", rails.formSubmitSelector, function(e) {
-              var form = $3(this), remote = rails.isRemote(form), blankRequiredInputs, nonBlankFileInputs;
-              if (!rails.allowAction(form))
-                return rails.stopEverything(e);
-              if (form.attr("novalidate") === undefined2) {
-                if (form.data("ujs:formnovalidate-button") === undefined2) {
-                  blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector, false);
-                  if (blankRequiredInputs && rails.fire(form, "ajax:aborted:required", [blankRequiredInputs])) {
-                    return rails.stopEverything(e);
-                  }
-                } else {
-                  form.data("ujs:formnovalidate-button", undefined2);
-                }
-              }
-              if (remote) {
-                nonBlankFileInputs = rails.nonBlankInputs(form, rails.fileInputSelector);
-                if (nonBlankFileInputs) {
-                  setTimeout(function() {
-                    rails.disableFormElements(form);
-                  }, 13);
-                  var aborted = rails.fire(form, "ajax:aborted:file", [nonBlankFileInputs]);
-                  if (!aborted) {
-                    setTimeout(function() {
-                      rails.enableFormElements(form);
-                    }, 13);
-                  }
-                  return aborted;
-                }
-                rails.handleRemote(form);
-                return false;
-              } else {
-                setTimeout(function() {
-                  rails.disableFormElements(form);
-                }, 13);
-              }
-            });
-            $document.on("click.rails", rails.formInputClickSelector, function(event) {
-              var button = $3(this);
-              if (!rails.allowAction(button))
-                return rails.stopEverything(event);
-              var name = button.attr("name"), data = name ? { name, value: button.val() } : null;
-              var form = button.closest("form");
-              if (form.length === 0) {
-                form = $3("#" + button.attr("form"));
-              }
-              form.data("ujs:submit-button", data);
-              form.data("ujs:formnovalidate-button", button.attr("formnovalidate"));
-              form.data("ujs:submit-button-formaction", button.attr("formaction"));
-              form.data("ujs:submit-button-formmethod", button.attr("formmethod"));
-            });
-            $document.on("ajax:send.rails", rails.formSubmitSelector, function(event) {
-              if (this === event.target)
-                rails.disableFormElements($3(this));
-            });
-            $document.on("ajax:complete.rails", rails.formSubmitSelector, function(event) {
-              if (this === event.target)
-                rails.enableFormElements($3(this));
-            });
-            $3(function() {
-              rails.refreshCSRFTokens();
-            });
-          }
-        };
-        if (window.jQuery) {
-          jqueryUjsInit(jQuery);
-        } else if (typeof exports === "object" && typeof module === "object") {
-          module.exports = jqueryUjsInit;
-        }
-      })();
-    }
-  });
-
   // node_modules/sifter/sifter.js
   var require_sifter = __commonJS({
     "node_modules/sifter/sifter.js"(exports, module) {
@@ -6738,7 +6738,7 @@
         } else {
           root.Selectize = factory(root.jQuery, root.Sifter, root.MicroPlugin);
         }
-      })(exports, function($3, Sifter, MicroPlugin) {
+      })(exports, function($5, Sifter, MicroPlugin) {
         "use strict";
         var highlight = function($element, pattern) {
           if (typeof pattern === "string" && !pattern.length)
@@ -6770,7 +6770,7 @@
             highlight2(this);
           });
         };
-        $3.fn.removeHighlight = function() {
+        $5.fn.removeHighlight = function() {
           return this.find("span.highlight").each(function() {
             this.parentNode.firstChild.nodeName;
             var parent = this.parentNode;
@@ -6945,7 +6945,7 @@
             return 0;
           }
           if (!Selectize.$testInput) {
-            Selectize.$testInput = $3("<span />").css({
+            Selectize.$testInput = $5("<span />").css({
               position: "absolute",
               top: -99999,
               left: -99999,
@@ -7037,7 +7037,7 @@
           var computedStyle = window.getComputedStyle && window.getComputedStyle(input, null);
           dir = computedStyle ? computedStyle.getPropertyValue("direction") : input.currentStyle && input.currentStyle.direction;
           dir = dir || $input.parents("[dir]:first").attr("dir") || "";
-          $3.extend(self, {
+          $5.extend(self, {
             order: 0,
             settings,
             $input,
@@ -7104,13 +7104,13 @@
         } else {
           logError("Dependency MicroPlugin is missing", { explanation: 'Make sure you either: (1) are using the "standalone" version of Selectize, or (2) require MicroPlugin before you load Selectize.' });
         }
-        $3.extend(Selectize.prototype, {
+        $5.extend(Selectize.prototype, {
           setup: function() {
             var self = this;
             var settings = self.settings;
             var eventNS = self.eventNS;
-            var $window = $3(window);
-            var $document = $3(document);
+            var $window = $5(window);
+            var $document = $5(document);
             var $input = self.$input;
             var $wrapper;
             var $control;
@@ -7126,15 +7126,15 @@
             var inputId;
             inputMode = self.settings.mode;
             classes = $input.attr("class") || "";
-            $wrapper = $3("<div>").addClass(settings.wrapperClass).addClass(classes).addClass(inputMode);
-            $control = $3("<div>").addClass(settings.inputClass).addClass("items").appendTo($wrapper);
-            $control_input = $3('<input type="text" autocomplete="off" />').appendTo($control).attr("tabindex", $input.is(":disabled") ? "-1" : self.tabIndex);
-            $dropdown_parent = $3(settings.dropdownParent || $wrapper);
-            $dropdown = $3("<div>").addClass(settings.dropdownClass).addClass(inputMode).hide().appendTo($dropdown_parent);
-            $dropdown_content = $3("<div>").addClass(settings.dropdownContentClass).appendTo($dropdown);
+            $wrapper = $5("<div>").addClass(settings.wrapperClass).addClass(classes).addClass(inputMode);
+            $control = $5("<div>").addClass(settings.inputClass).addClass("items").appendTo($wrapper);
+            $control_input = $5('<input type="text" autocomplete="off" />').appendTo($control).attr("tabindex", $input.is(":disabled") ? "-1" : self.tabIndex);
+            $dropdown_parent = $5(settings.dropdownParent || $wrapper);
+            $dropdown = $5("<div>").addClass(settings.dropdownClass).addClass(inputMode).hide().appendTo($dropdown_parent);
+            $dropdown_content = $5("<div>").addClass(settings.dropdownContentClass).appendTo($dropdown);
             if (inputId = $input.attr("id")) {
               $control_input.attr("id", inputId + "-selectized");
-              $3("label[for='" + inputId + "']").attr("for", inputId + "-selectized");
+              $5("label[for='" + inputId + "']").attr("for", inputId + "-selectized");
             }
             if (self.settings.copyClassesToDropdown) {
               $dropdown.addClass(classes);
@@ -7253,7 +7253,7 @@
               tabindex: $input.attr("tabindex")
             };
             $input.attr("tabindex", -1).hide().after(self.$wrapper);
-            if ($3.isArray(settings.items)) {
+            if ($5.isArray(settings.items)) {
               self.setValue(settings.items);
               delete settings.items;
             }
@@ -7301,7 +7301,7 @@
                 return '<div class="create">Add <strong>' + escape(data.input) + "</strong>&hellip;</div>";
               }
             };
-            self.settings.render = $3.extend({}, templates, self.settings.render);
+            self.settings.render = $5.extend({}, templates, self.settings.render);
           },
           setupCallbacks: function() {
             var key, fn, callbacks = {
@@ -7341,7 +7341,7 @@
           onMouseDown: function(e) {
             var self = this;
             var defaultPrevented = e.isDefaultPrevented();
-            var $target = $3(e.target);
+            var $target = $5(e.target);
             if (self.isFocused) {
               if (e.target !== self.$control_input[0]) {
                 if (self.settings.mode === "single") {
@@ -7374,7 +7374,7 @@
                 if (!pastedText.match(self.settings.splitOn)) {
                   return;
                 }
-                var splitInput = $3.trim(pastedText).split(self.settings.splitOn);
+                var splitInput = $5.trim(pastedText).split(self.settings.splitOn);
                 for (var i = 0, n = splitInput.length; i < n; i++) {
                   self.createItem(splitInput[i]);
                 }
@@ -7562,7 +7562,7 @@
               e.preventDefault();
               e.stopPropagation();
             }
-            $target = $3(e.currentTarget);
+            $target = $5(e.currentTarget);
             if ($target.hasClass("create")) {
               self.createItem(null, function() {
                 if (self.settings.closeAfterSelect) {
@@ -7637,9 +7637,9 @@
             var $last;
             if (self.settings.mode === "single")
               return;
-            $item = $3($item);
+            $item = $5($item);
             if (!$item.length) {
-              $3(self.$activeItems).removeClass("active");
+              $5(self.$activeItems).removeClass("active");
               self.$activeItems = [];
               if (self.isFocused) {
                 self.showInput();
@@ -7659,7 +7659,7 @@
               for (i = begin; i <= end; i++) {
                 item = self.$control[0].childNodes[i];
                 if (self.$activeItems.indexOf(item) === -1) {
-                  $3(item).addClass("active");
+                  $5(item).addClass("active");
                   self.$activeItems.push(item);
                 }
               }
@@ -7673,7 +7673,7 @@
                 self.$activeItems.push($item.addClass("active")[0]);
               }
             } else {
-              $3(self.$activeItems).removeClass("active");
+              $5(self.$activeItems).removeClass("active");
               self.$activeItems = [$item.addClass("active")[0]];
             }
             self.hideInput();
@@ -7688,7 +7688,7 @@
             if (self.$activeOption)
               self.$activeOption.removeClass("active");
             self.$activeOption = null;
-            $option = $3($option);
+            $option = $5($option);
             if (!$option.length)
               return;
             self.$activeOption = $option.addClass("active");
@@ -7771,10 +7771,10 @@
             }
             if (query !== self.lastQuery) {
               self.lastQuery = query;
-              result = self.sifter.search(query, $3.extend(options, { score: calculateScore }));
+              result = self.sifter.search(query, $5.extend(options, { score: calculateScore }));
               self.currentResults = result;
             } else {
-              result = $3.extend(true, {}, self.currentResults);
+              result = $5.extend(true, {}, self.currentResults);
             }
             if (settings.hideSelected) {
               for (i = result.items.length - 1; i >= 0; i--) {
@@ -7792,7 +7792,7 @@
               triggerDropdown = true;
             }
             var self = this;
-            var query = $3.trim(self.$control_input.val());
+            var query = $5.trim(self.$control_input.val());
             var results = self.search(query);
             var $dropdown_content = self.$dropdown_content;
             var active_before = self.$activeOption && hash_key(self.$activeOption.attr("data-value"));
@@ -7806,7 +7806,7 @@
               option = self.options[results.items[i].id];
               option_html = self.render("option", option);
               optgroup = option[self.settings.optgroupField] || "";
-              optgroups = $3.isArray(optgroup) ? optgroup : [optgroup];
+              optgroups = $5.isArray(optgroup) ? optgroup : [optgroup];
               for (j = 0, k = optgroups && optgroups.length; j < k; j++) {
                 optgroup = optgroups[j];
                 if (!self.optgroups.hasOwnProperty(optgroup)) {
@@ -7833,7 +7833,7 @@
                 html_children = document.createDocumentFragment();
                 html_children.appendChild(self.render("optgroup_header", self.optgroups[optgroup]));
                 html_children.appendChild(groups[optgroup]);
-                html.appendChild(self.render("optgroup", $3.extend({}, self.optgroups[optgroup], {
+                html.appendChild(self.render("optgroup", $5.extend({}, self.optgroups[optgroup], {
                   html: domToString(html_children),
                   dom: html_children
                 })));
@@ -7858,7 +7858,7 @@
             has_create_option = self.canCreate(query);
             if (has_create_option) {
               $dropdown_content.prepend(self.render("option_create", { input: query }));
-              $create = $3($dropdown_content[0].childNodes[0]);
+              $create = $5($dropdown_content[0].childNodes[0]);
             }
             self.hasOptions = results.items.length > 0 || has_create_option;
             if (self.hasOptions) {
@@ -7892,7 +7892,7 @@
           },
           addOption: function(data) {
             var i, n, value, self = this;
-            if ($3.isArray(data)) {
+            if ($5.isArray(data)) {
               for (i = 0, n = data.length; i < n; i++) {
                 self.addOption(data[i]);
               }
@@ -7972,7 +7972,7 @@
             }
             if (self.items.indexOf(value_new) !== -1) {
               $item = self.getItem(value);
-              $item_new = $3(self.render("item", data));
+              $item_new = $5(self.render("item", data));
               if ($item.hasClass("active"))
                 $item_new.addClass("active");
               $item.replaceWith($item_new);
@@ -8003,7 +8003,7 @@
             self.userOptions = {};
             self.renderCache = {};
             var options = self.options;
-            $3.each(self.options, function(key, value) {
+            $5.each(self.options, function(key, value) {
               if (self.items.indexOf(key) == -1) {
                 delete options[key];
               }
@@ -8018,18 +8018,18 @@
           getAdjacentOption: function($option, direction) {
             var $options = this.$dropdown.find("[data-selectable]");
             var index = $options.index($option) + direction;
-            return index >= 0 && index < $options.length ? $options.eq(index) : $3();
+            return index >= 0 && index < $options.length ? $options.eq(index) : $5();
           },
           getElementWithValue: function(value, $els) {
             value = hash_key(value);
             if (typeof value !== "undefined" && value !== null) {
               for (var i = 0, n = $els.length; i < n; i++) {
                 if ($els[i].getAttribute("data-value") === value) {
-                  return $3($els[i]);
+                  return $5($els[i]);
                 }
               }
             }
-            return $3();
+            return $5();
           },
           getItem: function(value) {
             return this.getElementWithValue(value, this.$control.children());
@@ -8040,7 +8040,7 @@
             for (var i = 0; i < childNodes.length; i++) {
               this.buffer.appendChild(childNodes[i]);
             }
-            var items = $3.isArray(values) ? values : [values];
+            var items = $5.isArray(values) ? values : [values];
             for (var i = 0, n = items.length; i < n; i++) {
               this.isPending = i < n - 1;
               this.addItem(items[i], silent);
@@ -8068,7 +8068,7 @@
                 self.clear(silent);
               if (inputMode === "multi" && self.isFull())
                 return;
-              $item = $3(self.render("item", self.options[value]));
+              $item = $5(self.render("item", self.options[value]));
               wasFull = self.isFull();
               self.items.splice(self.caretPos, 0, value);
               self.insertAtCaret($item);
@@ -8101,7 +8101,7 @@
           removeItem: function(value, silent) {
             var self = this;
             var $item, i, idx;
-            $item = value instanceof $3 ? value : self.getItem(value);
+            $item = value instanceof $5 ? value : self.getItem(value);
             value = hash_key($item.attr("data-value"));
             i = self.items.indexOf(value);
             if (i !== -1) {
@@ -8128,7 +8128,7 @@
           createItem: function(input, triggerDropdown) {
             var self = this;
             var caret = self.caretPos;
-            input = input || $3.trim(self.$control_input.val() || "");
+            input = input || $5.trim(self.$control_input.val() || "");
             var callback = arguments[arguments.length - 1];
             if (typeof callback !== "function")
               callback = function() {
@@ -8192,7 +8192,7 @@
             var isFull = self.isFull();
             var isLocked = self.isLocked;
             self.$wrapper.toggleClass("rtl", self.rtl);
-            self.$control.toggleClass("focus", self.isFocused).toggleClass("disabled", self.isDisabled).toggleClass("required", self.isRequired).toggleClass("invalid", self.isInvalid).toggleClass("locked", isLocked).toggleClass("full", isFull).toggleClass("not-full", !isFull).toggleClass("input-active", self.isFocused && !self.isInputHidden).toggleClass("dropdown-active", self.isOpen).toggleClass("has-options", !$3.isEmptyObject(self.options)).toggleClass("has-items", self.items.length > 0);
+            self.$control.toggleClass("focus", self.isFocused).toggleClass("disabled", self.isDisabled).toggleClass("required", self.isRequired).toggleClass("invalid", self.isInvalid).toggleClass("locked", isLocked).toggleClass("full", isFull).toggleClass("not-full", !isFull).toggleClass("input-active", self.isFocused && !self.isInputHidden).toggleClass("dropdown-active", self.isOpen).toggleClass("has-options", !$5.isEmptyObject(self.options)).toggleClass("has-items", self.items.length > 0);
             self.$control_input.data("grow", !isFull && !isLocked);
           },
           isFull: function() {
@@ -8312,7 +8312,7 @@
                 caret++;
               }
               for (i = 0, n = self.$activeItems.length; i < n; i++) {
-                values.push($3(self.$activeItems[i]).attr("data-value"));
+                values.push($5(self.$activeItems[i]).attr("data-value"));
               }
               if (e) {
                 e.preventDefault();
@@ -8396,7 +8396,7 @@
               var j, n, fn, $children, $child;
               $children = self.$control.children(":not(input)");
               for (j = 0, n = $children.length; j < n; j++) {
-                $child = $3($children[j]).detach();
+                $child = $5($children[j]).detach();
                 if (j < i) {
                   self.$control_input.before($child);
                 } else {
@@ -8444,9 +8444,9 @@
               Selectize.$testInput.remove();
               Selectize.$testInput = void 0;
             }
-            $3(window).off(eventNS);
-            $3(document).off(eventNS);
-            $3(document.body).off(eventNS);
+            $5(window).off(eventNS);
+            $5(document).off(eventNS);
+            $5(document.body).off(eventNS);
             delete self.$input[0].selectize;
           },
           render: function(templateName, data) {
@@ -8467,7 +8467,7 @@
                 return self.renderCache[templateName][value];
               }
             }
-            html = $3(self.settings.render[templateName].apply(this, [data, escape_html]));
+            html = $5(self.settings.render[templateName].apply(this, [data, escape_html]));
             if (templateName === "option" || templateName === "option_create") {
               if (!data[self.settings.disabledField]) {
                 html.attr("data-selectable", "");
@@ -8548,9 +8548,9 @@
           copyClassesToDropdown: true,
           render: {}
         };
-        $3.fn.selectize = function(settings_user) {
-          var defaults = $3.fn.selectize.defaults;
-          var settings = $3.extend({}, defaults, settings_user);
+        $5.fn.selectize = function(settings_user) {
+          var defaults = $5.fn.selectize.defaults;
+          var settings = $5.extend({}, defaults, settings_user);
           var attr_data = settings.dataAttr;
           var field_label = settings.labelField;
           var field_value = settings.valueField;
@@ -8562,7 +8562,7 @@
             var i, n, values, option;
             var data_raw = $input.attr(attr_data);
             if (!data_raw) {
-              var value = $3.trim($input.val() || "");
+              var value = $5.trim($input.val() || "");
               if (!settings.allowEmptyOption && !value.length)
                 return;
               values = value.split(settings.delimiter);
@@ -8592,7 +8592,7 @@
               return null;
             };
             var addOption = function($option, group) {
-              $option = $3($option);
+              $option = $5($option);
               var value = hash_key($option.val());
               if (!value && !settings.allowEmptyOption)
                 return;
@@ -8601,7 +8601,7 @@
                   var arr = optionsMap[value][field_optgroup];
                   if (!arr) {
                     optionsMap[value][field_optgroup] = group;
-                  } else if (!$3.isArray(arr)) {
+                  } else if (!$5.isArray(arr)) {
                     optionsMap[value][field_optgroup] = [arr, group];
                   } else {
                     arr.push(group);
@@ -8622,7 +8622,7 @@
             };
             var addGroup = function($optgroup) {
               var i2, n2, id, optgroup, $options;
-              $optgroup = $3($optgroup);
+              $optgroup = $5($optgroup);
               id = $optgroup.attr("label");
               if (id) {
                 optgroup = readData($optgroup) || {};
@@ -8631,7 +8631,7 @@
                 optgroup[field_disabled] = $optgroup.prop("disabled");
                 settings_element.optgroups.push(optgroup);
               }
-              $options = $3("option", $optgroup);
+              $options = $5("option", $optgroup);
               for (i2 = 0, n2 = $options.length; i2 < n2; i2++) {
                 addOption($options[i2], id);
               }
@@ -8651,7 +8651,7 @@
             if (this.selectize)
               return;
             var instance;
-            var $input = $3(this);
+            var $input = $5(this);
             var tag_name = this.tagName.toLowerCase();
             var placeholder = $input.attr("placeholder") || $input.attr("data-placeholder");
             if (!placeholder && !settings.allowEmptyOption) {
@@ -8668,15 +8668,15 @@
             } else {
               init_textbox($input, settings_element);
             }
-            instance = new Selectize($input, $3.extend(true, {}, defaults, settings_element, settings_user));
+            instance = new Selectize($input, $5.extend(true, {}, defaults, settings_element, settings_user));
           });
         };
-        $3.fn.selectize.defaults = Selectize.defaults;
-        $3.fn.selectize.support = {
+        $5.fn.selectize.defaults = Selectize.defaults;
+        $5.fn.selectize.support = {
           validity: SUPPORTS_VALIDITY_API
         };
         Selectize.define("drag_drop", function(options) {
-          if (!$3.fn.sortable)
+          if (!$5.fn.sortable)
             throw new Error('The "drag_drop" plugin requires jQuery UI "sortable".');
           if (this.settings.mode !== "multi")
             return;
@@ -8716,7 +8716,7 @@
                   var active = self.$activeItems ? self.$activeItems.slice() : null;
                   var values = [];
                   $control.children("[data-value]").each(function() {
-                    values.push($3(this).attr("data-value"));
+                    values.push($5(this).attr("data-value"));
                   });
                   self.setValue(values);
                   self.setActiveItem(active);
@@ -8727,7 +8727,7 @@
         });
         Selectize.define("dropdown_header", function(options) {
           var self = this;
-          options = $3.extend({
+          options = $5.extend({
             title: "Untitled",
             headerClass: "selectize-dropdown-header",
             titleRowClass: "selectize-dropdown-header-title",
@@ -8741,21 +8741,21 @@
             var original = self.setup;
             return function() {
               original.apply(self, arguments);
-              self.$dropdown_header = $3(options.html(options));
+              self.$dropdown_header = $5(options.html(options));
               self.$dropdown.prepend(self.$dropdown_header);
             };
           }();
         });
         Selectize.define("optgroup_columns", function(options) {
           var self = this;
-          options = $3.extend({
+          options = $5.extend({
             equalizeWidth: true,
             equalizeHeight: true
           }, options);
           this.getAdjacentOption = function($option, direction) {
             var $options = $option.closest("[data-group]").find("[data-selectable]");
             var index = $options.index($option) + direction;
-            return index >= 0 && index < $options.length ? $options.eq(index) : $3();
+            return index >= 0 && index < $options.length ? $options.eq(index) : $5();
           };
           this.onKeyDown = function() {
             var original = self.onKeyDown;
@@ -8796,7 +8796,7 @@
           };
           var equalizeSizes = function() {
             var i, n, height_max, width, width_last, width_parent, $optgroups;
-            $optgroups = $3("[data-group]", self.$dropdown_content);
+            $optgroups = $5("[data-group]", self.$dropdown_content);
             n = $optgroups.length;
             if (!n || !self.$dropdown_content.width())
               return;
@@ -8823,7 +8823,7 @@
           }
         });
         Selectize.define("remove_button", function(options) {
-          options = $3.extend({
+          options = $5.extend({
             label: "&times;",
             title: "Remove",
             className: "remove",
@@ -8834,14 +8834,14 @@
             var self = thisRef;
             var html = '<a href="javascript:void(0)" class="' + options2.className + '" tabindex="-1" title="' + escape_html(options2.title) + '">' + options2.label + "</a>";
             var append = function(html_container, html_element) {
-              return $3("<span>").append(html_container).append(html_element);
+              return $5("<span>").append(html_container).append(html_element);
             };
             thisRef.setup = function() {
               var original = self.setup;
               return function() {
                 if (options2.append) {
-                  var id = $3(self.$input.context).attr("id");
-                  var selectizer = $3("#" + id);
+                  var id = $5(self.$input.context).attr("id");
+                  var selectizer = $5("#" + id);
                   var render_item = self.settings.render.item;
                   self.settings.render.item = function(data) {
                     return append(render_item.apply(thisRef, arguments), html);
@@ -8878,7 +8878,7 @@
                   e.preventDefault();
                   if (self.isLocked)
                     return;
-                  var $item = $3(e.currentTarget).parent();
+                  var $item = $5(e.currentTarget).parent();
                   self.setActiveItem($item);
                   if (self.deleteSelection()) {
                     self.setCaret(self.items.length);
@@ -20176,11 +20176,11 @@
           }, Z = function() {
             var a2, b2, c3 = o.find(".timepicker span[data-time-component]");
             h || (a2 = o.find(".timepicker [data-action=togglePeriod]"), b2 = e.clone().add(e.hours() >= 12 ? -12 : 12, "h"), a2.text(e.format("A")), Q(b2, "h") ? a2.removeClass("disabled") : a2.addClass("disabled")), c3.filter("[data-time-component=hours]").text(e.format(h ? "HH" : "hh")), c3.filter("[data-time-component=minutes]").text(e.format("mm")), c3.filter("[data-time-component=seconds]").text(e.format("ss")), W(), X(), Y();
-          }, $3 = function() {
+          }, $5 = function() {
             o && (V(), Z());
           }, _ = function(a2) {
             var b2 = m ? null : e;
-            return a2 ? (a2 = a2.clone().locale(d.locale), d.stepping !== 1 && a2.minutes(Math.round(a2.minutes() / d.stepping) * d.stepping % 60).seconds(0), void (Q(a2) ? (e = a2, f = e.clone(), g.val(e.format(i)), c2.data("date", e.format(i)), m = false, $3(), I({ type: "dp.change", date: e.clone(), oldDate: b2 })) : (d.keepInvalid || g.val(m ? "" : e.format(i)), I({ type: "dp.error", date: a2 })))) : (m = true, g.val(""), c2.data("date", ""), I({ type: "dp.change", date: false, oldDate: b2 }), void $3());
+            return a2 ? (a2 = a2.clone().locale(d.locale), d.stepping !== 1 && a2.minutes(Math.round(a2.minutes() / d.stepping) * d.stepping % 60).seconds(0), void (Q(a2) ? (e = a2, f = e.clone(), g.val(e.format(i)), c2.data("date", e.format(i)), m = false, $5(), I({ type: "dp.change", date: e.clone(), oldDate: b2 })) : (d.keepInvalid || g.val(m ? "" : e.format(i)), I({ type: "dp.error", date: a2 })))) : (m = true, g.val(""), c2.data("date", ""), I({ type: "dp.change", date: false, oldDate: b2 }), void $5());
           }, aa = function() {
             var b2 = false;
             return o ? (o.find(".collapse").each(function() {
@@ -20268,7 +20268,7 @@
             }, minute: function(a2) {
               return a2.seconds(0);
             } };
-            return g.prop("disabled") || !d.ignoreReadonly && g.prop("readonly") || o ? l : (g.val() !== void 0 && g.val().trim().length !== 0 ? _(ga(g.val().trim())) : d.useCurrent && m && (g.is("input") && g.val().trim().length === 0 || d.inline) && (b2 = x(), typeof d.useCurrent == "string" && (b2 = c3[d.useCurrent](b2)), _(b2)), o = F(), L(), R(), o.find(".timepicker-hours").hide(), o.find(".timepicker-minutes").hide(), o.find(".timepicker-seconds").hide(), $3(), K(), a(window).on("resize", H), o.on("click", "[data-action]", da), o.on("mousedown", false), n && n.hasClass("btn") && n.toggleClass("active"), o.show(), H(), d.focusOnShow && !g.is(":focus") && g.focus(), I({ type: "dp.show" }), l);
+            return g.prop("disabled") || !d.ignoreReadonly && g.prop("readonly") || o ? l : (g.val() !== void 0 && g.val().trim().length !== 0 ? _(ga(g.val().trim())) : d.useCurrent && m && (g.is("input") && g.val().trim().length === 0 || d.inline) && (b2 = x(), typeof d.useCurrent == "string" && (b2 = c3[d.useCurrent](b2)), _(b2)), o = F(), L(), R(), o.find(".timepicker-hours").hide(), o.find(".timepicker-minutes").hide(), o.find(".timepicker-seconds").hide(), $5(), K(), a(window).on("resize", H), o.on("click", "[data-action]", da), o.on("mousedown", false), n && n.hasClass("btn") && n.toggleClass("active"), o.show(), H(), d.focusOnShow && !g.is(":focus") && g.focus(), I({ type: "dp.show" }), l);
           }, fa = function() {
             return o ? aa() : ea();
           }, ga = function(a2) {
@@ -20372,23 +20372,23 @@
             if (arguments.length === 0)
               return d.disabledDates ? a.extend({}, d.disabledDates) : d.disabledDates;
             if (!b2)
-              return d.disabledDates = false, $3(), l;
+              return d.disabledDates = false, $5(), l;
             if (!(b2 instanceof Array))
               throw new TypeError("disabledDates() expects an array parameter");
-            return d.disabledDates = ma(b2), d.enabledDates = false, $3(), l;
+            return d.disabledDates = ma(b2), d.enabledDates = false, $5(), l;
           }, l.enabledDates = function(b2) {
             if (arguments.length === 0)
               return d.enabledDates ? a.extend({}, d.enabledDates) : d.enabledDates;
             if (!b2)
-              return d.enabledDates = false, $3(), l;
+              return d.enabledDates = false, $5(), l;
             if (!(b2 instanceof Array))
               throw new TypeError("enabledDates() expects an array parameter");
-            return d.enabledDates = ma(b2), d.disabledDates = false, $3(), l;
+            return d.enabledDates = ma(b2), d.disabledDates = false, $5(), l;
           }, l.daysOfWeekDisabled = function(a2) {
             if (arguments.length === 0)
               return d.daysOfWeekDisabled.splice(0);
             if (typeof a2 == "boolean" && !a2)
-              return d.daysOfWeekDisabled = false, $3(), l;
+              return d.daysOfWeekDisabled = false, $5(), l;
             if (!(a2 instanceof Array))
               throw new TypeError("daysOfWeekDisabled() expects an array parameter");
             if (d.daysOfWeekDisabled = a2.reduce(function(a3, b3) {
@@ -20401,31 +20401,31 @@
               }
               _(e);
             }
-            return $3(), l;
+            return $5(), l;
           }, l.maxDate = function(a2) {
             if (arguments.length === 0)
               return d.maxDate ? d.maxDate.clone() : d.maxDate;
             if (typeof a2 == "boolean" && a2 === false)
-              return d.maxDate = false, $3(), l;
+              return d.maxDate = false, $5(), l;
             typeof a2 == "string" && (a2 === "now" || a2 === "moment") && (a2 = x());
             var b2 = ga(a2);
             if (!b2.isValid())
               throw new TypeError("maxDate() Could not parse date parameter: " + a2);
             if (d.minDate && b2.isBefore(d.minDate))
               throw new TypeError("maxDate() date parameter is before options.minDate: " + b2.format(i));
-            return d.maxDate = b2, d.useCurrent && !d.keepInvalid && e.isAfter(a2) && _(d.maxDate), f.isAfter(b2) && (f = b2.clone().subtract(d.stepping, "m")), $3(), l;
+            return d.maxDate = b2, d.useCurrent && !d.keepInvalid && e.isAfter(a2) && _(d.maxDate), f.isAfter(b2) && (f = b2.clone().subtract(d.stepping, "m")), $5(), l;
           }, l.minDate = function(a2) {
             if (arguments.length === 0)
               return d.minDate ? d.minDate.clone() : d.minDate;
             if (typeof a2 == "boolean" && a2 === false)
-              return d.minDate = false, $3(), l;
+              return d.minDate = false, $5(), l;
             typeof a2 == "string" && (a2 === "now" || a2 === "moment") && (a2 = x());
             var b2 = ga(a2);
             if (!b2.isValid())
               throw new TypeError("minDate() Could not parse date parameter: " + a2);
             if (d.maxDate && b2.isAfter(d.maxDate))
               throw new TypeError("minDate() date parameter is after options.maxDate: " + b2.format(i));
-            return d.minDate = b2, d.useCurrent && !d.keepInvalid && e.isBefore(a2) && _(d.minDate), f.isBefore(b2) && (f = b2.clone().add(d.stepping, "m")), $3(), l;
+            return d.minDate = b2, d.useCurrent && !d.keepInvalid && e.isBefore(a2) && _(d.minDate), f.isBefore(b2) && (f = b2.clone().add(d.stepping, "m")), $5(), l;
           }, l.defaultDate = function(a2) {
             if (arguments.length === 0)
               return d.defaultDate ? d.defaultDate.clone() : d.defaultDate;
@@ -20520,13 +20520,13 @@
                 throw new TypeError("widgetPositioning() expects vertical parameter to be one of (" + s.join(", ") + ")");
               d.widgetPositioning.vertical = b2.vertical;
             }
-            return $3(), l;
+            return $5(), l;
           }, l.calendarWeeks = function(a2) {
             if (arguments.length === 0)
               return d.calendarWeeks;
             if (typeof a2 != "boolean")
               throw new TypeError("calendarWeeks() expects parameter to be a boolean value");
-            return d.calendarWeeks = a2, $3(), l;
+            return d.calendarWeeks = a2, $5(), l;
           }, l.showTodayButton = function(a2) {
             if (arguments.length === 0)
               return d.showTodayButton;
@@ -20607,15 +20607,15 @@
             if (arguments.length === 0)
               return d.disabledTimeIntervals ? a.extend({}, d.disabledTimeIntervals) : d.disabledTimeIntervals;
             if (!b2)
-              return d.disabledTimeIntervals = false, $3(), l;
+              return d.disabledTimeIntervals = false, $5(), l;
             if (!(b2 instanceof Array))
               throw new TypeError("disabledTimeIntervals() expects an array parameter");
-            return d.disabledTimeIntervals = b2, $3(), l;
+            return d.disabledTimeIntervals = b2, $5(), l;
           }, l.disabledHours = function(b2) {
             if (arguments.length === 0)
               return d.disabledHours ? a.extend({}, d.disabledHours) : d.disabledHours;
             if (!b2)
-              return d.disabledHours = false, $3(), l;
+              return d.disabledHours = false, $5(), l;
             if (!(b2 instanceof Array))
               throw new TypeError("disabledHours() expects an array parameter");
             if (d.disabledHours = na(b2), d.enabledHours = false, d.useCurrent && !d.keepInvalid) {
@@ -20626,12 +20626,12 @@
               }
               _(e);
             }
-            return $3(), l;
+            return $5(), l;
           }, l.enabledHours = function(b2) {
             if (arguments.length === 0)
               return d.enabledHours ? a.extend({}, d.enabledHours) : d.enabledHours;
             if (!b2)
-              return d.enabledHours = false, $3(), l;
+              return d.enabledHours = false, $5(), l;
             if (!(b2 instanceof Array))
               throw new TypeError("enabledHours() expects an array parameter");
             if (d.enabledHours = na(b2), d.disabledHours = false, d.useCurrent && !d.keepInvalid) {
@@ -20642,7 +20642,7 @@
               }
               _(e);
             }
-            return $3(), l;
+            return $5(), l;
           }, l.viewDate = function(a2) {
             if (arguments.length === 0)
               return f.clone();
@@ -20722,56 +20722,55 @@
   });
 
   // lib/assets/javascript/application.js
-  var import_jquery = __toESM(require_jquery());
   var import_jquery_ujs = __toESM(require_rails());
 
   // lib/assets/javascript/components/associative.js
+  var import_jquery = __toESM(require_jquery());
   var import_selectize = __toESM(require_selectize());
-  $(function() {
-    $(".field-unit--belongs-to select").selectize({});
-    $(".field-unit--has-many select").selectize({});
-    $(".field-unit--polymorphic select").selectize({});
+  (0, import_jquery.default)(function() {
+    (0, import_jquery.default)(".field-unit--belongs-to select").selectize({});
+    (0, import_jquery.default)(".field-unit--has-many select").selectize({});
+    (0, import_jquery.default)(".field-unit--polymorphic select").selectize({});
   });
 
   // lib/assets/javascript/components/date_time_picker.js
+  var import_jquery2 = __toESM(require_jquery());
   var import_moment = __toESM(require_moment());
   var import_bootstrap_datetimepicker_min = __toESM(require_bootstrap_datetimepicker_min());
-  $(function() {
-    $('[data-type="time"]').datetimepicker({
+  (0, import_jquery2.default)(function() {
+    (0, import_jquery2.default)('[data-type="time"]').datetimepicker({
       debug: false,
       format: "HH:mm:ss"
     });
-    $('[data-type="datetime"]').datetimepicker({
+    (0, import_jquery2.default)('[data-type="datetime"]').datetimepicker({
       debug: false,
       format: "YYYY-MM-DD HH:mm:ss"
     });
-    $('[data-type="date"]').datetimepicker({
+    (0, import_jquery2.default)('[data-type="date"]').datetimepicker({
       debug: false,
       format: "YYYY-MM-DD"
     });
   });
 
   // lib/assets/javascript/components/table.js
-  $(function() {
+  var import_jquery3 = __toESM(require_jquery());
+  (0, import_jquery3.default)(function() {
     var keycodes = { space: 32, enter: 13 };
     var visitDataUrl = function(event) {
       if (event.type == "click" || event.keyCode == keycodes.space || event.keyCode == keycodes.enter) {
         if (event.target.href) {
           return;
         }
-        var dataUrl = $(event.target).closest("tr").data("url");
+        var dataUrl = (0, import_jquery3.default)(event.target).closest("tr").data("url");
         var selection = window.getSelection().toString();
         if (selection.length === 0 && dataUrl) {
           window.location = window.location.protocol + "//" + window.location.host + dataUrl;
         }
       }
     };
-    $("table").on("click", ".js-table-row", visitDataUrl);
-    $("table").on("keydown", ".js-table-row", visitDataUrl);
+    (0, import_jquery3.default)("table").on("click", ".js-table-row", visitDataUrl);
+    (0, import_jquery3.default)("table").on("keydown", ".js-table-row", visitDataUrl);
   });
-
-  // lib/assets/javascript/application.js
-  window.$ = import_jquery.default;
 })();
 /*!
  * jQuery JavaScript Library v2.1.4
