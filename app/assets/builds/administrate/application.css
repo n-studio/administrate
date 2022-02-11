@@ -1921,8 +1921,8 @@ input[type=submit]:disabled:hover,
   background-color: #fff6bf;
   color: #66624c;
   display: block;
-  margin-bottom: 0.75em;
-  padding: 0.75em;
+  margin-bottom: calc(1.5em / 2);
+  padding: calc(1.5em / 2);
   text-align: center;
 }
 .flash-alert a {
@@ -1937,8 +1937,8 @@ input[type=submit]:disabled:hover,
   background-color: #fbe3e4;
   color: #645b5b;
   display: block;
-  margin-bottom: 0.75em;
-  padding: 0.75em;
+  margin-bottom: calc(1.5em / 2);
+  padding: calc(1.5em / 2);
   text-align: center;
 }
 .flash-error a {
@@ -1953,8 +1953,8 @@ input[type=submit]:disabled:hover,
   background-color: #e5edf8;
   color: #5c5f63;
   display: block;
-  margin-bottom: 0.75em;
-  padding: 0.75em;
+  margin-bottom: calc(1.5em / 2);
+  padding: calc(1.5em / 2);
   text-align: center;
 }
 .flash-notice a {
@@ -1969,8 +1969,8 @@ input[type=submit]:disabled:hover,
   background-color: #e6efc2;
   color: #5c604e;
   display: block;
-  margin-bottom: 0.75em;
-  padding: 0.75em;
+  margin-bottom: calc(1.5em / 2);
+  padding: calc(1.5em / 2);
   text-align: center;
 }
 .flash-success a {
